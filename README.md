@@ -1,2 +1,2 @@
 # sim-broggi
-Medical emergencies simulator for eductional purposes
+Medical emergencies simulator for educational purposes
