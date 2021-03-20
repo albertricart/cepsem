@@ -81,6 +81,7 @@ $c_lightest_pink:rgb(217, 20, 128, 0.15);
 
 
 :root {
+    --text: #{$c_text};
     --blue: #{$c_blue};
     --pink: #{$c_pink};
     --lighter-blue: #{$c_lighter_blue};

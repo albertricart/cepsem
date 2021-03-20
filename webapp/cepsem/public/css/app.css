@@ -53,6 +53,7 @@
   font-style: bold;
 }
 :root {
+  --text: #4A4A4A;
   --blue: #11AEBF;
   --pink: #D91480;
   --lighter-blue: rgba(17, 174, 191, 0.3);
@@ -105,6 +106,7 @@ body {
   padding: 50px 80px;
 }
 .form-container h2 {
+  color: #4A4A4A;
   margin-top: 0;
   font-size: 38px;
 }
