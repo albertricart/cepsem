@@ -1,3 +1,30 @@
-body{
-    background-color: #000000;
+* {
+    font-family: $font_Inter;
+    scroll-behavior: smooth;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+}
+
+img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.card {
+    border-radius: 26px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.icon {
+    transition: all cubic-bezier(0.55, 0.06, 0.68, 0.19) 0.25s;
+    padding: 4px;
+
+    &:hover {
+        border-radius: 100%;
+        background-color: $c_lighter_pink;
+        cursor: pointer;
+    }
 }

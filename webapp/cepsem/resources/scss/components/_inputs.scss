@@ -1,3 +1,74 @@
-input[type="text"]{
+::placeholder {
+    color: $c_text;
+}
 
+
+.input {
+    display: flex;
+    margin-bottom: 20px;
+    font-family: "Inter", sans-serif;
+    color: $c_text;
+
+    label {
+        margin-bottom: 8px;
+    }
+
+    input {
+        padding: 16px;
+        border: 1px solid rgb(207, 214, 228);
+        outline: none;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        width: 100%;
+
+        &:focus {
+            border: 1px solid $c_light_pink;
+            box-shadow: 0px 0px 1px 3px $c_lightest_pink;
+        }
+    }
+
+    &--col {
+        flex-direction: column;
+    }
+
+    &--row {
+        flex-direction: row;
+        align-items: center;
+
+        label {
+            margin-right: 12px;
+            margin-bottom: 0;
+        }
+    }
+
+    &-icon {
+        position: relative;
+
+        img {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+    }
+}
+
+
+
+.input-error {
+    font-size: 14px;
+    color: red;
+
+    span {
+        margin-left: 6px;
+    }
+
+    &--show {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    &--hide {
+        display: none;
+    }
 }

@@ -1,11 +1,22 @@
 .button{
-
+    display: inline-block;
+    outline: none;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    padding: 16px 32px;
+    transition: opacity ease 0.2s;
 
     &--blue{
-
+        background-color: $c_blue;
     }
 
     &--pink{
+        background-color: $c_pink;
+    }
 
+    &:hover{
+        cursor: pointer;
+        opacity: 0.75;
     }
 }

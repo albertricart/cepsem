@@ -1,0 +1,206 @@
+@font-face {
+  font-family: "Inter";
+  src: url("../fonts/Inter-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("../fonts/Inter-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("../fonts/Inter-Semibold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("../fonts/Inter-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: bold;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("../fonts/Inter-ExtraBold.ttf") format("truetype");
+  font-weight: 800;
+  font-style: bolder;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("../fonts/Roboto-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("../fonts/Roboto-LightItalic.ttf") format("truetype");
+  font-weight: 300;
+  font-style: italic;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("../fonts/Roboto-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("../fonts/Roboto-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: bold;
+}
+:root {
+  --blue: #11AEBF;
+  --pink: #D91480;
+  --lighter-blue: rgba(17, 174, 191, 0.3);
+  --lighter-pink: rgba(217, 20, 128, 0.3);
+  --lightest-blue: rgba(17, 174, 191, 0.15);
+  --lightest-pink: rgba(217, 20, 128, 0.15);
+}
+
+* {
+  font-family: "Inter", sans-serif;
+  scroll-behavior: smooth;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.card {
+  border-radius: 26px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.icon {
+  transition: all cubic-bezier(0.55, 0.06, 0.68, 0.19) 0.25s;
+  padding: 4px;
+}
+.icon:hover {
+  border-radius: 100%;
+  background-color: rgba(217, 20, 128, 0.3);
+  cursor: pointer;
+}
+
+body {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.form-container {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 100px;
+  max-width: 500px;
+  width: 100%;
+  background-color: white;
+  padding: 50px 80px;
+}
+.form-container h2 {
+  margin-top: 0;
+  font-size: 38px;
+}
+.form-container button {
+  width: 100%;
+  margin-top: 30px;
+}
+.form-container label {
+  font-weight: 600;
+}
+
+.button {
+  display: inline-block;
+  outline: none;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  padding: 16px 32px;
+  transition: opacity ease 0.2s;
+}
+.button--blue {
+  background-color: #11AEBF;
+}
+.button--pink {
+  background-color: #D91480;
+}
+.button:hover {
+  cursor: pointer;
+  opacity: 0.75;
+}
+
+::-moz-placeholder {
+  color: #4A4A4A;
+}
+
+:-ms-input-placeholder {
+  color: #4A4A4A;
+}
+
+::placeholder {
+  color: #4A4A4A;
+}
+
+.input {
+  display: flex;
+  margin-bottom: 20px;
+  font-family: "Inter", sans-serif;
+  color: #4A4A4A;
+}
+.input label {
+  margin-bottom: 8px;
+}
+.input input {
+  padding: 16px;
+  border: 1px solid #cfd6e4;
+  outline: none;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+.input input:focus {
+  border: 1px solid rgba(217, 20, 128, 0.6);
+  box-shadow: 0px 0px 1px 3px rgba(217, 20, 128, 0.15);
+}
+.input--col {
+  flex-direction: column;
+}
+.input--row {
+  flex-direction: row;
+  align-items: center;
+}
+.input--row label {
+  margin-right: 12px;
+  margin-bottom: 0;
+}
+.input-icon {
+  position: relative;
+}
+.input-icon img {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.input-error {
+  font-size: 14px;
+  color: red;
+}
+.input-error span {
+  margin-left: 6px;
+}
+.input-error--show {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.input-error--hide {
+  display: none;
+}
