@@ -10,7 +10,7 @@ class Alertant extends Model
     use HasFactory;
 
     protected $table = "alertants";
-    protected $timestamps = false;
+    public $timestamps = false;
 
     /**
      * Get all of the incidencies for the Alertant

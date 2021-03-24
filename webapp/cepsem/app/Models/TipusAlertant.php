@@ -10,7 +10,7 @@ class TipusAlertant extends Model
     use HasFactory;
 
     protected $table = "tipus_alertants";
-    protected $timestamps = false;
+    public $timestamps = false;
 
     /**
      * Get all of the alertants for the TipusAlertant

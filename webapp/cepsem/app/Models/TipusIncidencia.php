@@ -10,7 +10,7 @@ class TipusIncidencia extends Model
     use HasFactory;
 
     protected $table = "tipus_incidencies";
-    protected $timestamps = false;
+    public $timestamps = false;
 
     /**
      * Get all of the incidencies for the TipusIncidencia

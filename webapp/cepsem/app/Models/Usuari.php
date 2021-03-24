@@ -10,7 +10,7 @@ class Usuari extends Model
     use HasFactory;
 
     protected $table = "usuaris";
-    protected $timestamps = false;
+    public $timestamps = false;
 
     /**
      * Get all of the incidencies for the Usuari

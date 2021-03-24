@@ -10,7 +10,7 @@ class Afectat extends Model
     use HasFactory;
 
     protected $table = "afectats";
-    protected $timestamps = false;
+    public $timestamps = false;
 
     /**
      * Get the sexe that owns the Afectat

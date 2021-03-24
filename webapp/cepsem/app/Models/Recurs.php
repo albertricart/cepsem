@@ -10,7 +10,7 @@ class Recurs extends Model
     use HasFactory;
 
     protected $table = "recursos";
-    protected $timestamps = false;
+    public $timestamps = false;
 
 
     /**

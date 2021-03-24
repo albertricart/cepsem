@@ -10,7 +10,7 @@ class Rol extends Model
     use HasFactory;
 
     protected $table = "rols";
-    protected $timestamps = false;
+    public $timestamps = false;
 
     /**
      * Get all of the usuaris for the Rol

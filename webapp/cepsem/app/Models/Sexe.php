@@ -10,7 +10,7 @@ class Sexe extends Model
     use HasFactory;
 
     protected $table = "sexes";
-    protected $timestamps = false;
+    public $timestamps = false;
 
     /**
      * Get all of the afectats for the Sexe

@@ -10,7 +10,7 @@ class Comarca extends Model
     use HasFactory;
 
     protected $table = "comarques";
-    protected $timestamps = false;
+    public $timestamps = false;
 
     /**
      * Get all of the municipis for the Comarca

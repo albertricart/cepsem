@@ -10,7 +10,7 @@ class Provincia extends Model
     use HasFactory;
 
     protected $table = "provincies";
-    protected $timestamps = false;
+    public $timestamps = false;
 
     /**
      * Get all of the comarques for the Provincia

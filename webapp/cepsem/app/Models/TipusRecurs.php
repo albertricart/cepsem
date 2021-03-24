@@ -10,7 +10,7 @@ class TipusRecurs extends Model
     use HasFactory;
 
     protected $table = "tipus_recursos";
-    protected $timestamps = false;
+    public $timestamps = false;
 
     /**
      * Get all of the recursos for the TipusRecurs

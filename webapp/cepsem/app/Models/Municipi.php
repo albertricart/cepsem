@@ -10,7 +10,7 @@ class Municipi extends Model
     use HasFactory;
 
     protected $table = "municipis";
-    protected $timestamps = false;
+    public $timestamps = false;
 
     /**
      * Get all of the incidencies for the Municipi

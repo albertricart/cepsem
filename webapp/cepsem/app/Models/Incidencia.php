@@ -10,7 +10,7 @@ class Incidencia extends Model
     use HasFactory;
 
     protected $table = "incidencies";
-    protected $timestamps = false;
+    public $timestamps = false;
 
     /**
      * The afectats that belong to the Incidencia
