@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Alertant;
 use App\Models\Incidencia;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,8 @@ class IncidenciaController extends Controller
      */
     public function index()
     {
-        //
+        $incidencies = Incidencia::all();
+        return view('pages.incidencies.index', compact('incidencies'));
     }
 
     /**
