@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@yield('pagename')</title>
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="shortcut icon" href="{{ asset('assets/logos/cepsem-simple.png') }}">
 </head>
 <body>
     @yield('content')
