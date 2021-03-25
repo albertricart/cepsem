@@ -83,17 +83,20 @@ img {
 }
 
 .icon {
-  transition: all cubic-bezier(0.55, 0.06, 0.68, 0.19) 0.25s;
+  transition: all ease-in-out 0.2s;
   padding: 4px;
+  border-radius: 100%;
 }
 .icon:hover {
-  border-radius: 100%;
   background-color: rgba(217, 20, 128, 0.3);
   cursor: pointer;
 }
 
-body {
+.login {
   background-color: rgba(0, 0, 0, 0.2);
+  height: 100vh;
+  width: 100vw;
+  padding-top: 30px;
 }
 
 .form-container {
@@ -131,7 +134,7 @@ body {
   background-color: #11AEBF;
 }
 .button--pink {
-  background-color: #D91480;
+  background-color: black;
 }
 .button:hover {
   cursor: pointer;
@@ -196,7 +199,7 @@ body {
   color: red;
 }
 .input-error span {
-  margin-left: 6px;
+  margin-left: 8px;
 }
 .input-error--show {
   display: flex;
