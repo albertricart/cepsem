@@ -5,12 +5,11 @@
 
 .input {
     display: flex;
-    margin-bottom: 20px;
-    font-family: "Inter", sans-serif;
-    color: $c_text;
+
 
     label {
         margin-bottom: 8px;
+        font-weight: 600;
     }
 
     input {
@@ -71,5 +70,20 @@
 
     &--hide {
         display: none;
+    }
+}
+
+
+.select {
+    padding: 16px;
+    border: 1px solid rgb(207, 214, 228);
+    outline: none;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+
+    &:focus {
+        border: 1px solid $c_light_pink;
+        box-shadow: 0px 0px 1px 3px $c_lightest_pink;
     }
 }

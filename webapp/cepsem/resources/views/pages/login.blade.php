@@ -9,11 +9,11 @@ Login
 
 <div class="login">
     <div style="padding-top: 150px">
-        <div class="form-container custom-card">
+        <div class="form-container form-container--small custom-card">
             <h2>Iniciar Sessió</h2>
 
             <form action="{{ url('/login') }}">
-                <div class="input input--col">
+                <div class="input input--col mb-4">
                     <label for="username">Usuari</label>
                     <input type="text" name="username" id="username" placeholder="Introdueix el teu usuari...">
                 </div>

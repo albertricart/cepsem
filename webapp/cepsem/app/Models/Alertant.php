@@ -11,6 +11,7 @@ class Alertant extends Model
 
     protected $table = "alertants";
     public $timestamps = false;
+    protected $fillable = ['telefon', 'nom', 'cognoms', 'adreca', 'municipis_id', 'tipus_alertants_id'];
 
     /**
      * Get all of the incidencies for the Alertant

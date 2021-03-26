@@ -1,17 +1,94 @@
 @extends('layouts.layout')
 
 @section('pagename')
-    Alertants
+Alertants
 @endsection
 
 @section('content')
+
+<div class="form-container custom-card my-5">
+
+    <h2 class="textBlue mb-4" style="font-weight: 700">Alertant</h2>
+
+    <div class="form-grid">
+        <div class="input input--col">
+            <label for="nom">Nom</label>
+            <input type="text" name="nom" id="nom" placeholder="Introdueix el nom de l'alertant...">
+        </div>
+
+        <div class="input input--col">
+            <label for="cognoms">Cognoms</label>
+            <input type="text" name="cognoms" id="cognoms" placeholder="Introdueix els cognoms de l'alertant...">
+        </div>
+
+        <div class="input input--col">
+            <label for="telefon">Telèfon</label>
+            <input type="text" name="telefon" id="telefon" placeholder="Introdueix el telèfon de l'alertant...">
+        </div>
+
+        <div class="input input--col">
+            <label for="adreca">Adreça</label>
+            <input type="text" name="adreca" id="adreca" placeholder="Introdueix l'adreça de l'alertant...">
+        </div>
+
+        <div class="input input--col">
+            <label for="tipus">Tipus</label>
+            <select name="tipus" id="tipus" class="select">
+                <option value="null" selected="true" disabled="disabled">Selecciona el tipus d'alertant...</option>
+                @foreach ($tipusAlertants as $tipusAlertant)
+                <option value="{{ $tipusAlertant->id }}">{{ $tipusAlertant->tipus }}</option>
+                @endforeach
+            </select>
+        </div>
+
+        <div class="input input--col">
+            <label for="provincia">Provincia</label>
+            <select name="provincia" id="provincia" class="select">
+                <option value="null" selected="true" disabled="disabled">Selecciona la provincia on es troba...</option>
+                @foreach ($provincies as $provincia)
+                <option value="{{ $provincia->id }}">{{ $provincia->nom }}</option>
+                @endforeach
+            </select>
+        </div>
+
+        <div class="input input--col">
+            <label for="comarca">Comarca</label>
+            <select name="comarca" id="comarca" class="select">
+                <option value="null" selected="true" disabled="disabled">Selecciona la comarca on es troba...</option>
+                @foreach ($comarques as $comarca)
+                <option value="{{ $comarca->id }}">{{ $comarca->nom }}</option>
+                @endforeach
+            </select>
+        </div>
+
+        <div class="input input--col">
+            <label for="municipi">Municipi</label>
+            <select name="municipi" id="municipi" class="select">
+                <option value="null" selected="true" disabled="disabled">Selecciona el municipi on es troba...</option>
+                @foreach ($municipis as $municipi)
+                <option value="{{ $municipi->id }}">{{ $municipi->nom }}</option>
+                @endforeach
+            </select>
+        </div>
+    </div>
+
+    <div class="mt-5">
+        <a href="" class="button button-icon button--rounded button--blue mr-2"
+            style="background-image: url({{ asset('assets/icons/add.svg') }})">Afegir</a>
+        <a href="" class="button button-icon button--rounded button--pink"
+            style="background-image: url({{ asset('assets/icons/cancel.svg') }})">Cancel·lar</a>
+    </div>
+
+
+</div>
 
 
 <div class="container-fluid my-5">
     <h1 class="page-title">Alertants</h1>
 
     <div class="d-flex justify-content-end">
-        <a href="" class="button button-icon button--pink" style="background-image: url({{ asset('assets/icons/add.svg') }})">AFEGEIX UN NOU ALERTANT</a>
+        <a href="" class="button button-icon button--pink"
+            style="background-image: url({{ asset('assets/icons/add.svg') }})">AFEGEIX UN NOU ALERTANT</a>
     </div>
 
     <div class="table-responsive  py-4">
@@ -28,7 +105,7 @@
             </thead>
             <tbody>
                 @foreach ($alertants as $alertant)
-                <tr class="table-info py-5" >
+                <tr class="table-info py-5">
                     <th scope="row">{{ $alertant->telefon }}</th>
                     <td>{{ $alertant->nom }}</td>
                     <td>{{ $alertant->cognoms }}</td>
@@ -43,6 +120,9 @@
     </div>
 
 </div>
+
+
+
 
 
 
