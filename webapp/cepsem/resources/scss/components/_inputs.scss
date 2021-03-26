@@ -56,11 +56,11 @@
 
 
 .input-error {
-    font-size: 14px;
-    color: red;
 
     span {
         margin-left: 8px;
+        color: red;
+        font-size: 14px;
     }
 
     &--show {

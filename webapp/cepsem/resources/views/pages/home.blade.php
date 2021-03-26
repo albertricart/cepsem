@@ -3,3 +3,9 @@
 @section('pagename')
     Home
 @endsection
+
+
+@section('content')
+
+
+@endsection

@@ -6,8 +6,15 @@
 
 @section('content')
 
+
 <div class="container-fluid my-5">
-    <div class="table-responsive">
+    <h1 class="page-title">Alertants</h1>
+
+    <div class="d-flex justify-content-end">
+        <a href="" class="button button-icon button--pink" style="background-image: url({{ asset('assets/icons/add.svg') }})">AFEGEIX UN NOU ALERTANT</a>
+    </div>
+
+    <div class="table-responsive  py-4">
         <table class="table table-hover">
             <thead>
                 <tr class="table-danger">
@@ -32,6 +39,7 @@
                 @endforeach
             </tbody>
         </table>
+        {{ $alertants->links() }}
     </div>
 
 </div>

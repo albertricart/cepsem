@@ -2,7 +2,7 @@
     display: inline-block;
     outline: none;
     border: none;
-    border-radius: 10px;
+    border-radius: 12px;
     color: white;
     padding: 16px 32px;
     transition: opacity ease 0.2s;
@@ -13,6 +13,13 @@
 
     &--pink{
         background-color: $c_pink;
+    }
+
+    &-icon{
+        background-size: 30px;
+        background-position: 16px 50%;
+        background-repeat: no-repeat;
+        padding-left: 60px;
     }
 
     &:hover{

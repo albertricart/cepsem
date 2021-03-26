@@ -16,6 +16,10 @@
     background-color: white;
     padding: 50px 80px;
 
+    // @include media-breakpoint-down(sm) {
+    //     padding: 12px 80px;
+    // }
+
     h2{
         color: $c_text;
         margin-top: 0;

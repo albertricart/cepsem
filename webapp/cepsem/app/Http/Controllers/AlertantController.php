@@ -21,7 +21,7 @@ class AlertantController extends Controller
             ->join('municipis', 'municipis_id', '=', 'municipis.id')
             ->join('tipus_alertants', 'tipus_alertants_id', '=', 'tipus_alertants.id')
             ->orderBy('alertants.nom')
-            ->get();
+            ->paginate(10);
 
         return view('pages.alertants.index', compact('alertants'));
     }

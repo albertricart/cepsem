@@ -64,6 +64,7 @@
 
 * {
   font-family: "Inter", sans-serif;
+  color: #4A4A4A;
   scroll-behavior: smooth;
   box-sizing: border-box;
 }
@@ -90,6 +91,11 @@ img {
 .icon:hover {
   background-color: rgba(217, 20, 128, 0.3);
   cursor: pointer;
+}
+
+.page-title {
+  font-size: 48px;
+  font-weight: 700;
 }
 
 .login {
@@ -128,7 +134,7 @@ img {
   display: inline-block;
   outline: none;
   border: none;
-  border-radius: 10px;
+  border-radius: 12px;
   color: white;
   padding: 16px 32px;
   transition: opacity ease 0.2s;
@@ -138,6 +144,12 @@ img {
 }
 .button--pink {
   background-color: #D91480;
+}
+.button-icon {
+  background-size: 30px;
+  background-position: 16px 50%;
+  background-repeat: no-repeat;
+  padding-left: 60px;
 }
 .button:hover {
   cursor: pointer;
@@ -198,12 +210,10 @@ img {
   right: 10px;
 }
 
-.input-error {
-  font-size: 14px;
-  color: red;
-}
 .input-error span {
   margin-left: 8px;
+  color: red;
+  font-size: 14px;
 }
 .input-error--show {
   display: flex;
