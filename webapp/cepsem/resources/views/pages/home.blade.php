@@ -6,6 +6,8 @@
 
 
 @section('content')
-
+    <div class="container mt-5">
+        <h1>Hola</h1>
+    </div>
 
 @endsection

@@ -16,34 +16,7 @@ class AlertantController extends Controller
      */
     public function index()
     {
-        $alertants = DB::table('alertants')
-            ->select('alertants.id', 'alertants.telefon', 'alertants.nom', 'alertants.cognoms', 'alertants.adreca', 'municipis.nom as municipi', 'tipus_alertants.tipus as tipus')
-            ->join('municipis', 'municipis_id', '=', 'municipis.id')
-            ->join('tipus_alertants', 'tipus_alertants_id', '=', 'tipus_alertants.id')
-            ->orderBy('alertants.nom')
-            ->paginate(10);
-
-        $tipusAlertants = DB::table('tipus_alertants')
-            ->select('id', 'tipus')
-            ->orderBy('tipus')
-            ->get();
-
-        $provincies = DB::table('provincies')
-        ->select('id', 'nom')
-        ->orderBy('nom')
-        ->get();
-
-        $comarques = DB::table('comarques')
-        ->select('id', 'nom', 'provincies_id')
-        ->orderBy('nom')
-        ->get();
-
-        $municipis = DB::table('municipis')
-        ->select('id', 'nom', 'comarques_id')
-        ->orderBy('nom')
-        ->get();
-
-        return view('pages.alertants.index', compact('alertants', 'tipusAlertants', 'provincies', 'comarques', 'municipis'));
+        return view('pages.alertants.index_vue');
     }
 
     /**
