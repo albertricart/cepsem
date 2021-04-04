@@ -18,10 +18,10 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `cepsem`
+-- Database: `daw2b02`
 --
-CREATE DATABASE IF NOT EXISTS `cepsem` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `cepsem`;
+CREATE DATABASE IF NOT EXISTS `daw2b02` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `daw2b02`;
 
 -- --------------------------------------------------------
 

@@ -37498,9 +37498,9 @@ var render = function() {
                 _vm._v(" "),
                 _c("td", [_vm._v(_vm._s(alertant.adreca))]),
                 _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(alertant.municipi))]),
+                _c("td", [_vm._v(_vm._s(alertant.municipis_id))]),
                 _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(alertant.tipus))])
+                _c("td", [_vm._v(_vm._s(alertant.tipus_alertants_id))])
               ]
             )
           }),
@@ -37518,7 +37518,11 @@ var staticRenderFns = [
     return _c("div", { staticClass: "d-flex justify-content-end" }, [
       _c(
         "a",
-        { staticClass: "button button-icon button--pink", attrs: { href: "" } },
+        {
+          staticClass: "button button-icon button--pink",
+          staticStyle: { "background-image": "url('./assets/icons/add.svg')" },
+          attrs: { href: "" }
+        },
         [_vm._v("\n      AFEGEIX UN NOU ALERTANT")]
       )
     ])

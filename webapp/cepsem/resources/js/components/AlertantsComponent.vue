@@ -6,7 +6,7 @@
       <a
         href=""
         class="button button-icon button--pink"
-
+        style="background-image: url('./assets/icons/add.svg')"
       >
         AFEGEIX UN NOU ALERTANT</a
       >
@@ -36,8 +36,8 @@
             <td>{{ alertant.nom }}</td>
             <td>{{ alertant.cognoms }}</td>
             <td>{{ alertant.adreca }}</td>
-            <td>{{ alertant.municipi }}</td>
-            <td>{{ alertant.tipus }}</td>
+            <td>{{ alertant.municipis_id }}</td>
+            <td>{{ alertant.tipus_alertants_id }}</td>
           </tr>
         </tbody>
       </table>
