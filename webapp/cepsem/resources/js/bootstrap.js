@@ -22,7 +22,12 @@ try {
 window.axios = require('axios');
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+
+//==== LOCAL ====//
 window.axios.defaults.baseURL = '/cepsem/webapp/cepsem/public/api/'
+
+//==== SERVIDOR ====//
+// window.axios.defaults.baseURL = '/2021/daw2b02/cepsem/public/api/'
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening

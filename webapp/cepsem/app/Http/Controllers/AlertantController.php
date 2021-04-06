@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Alertant;
 use Illuminate\Http\Request;
-use Illuminate\Database\QueryException;
-use Illuminate\Support\Facades\DB;
+
 
 class AlertantController extends Controller
 {
