@@ -13,6 +13,7 @@
 <body>
 
     <div id="app">
+        @yield('header')
         @yield('content')
     </div>
 
