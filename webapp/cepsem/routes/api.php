@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\API\AlertantController;
-use App\Http\Controllers\API\IncidenciaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\API\UsuariController;
+use App\Http\Controllers\API\AlertantController;
+use App\Http\Controllers\API\IncidenciaController;
 
 /*
 |--------------------------------------------------------------------------

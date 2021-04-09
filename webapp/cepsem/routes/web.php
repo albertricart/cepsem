@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsuariController;
 use App\Http\Controllers\AlertantController;
 use App\Http\Controllers\IncidenciaController;
+use App\Http\Controllers\TipusRecursController;
 
 Route::get('/', function () {
     return view('pages.home');
@@ -21,6 +22,7 @@ Route::get('/cecos', function () {
 Route::resource('/cecos/alertants', AlertantController::class);
 Route::resource('/cecos/incidencies', IncidenciaController::class);
 Route::resource('/cecos/usuaris', UsuariController::class);
+Route::resource('/cecos/tipus-recurs', TipusRecursController::class);
 
 Route::get('/login', [UsuariController::class, 'showLogin'])->name('login');
 Route::post('/login', [UsuariController::class, 'login'] );

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Classes\Utilitat;
 use App\Models\TipusRecurs;
 use Illuminate\Http\Request;
+use Illuminate\Database\QueryException;
 
 class TipusRecursController extends Controller
 {
@@ -14,7 +16,8 @@ class TipusRecursController extends Controller
      */
     public function index()
     {
-        //
+        $tipusRecurs = TipusRecurs::all();
+        return view('pages.cecos.altres.tipusRecursos.index', ['tipusRecurs' => $tipusRecurs]);
     }
 
     /**
@@ -24,7 +27,7 @@ class TipusRecursController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -35,7 +38,25 @@ class TipusRecursController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $tipus_recur = new TipusRecurs();
+
+        /* $tipusRecurs->id = $request->input('id'); */
+        $tipus_recur->id = 5;
+        $tipus_recur->tipus = $request->input('tipus');
+
+        try {
+            $tipus_recur->save();
+            $request->session()->flash('mensaje', 'Registre creat correctament');
+            $response = redirect()->action([TipusRecursController::class, 'index']);
+        }
+        catch (QueryException $e)
+        {
+            $mensaje = Utilitat::handleErrorMessage($e);
+            $request->session()->flash('error', $mensaje);
+            $response = redirect()->action([TipusRecursController::class, 'create'])->withInput();
+        }
+
+        return $response;
     }
 
     /**
@@ -57,7 +78,8 @@ class TipusRecursController extends Controller
      */
     public function edit(TipusRecurs $tipusRecurs)
     {
-        //
+
+        return view('pages.cecos.altres.tipusRecursos.create', ['tipusRecurs' => $tipusRecurs]);
     }
 
     /**
@@ -69,7 +91,23 @@ class TipusRecursController extends Controller
      */
     public function update(Request $request, TipusRecurs $tipusRecurs)
     {
-        //
+        $tipusRecurs->id = $request->input('id');
+        $tipusRecurs->tipus = $request->input('tipus');
+
+
+        try {
+            $tipusRecurs->save();
+            $request->session()->flash('mensaje', 'Registre modificat correctament');
+            $response = redirect()->action([TipusRecursController::class, 'index']);
+        }
+        catch (QueryException $ex)
+        {
+            $mensaje = Utilitat::handleErrorMessage($ex);
+            $request->session()->flash('error', $mensaje);
+            $response = redirect()->action([TipusRecursController::class, 'create'])->withInput();
+        }
+
+        return $response;
     }
 
     /**
@@ -78,8 +116,19 @@ class TipusRecursController extends Controller
      * @param  \App\Models\TipusRecurs  $tipusRecurs
      * @return \Illuminate\Http\Response
      */
-    public function destroy(TipusRecurs $tipusRecurs)
+    public function destroy(Request $request,TipusRecurs $tipus_recur)
     {
-        //
+        try {
+            $tipus_recur->delete();
+            $request->session()->flash('mensaje', 'Registre esborrat correctament');
+        }
+        catch (QueryException $ex)
+        {
+            $mensaje = Utilitat::handleErrorMessage($ex);
+            $request->session()->flash('error', $mensaje);
+
+        }
+
+        return redirect()->action([TipusRecursController::class, 'index']);
     }
 }
