@@ -4,9 +4,54 @@ namespace App\Http\Controllers;
 
 use App\Models\Usuari;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UsuariController extends Controller
 {
+
+    public function showLogin()
+    {
+        /* $user = new Usuari();
+
+        $user->id = '45';
+        $user->username = 'ivan';
+        $user->contrasenya = \bcrypt('ivan');
+        $user->email = 'ivan';
+        $user->nom = 'ivan';
+        $user->cognoms = 'ivan';
+        $user->rols_id = 1;
+        $user->recursos_id = 1;
+
+        $user->save(); */
+
+        return view('pages.login');
+    }
+
+    public function login(Request $request)
+    {
+        $username = $request->input('username');
+        $contrasenya = $request->input('contrasenya');
+
+        $user = Usuari::where('username', $username)->first();
+
+        if ($user !=null && Hash::check($contrasenya, $user->contrasenya)) {
+            Auth::login($user);
+            $response = redirect('/cecos');
+        }
+        else {
+            $request->session()->flash('error', 'Usuari o contrasenya incorrectes');
+            $response = redirect('/login')->withInput();
+        }
+
+        return $response;
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect('/');
+    }
     /**
      * Display a listing of the resource.
      *

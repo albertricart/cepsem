@@ -2,15 +2,18 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Usuari extends Model
+class Usuari extends Authenticatable
 {
-    use HasFactory;
+    use HasFactory, Notifiable;
 
     protected $table = "usuaris";
     public $timestamps = false;
+    protected $fillable = ['username', 'contrasenya', 'email', 'nom', 'cognoms', 'rols_id', 'recursos_id'];
 
     /**
      * Get all of the incidencies for the Usuari
