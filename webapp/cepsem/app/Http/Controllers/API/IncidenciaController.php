@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\IncidenciaResource;
+use App\Models\Alertant;
 use App\Models\Incidencia;
 use Illuminate\Http\Request;
 
@@ -14,17 +16,7 @@ class IncidenciaController extends Controller
      */
     public function index()
     {
-        return view('pages.cecos.incidencies.index');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return IncidenciaResource::collection(Incidencia::with(['afectats', 'tipus_incidencia', 'recursos', 'municipi', 'alertant', 'usuari'])->get());
     }
 
     /**
@@ -45,17 +37,6 @@ class IncidenciaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Incidencia $incidencia)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Incidencia  $incidencia
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Incidencia $incidencia)
     {
         //
     }

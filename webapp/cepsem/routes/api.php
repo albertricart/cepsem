@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\AlertantController;
+use App\Http\Controllers\API\IncidenciaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,3 +21,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::apiResource('alertants', AlertantController::class);
+Route::apiResource('incidencies', IncidenciaController::class);

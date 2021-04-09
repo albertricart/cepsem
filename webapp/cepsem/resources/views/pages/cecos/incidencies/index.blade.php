@@ -5,38 +5,17 @@ Incidències
 @endsection
 
 @section('content')
+<div class="container-fluid my-5">
+    {{-- <h1 class="page-title">INCIDÈNCIES</h1> --}}
 
-<div class="container my-5">
+    <div class="d-flex justify-content-end">
+      <button class="button button-icon button--pink" style="background-image: url('../assets/icons/add.svg')">
+        AFEGEIX UNA NOVA INCIDENCIA
+      </button>
+    </div>
 
-
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th scope="col">Telèfon</th>
-                <th scope="col">Nom</th>
-                <th scope="col">Cognom</th>
-                <th scope="col">Adreça</th>
-                <th scope="col">Municipi</th>
-                <th scope="col">Tipus</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($incidencies as $incidencia)
-            <tr>
-                <th scope="row">{{ $alertant->telefon }}</th>
-                <td>{{ $alertant->nom }}</td>
-                <td>{{ $alertant->cognoms }}</td>
-                <td>{{ $alertant->adreca }}</td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
-
-
-
+    <table-component taula="incidencies" :camps="['ID', 'Telèfon', 'Nom', 'Cognoms', 'Adreça', 'Municipi', 'Tipus']"></table-component>
 
 </div>
-
-
 
 @endsection

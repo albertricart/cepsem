@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AlertantController;
+use App\Http\Controllers\IncidenciaController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -16,3 +17,4 @@ Route::get('/cecos', function () {
 });
 
 Route::resource('/cecos/alertants', AlertantController::class);
+Route::resource('/cecos/incidencies', IncidenciaController::class);
