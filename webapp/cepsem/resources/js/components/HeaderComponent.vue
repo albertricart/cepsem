@@ -14,8 +14,9 @@
     </div>
 
     <div class="header-trail">
-      <div v-show="helpbox" class="header-helpbox"></div>
-      <div v-show="formacio" class="header-formacio"></div>
+      <div v-show="helpbox" class="header-icon header-icon--helpbox"></div>
+      <div v-show="formacio" class="header-icon header-icon--formacio"></div>
+      <div v-show="logged" class="header-icon header-icon--login">Hola, Albert</div>
 
       <!-- <a href="" class="header-formacio"></a>
       <a href="" class="header-help"></a> -->
@@ -33,6 +34,11 @@ export default {
     },
 
     helpbox: {
+      type: Boolean,
+      required: true,
+    },
+
+    logged: {
       type: Boolean,
       required: true,
     },

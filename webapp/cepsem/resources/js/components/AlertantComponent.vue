@@ -1,10 +1,9 @@
 <template>
-  <div class="container">
+  <div>
     <h1 class="page-title">ALERTANTS</h1>
 
     <div class="d-flex justify-content-end">
       <button
-        v-show="afegir"
         class="button button-icon button--pink"
         style="background-image: url('../assets/icons/add.svg')"
       >
@@ -29,7 +28,7 @@
 
         <tbody>
           <tr class="table-info py-5" v-for="(alertant, index) in alertants" :key="index">
-            <td>{{ alertant.id }}</td>
+            <th scope="row">{{ alertant.id }}</th>
             <td>{{ alertant.telefon }}</td>
             <td>{{ alertant.nom }}</td>
             <td>{{ alertant.cognoms }}</td>
