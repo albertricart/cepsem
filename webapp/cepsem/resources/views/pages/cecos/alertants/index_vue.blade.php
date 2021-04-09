@@ -5,7 +5,7 @@ Alertants
 @endsection
 
 @section('header')
-    <header-component></header-component>
+    <header-component :formacio="true" :helpbox="true"></header-component>
 @endsection
 
 @section('content')

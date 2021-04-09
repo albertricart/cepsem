@@ -15,7 +15,7 @@ class AlertantController extends Controller
      */
     public function index()
     {
-        return view('pages.alertants.index_vue');
+        return view('pages.cecos.alertants.index_vue');
     }
 
     /**

@@ -1,18 +1,24 @@
 .header{
     display: flex;
     align-items: center;
+    justify-content: space-between;
     background-color: whitesmoke;
     box-shadow: 0 2px 3px -2px rgba(0,0,0,.2);
     height: 90px;
     padding-left: 30px;
     padding-right: 30px;
 
+    &-main{
+        display: flex;
+        align-items: center;
+    }
+
     &-logo{
         background-image: url('../assets/logos/cepsem.svg');
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
-        width: 140px;
+        width: 180px;
         height: 70px;
     }
 
@@ -27,5 +33,29 @@
             padding-left: 10px;
             padding-right: 10px;
         }
+    }
+
+    &-trail{
+        display: flex;
+        align-items: center;
+    }
+
+    &-formacio{
+        background-image: url('../assets/icons/class.svg');
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
+        width: 35px;
+        height: 35px;
+    }
+
+    &-helpbox{
+        background-image: url('../assets/icons/helpbox.svg');
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
+        width: 35px;
+        height: 35px;
+        margin-right: 30px;
     }
 }

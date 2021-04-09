@@ -1863,8 +1863,25 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: {},
+  props: {
+    formacio: {
+      type: Boolean,
+      required: true
+    },
+    helpbox: {
+      type: Boolean,
+      required: true
+    }
+  },
   data: function data() {
     return {};
   },
@@ -37605,30 +37622,56 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "header" }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("div", { staticClass: "header-trail" }, [
+      _c("div", {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.helpbox,
+            expression: "helpbox"
+          }
+        ],
+        staticClass: "header-helpbox"
+      }),
+      _vm._v(" "),
+      _c("div", {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.formacio,
+            expression: "formacio"
+          }
+        ],
+        staticClass: "header-formacio"
+      })
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "header" }, [
-      _c("a", { staticClass: "header-logo", attrs: { href: "#" } }),
+    return _c("div", { staticClass: "header-main" }, [
+      _c("div", { staticClass: "header-logo", attrs: { href: "#" } }),
       _vm._v(" "),
       _c("nav", { staticClass: "header-nav" }, [
-        _c("a", { attrs: { href: "" } }, [_vm._v("Inici")]),
+        _c("a", { attrs: { href: "/cepsem/webapp/cepsem/public/" } }, [
+          _vm._v("Inici")
+        ]),
         _vm._v(" "),
-        _c("a", { attrs: { href: "" } }, [_vm._v("CECOS")]),
+        _c("a", { attrs: { href: "/cepsem/webapp/cepsem/public/cecos/" } }, [
+          _vm._v("CECOS")
+        ]),
         _vm._v(" "),
         _c("a", { attrs: { href: "" } }, [_vm._v("Recursos Mòbils")]),
         _vm._v(" "),
         _c("a", { attrs: { href: "" } }, [_vm._v("Formació")])
-      ]),
-      _vm._v(" "),
-      _c("div", [
-        _c("a", { staticClass: "header-formacio", attrs: { href: "" } }),
-        _vm._v(" "),
-        _c("a", { staticClass: "header-help", attrs: { href: "" } })
       ])
     ])
   }
@@ -37671,7 +37714,7 @@ var render = function() {
             }
           ],
           staticClass: "button button-icon button--pink",
-          staticStyle: { "background-image": "url('./assets/icons/add.svg')" }
+          staticStyle: { "background-image": "url('../assets/icons/add.svg')" }
         },
         [_vm._v("\n      AFEGEIX UN NOU " + _vm._s(_vm.singular) + "\n    ")]
       )

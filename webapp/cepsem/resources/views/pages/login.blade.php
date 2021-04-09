@@ -5,6 +5,12 @@
 Login
 @endsection
 
+
+@section('header')
+    {{-- <header-component></header-component> --}}
+@endsection
+
+
 @section('content')
 
 <div class="login">

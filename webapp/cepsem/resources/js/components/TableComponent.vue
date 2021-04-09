@@ -3,7 +3,7 @@
     <h1 class="page-title">{{ titol }}</h1>
 
     <div class="d-flex justify-content-end">
-      <button v-show="afegir" class="button button-icon button--pink" style="background-image: url('./assets/icons/add.svg')">
+      <button v-show="afegir" class="button button-icon button--pink" style="background-image: url('../assets/icons/add.svg')">
         AFEGEIX UN NOU {{ singular }}
       </button>
     </div>

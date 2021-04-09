@@ -15,5 +15,12 @@ class AlertantResource extends JsonResource
     public function toArray($request)
     {
         return parent::toArray($request);
+        // return [
+        //     "id" => $this->id,
+        //     "nom" => $this->nom,
+        //     "cognoms" => $this->cognoms,
+        //     "telefon" => $this->telefon,
+        //     "adreca" => $this->adreca,
+        // ];
     }
 }

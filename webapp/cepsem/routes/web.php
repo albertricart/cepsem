@@ -11,5 +11,8 @@ Route::get('/login', function () {
     return view('pages.login');
 });
 
+Route::get('/cecos', function () {
+    return view('pages.cecos.index');
+});
 
-Route::resource('alertants', AlertantController::class);
+Route::resource('/cecos/alertants', AlertantController::class);

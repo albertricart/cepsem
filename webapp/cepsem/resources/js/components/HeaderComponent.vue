@@ -1,24 +1,42 @@
 <template>
-    <div class="header">
-        <a href="#" class="header-logo"></a>
+  <div class="header">
 
-        <nav class="header-nav">
-            <a href="">Inici</a>
-            <a href="">CECOS</a>
-            <a href="">Recursos Mòbils</a>
-            <a href="">Formació</a>
-        </nav>
+    <div class="header-main">
+      <!-- <a href="#" class="header-logo"></a> -->
+      <div href="#" class="header-logo"></div>
 
-        <div>
-            <a href="" class="header-formacio"></a>
-            <a href="" class="header-help"></a>
-        </div>
+      <nav class="header-nav">
+        <a href="/cepsem/webapp/cepsem/public/">Inici</a>
+        <a href="/cepsem/webapp/cepsem/public/cecos/">CECOS</a>
+        <a href="">Recursos Mòbils</a>
+        <a href="">Formació</a>
+      </nav>
     </div>
+
+    <div class="header-trail">
+      <div v-show="helpbox" class="header-helpbox"></div>
+      <div v-show="formacio" class="header-formacio"></div>
+
+      <!-- <a href="" class="header-formacio"></a>
+      <a href="" class="header-help"></a> -->
+    </div>
+
+  </div>
 </template>
 
 <script>
 export default {
-  props: {},
+  props: {
+    formacio: {
+      type: Boolean,
+      required: true,
+    },
+
+    helpbox: {
+      type: Boolean,
+      required: true,
+    },
+  },
   data() {
     return {};
   },

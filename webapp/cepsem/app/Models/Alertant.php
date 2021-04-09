@@ -22,4 +22,24 @@ class Alertant extends Model
     {
         return $this->hasMany(Incidencia::class, 'alertants_id');
     }
+
+    /**
+     * Get the municipi that owns the Alertant
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function municipi()
+    {
+        return $this->belongsTo(Municipi::class, 'municipis_id');
+    }
+
+    /**
+     * Get the tipus_alertant that owns the Alertant
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function tipus_alertant()
+    {
+        return $this->belongsTo(TipusAlertant::class, 'tipus_alertants_id');
+    }
 }

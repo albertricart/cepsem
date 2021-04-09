@@ -7,9 +7,6 @@ Home
 
 @section('content')
 
-
-
-
 <div class="home">
     <div class="home-header">
         <div class="container-fluid">
@@ -48,8 +45,5 @@ Home
 
 
 </div>
-
-
-
 
 @endsection

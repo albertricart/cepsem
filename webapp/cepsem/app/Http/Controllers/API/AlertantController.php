@@ -18,7 +18,18 @@ class AlertantController extends Controller
      */
     public function index()
     {
-        return AlertantResource::collection(Alertant::all());
+
+        // $alertants = AlertantResource::collection(Alertant::all()->map->only(['id', 'nom'])->with(['incidencies', 'municipi', 'tipus_alertant'])->get());
+        // $alertants = AlertantResource::collection(
+        //     Alertant::query()
+        //         ->with()
+        //     Alertant::all()->map->only(['id', 'nom'])->with(['incidencies', 'municipi', 'tipus_alertant'])->get()
+        // );
+        // return $alertants;
+
+
+        // return AlertantResource::collection(Alertant::all());
+        return AlertantResource::collection(Alertant::with(['incidencies', 'municipi', 'tipus_alertant'])->get());
     }
 
     /**

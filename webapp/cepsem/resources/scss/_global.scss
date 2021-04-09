@@ -23,13 +23,13 @@ a {
     }
 }
 
-.container-fluid{
-    width: 100%;
-    padding-left: 0;
-    padding-right: 0;
-    margin-right: auto;
-    margin-left: auto;
-}
+// .container-fluid{
+//     width: 100%;
+//     padding-left: 0;
+//     padding-right: 0;
+//     margin-right: auto;
+//     margin-left: auto;
+// }
 
 button[type="submit"]{
     outline: none;
@@ -60,6 +60,22 @@ button[type="submit"]{
 .custom-card {
     border-radius: 26px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    width: 100%;
+    padding: 32px;
+    margin-bottom: 20px;
+
+
+    &--sm{
+        height: 200px;
+    }
+
+    &--md{
+        height: 300px;
+    }
+
+    &--lg{
+        height: 400px;
+    }
 }
 
 .form-container {
@@ -76,7 +92,7 @@ button[type="submit"]{
 
 
     &--small {
-        max-width: 530px;
+        max-width: 475px;
         padding: 50px 80px;
     }
 }
@@ -108,3 +124,4 @@ button[type="submit"]{
         margin-bottom: 25px;
     }
 }
+
