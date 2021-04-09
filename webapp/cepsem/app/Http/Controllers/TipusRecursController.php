@@ -40,8 +40,7 @@ class TipusRecursController extends Controller
     {
         $tipus_recur = new TipusRecurs();
 
-        /* $tipusRecurs->id = $request->input('id'); */
-        $tipus_recur->id = 5;
+        /* $tipusRecurs->id = 5; */
         $tipus_recur->tipus = $request->input('tipus');
 
         try {
@@ -91,7 +90,6 @@ class TipusRecursController extends Controller
      */
     public function update(Request $request, TipusRecurs $tipusRecurs)
     {
-        $tipusRecurs->id = $request->input('id');
         $tipusRecurs->tipus = $request->input('tipus');
 
 
