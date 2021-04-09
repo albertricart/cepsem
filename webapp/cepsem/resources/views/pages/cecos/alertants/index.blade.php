@@ -10,7 +10,6 @@ Alertants
 
 @section('content')
 <div class="container-fluid my-5">
-    <testpagination-component></testpagination-component>
-    <alertant-component taula="alertants" :camps="['ID', 'Telèfon', 'Nom', 'Cognoms', 'Adreça', 'Municipi', 'Tipus']" :afegir="true"></alertant-component>
+    <alertant-component></alertant-component>
 </div>
 @endsection

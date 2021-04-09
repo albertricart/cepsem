@@ -24,7 +24,6 @@ Vue.use(BootstrapVue) // Telling Vue to use this in whole application
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('table-component', require('./components/TableComponent.vue').default);
-Vue.component('testpagination-component', require('./components/TestPaginationComponent.vue').default);
 Vue.component('alertant-component', require('./components/AlertantComponent.vue').default);
 Vue.component('header-component', require('./components/HeaderComponent.vue').default);
 

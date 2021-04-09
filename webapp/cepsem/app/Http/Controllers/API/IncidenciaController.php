@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\IncidenciaResource;
-use App\Models\Alertant;
 use App\Models\Incidencia;
 use Illuminate\Http\Request;
 
