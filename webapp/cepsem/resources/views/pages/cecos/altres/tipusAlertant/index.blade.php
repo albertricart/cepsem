@@ -1,7 +1,7 @@
 @extends('layouts.layout')
 
 @section('pagename')
-Tipus Recurs
+Tipus Alertants
 @endsection
 
 @section('header')
@@ -11,7 +11,7 @@ Tipus Recurs
 @section('content')
 <div class="card">
     <div class="card-body">
-        <h4 class="card-title">Recurs</h4>
+        <h4 class="card-title">Alertants</h4>
 
 
     <table class="table table-hover">
@@ -23,36 +23,36 @@ Tipus Recurs
         </tr>
         </thead>
         <tbody>
-            @foreach ($tipusRecurs as $recurs)
+            @foreach ($tipusAlertant as $alertant)
                 <tr>
-                    <th scope="row">{{ $recurs->id }}</th>
-                    <td>{{ $recurs->tipus }}</td>
+                    <th scope="row">{{ $alertant->id }}</th>
+                    <td>{{ $alertant->tipus }}</td>
 
                     <td>
-                        <button type="submit" id="myBtn" class="btn btn-danger float-right" data-toggle="modal" data-target="#modal{{ $recurs->id }}"><i class="fas fa-trash-alt"></i>Esborrar</button>
+                        <button type="submit" id="myBtn" class="btn btn-danger float-right" data-toggle="modal" data-target="#modal{{ $alertant->id }}"><i class="fas fa-trash-alt"></i>Esborrar</button>
 
-                        <form action="{{ action([App\Http\Controllers\TipusRecursController::class, 'edit'], ['tipus_recur' => $recurs->id]) }}" method="get">
+                        <form action="{{ action([App\Http\Controllers\TipusAlertantController::class, 'edit'], ['tipus_alertant' => $alertant->id]) }}" method="get">
                             @csrf
                             <button type="submit" class="btn btn-secondary float-right"><i class="far fa-edit"></i>Editar</button>
                         </form>
 
 
                         {{-- MODAL ELIMINAR --}}
-                        <div class="modal" id="modal{{ $recurs->id }}" tabindex="-1" role="dialog">
+                        <div class="modal" id="modal{{ $alertant->id }}" tabindex="-1" role="dialog">
                             <div class="modal-dialog" role="document">
                               <div class="modal-content">
                                 <div class="modal-header">
-                                  <h5 class="modal-title">Esborrar Recurs</h5>
+                                  <h5 class="modal-title">Esborrar Alertant</h5>
                                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                   </button>
                                 </div>
                                 <div class="modal-body">
-                                  <p>Estas segur de que vols esborrar el recurs {{ $recurs->tipus }}</p>
+                                  <p>Estas segur de que vols esborrar el alertant {{ $alertant->tipus }}</p>
                                 </div>
                                 <div class="modal-footer">
                                   <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-times"></i>Tancar</button>
-                                  <form action="{{ action([App\Http\Controllers\TipusRecursController::class, 'destroy'], ['tipus_recur' => $recurs->id]) }}" method="POST">
+                                  <form action="{{ action([App\Http\Controllers\TipusAlertantController::class, 'destroy'], ['tipus_alertant' => $alertant->id]) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger float-right"><i class="fas fa-trash-alt"></i>Esborrar</button>
@@ -65,13 +65,13 @@ Tipus Recurs
 
                           {{-- MODAL CREAR/UPDATE --}}
                           <div class="modal" id="modalCrear" tabindex="-1" role="dialog">
-                                <form action="{{ action([App\Http\Controllers\TipusRecursController::class, 'store']) }}" method="POST">
+                                <form action="{{ action([App\Http\Controllers\TipusAlertantController::class, 'store']) }}" method="POST">
                                 @csrf
                             <div class="modal-dialog" role="document">
                               <div class="modal-content">
                                 <div class="modal-header">
 
-                                  <h5 class="modal-title">Recurs</h5>
+                                  <h5 class="modal-title">Alertant</h5>
                                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                   </button>

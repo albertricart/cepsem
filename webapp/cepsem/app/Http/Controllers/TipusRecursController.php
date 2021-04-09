@@ -52,7 +52,7 @@ class TipusRecursController extends Controller
         {
             $mensaje = Utilitat::handleErrorMessage($e);
             $request->session()->flash('error', $mensaje);
-            $response = redirect()->action([TipusRecursController::class, 'create'])->withInput();
+            $response = redirect()->action([TipusRecursController::class, 'index'])->withInput();
         }
 
         return $response;
@@ -78,7 +78,6 @@ class TipusRecursController extends Controller
     public function edit(TipusRecurs $tipusRecurs)
     {
 
-        return view('pages.cecos.altres.tipusRecursos.create', ['tipusRecurs' => $tipusRecurs]);
     }
 
     /**
@@ -102,7 +101,7 @@ class TipusRecursController extends Controller
         {
             $mensaje = Utilitat::handleErrorMessage($ex);
             $request->session()->flash('error', $mensaje);
-            $response = redirect()->action([TipusRecursController::class, 'create'])->withInput();
+            $response = redirect()->action([TipusRecursController::class, 'index'])->withInput();
         }
 
         return $response;
