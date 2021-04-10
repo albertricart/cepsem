@@ -5,7 +5,11 @@ Usuaris
 @endsection
 
 @section('header')
-    <header-component :formacio="true" :helpbox="false" :logged="true"></header-component>
+    @if (Auth::check())
+        <header-component username="{{ Auth::user()->nom }}" :formacio="true" :helpbox="true"></header-component>
+    @else
+        <header-component :formacio="true" :helpbox="true"></header-component>
+    @endif
 @endsection
 
 @section('content')
@@ -14,4 +18,21 @@ Usuaris
 </div>
 @endsection
 
+{{-- @if (Auth::check())
+    @switch(Auth::user()->rols_id)
+        @case(1)
 
+            @break
+        @case(2)
+
+            @break
+        @case(3)
+
+            @break
+        @default
+
+    @endswitch
+@else
+    {{ return redirect()->action([App\Http\Controllers\UsuariController::class, 'index']) }}
+@endif
+ --}}
