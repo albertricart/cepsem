@@ -30,11 +30,8 @@ Tipus Recurs
 
                     <td>
                         <button type="submit" id="myBtn" class="btn btn-danger float-right" data-toggle="modal" data-target="#modal{{ $recurs->id }}"><i class="fas fa-trash-alt"></i>Esborrar</button>
+                        <button type="submit" class="btn btn-secondary float-right" data-toggle="modal" data-target="#modalUpdate"><i class="far fa-edit"></i>Editar</button>
 
-                        <form action="{{ action([App\Http\Controllers\TipusRecursController::class, 'edit'], ['tipus_recur' => $recurs->id]) }}" method="get">
-                            @csrf
-                            <button type="submit" class="btn btn-secondary float-right"><i class="far fa-edit"></i>Editar</button>
-                        </form>
 
 
                         {{-- MODAL ELIMINAR --}}
@@ -94,7 +91,7 @@ Tipus Recurs
                           </div>
 
                           {{-- MODAL UPDATE --}}
-                          <div class="modal" id="modalCrear" tabindex="-1" role="dialog">
+                          <div class="modal" id="modalUpdate" tabindex="-1" role="dialog">
                             <form action="{{ action([App\Http\Controllers\TipusRecursController::class, 'update'], ['tipus_recur' => $recurs->id]) }}" method="POST">
                             @csrf
                         <div class="modal-dialog" role="document">
@@ -110,7 +107,7 @@ Tipus Recurs
                                 <div class="form-group row">
                                     <label class="col-2" for="sigles">Tipus</label>
                                     <div class="col-10">
-                                        <input class="form-control" type="text" name="tipus" id="tipus" value="{{ old('tipus') }}">
+                                        <input class="form-control" type="text" name="tipus" id="tipus" value="{{ $recurs->tipus }}">
                                     </div>
                                 </div>
                             </div>
