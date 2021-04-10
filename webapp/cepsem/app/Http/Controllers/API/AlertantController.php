@@ -29,8 +29,16 @@ class AlertantController extends Controller
 
 
         // return AlertantResource::collection(Alertant::all());
-        return AlertantResource::collection(Alertant::with(['incidencies', 'municipi', 'tipus_alertant'])->get());
-    }
+
+
+        // $alertants = AlertantResource::collection(Alertant::with(['incidencies', 'municipi', 'tipus_alertant'])->get());
+        // return $alertants->map(function($alertant) {
+            //     $alertant->testsilfjsld = 'jhsdkbfkjsdnfkls';
+            //     return $alertant;
+            // });
+
+            return AlertantResource::collection(Alertant::with(['incidencies', 'municipi', 'tipus_alertant'])->get());
+        }
 
     /**
      * Store a newly created resource in storage.

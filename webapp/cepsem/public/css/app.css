@@ -12912,6 +12912,10 @@ button[type=submit] {
   background-size: contain;
   padding-right: 35px;
   margin-left: 10px;
+  transition: all 0.15s ease;
+}
+.header-logout:hover {
+  opacity: 0.6;
 }
 
 .button {

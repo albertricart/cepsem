@@ -71,6 +71,11 @@
         background-size: contain;
         padding-right: 35px;
         margin-left: 10px;
+        transition: all 0.15s ease;
+
+        &:hover{
+            opacity: 0.6;
+        }
     }
 
 }

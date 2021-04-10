@@ -5,7 +5,12 @@ CECOS
 @endsection
 
 @section('header')
-    <header-component></header-component>
+@if (Auth::check())
+    <header-component username="{{ Auth::user()->nom }}" :formacio="true" :helpbox="true"></header-component>
+@else
+    <header-component :formacio="true" :helpbox="true"></header-component>
+@endif
+
 @endsection
 
 @section('content')
