@@ -103,7 +103,7 @@ class TipusAlertantController extends Controller
         {
             $mensaje = Utilitat::handleErrorMessage($ex);
             $request->session()->flash('error', $mensaje);
-            $response = redirect()->action([TipusAlertantController::class, 'create'])->withInput();
+            $response = redirect()->action([TipusAlertantController::class, 'index'])->withInput();
         }
 
         return $response;

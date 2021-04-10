@@ -63,7 +63,7 @@ Tipus Recurs
                           </div>
 
 
-                          {{-- MODAL CREAR/UPDATE --}}
+                          {{-- MODAL CREAR --}}
                           <div class="modal" id="modalCrear" tabindex="-1" role="dialog">
                                 <form action="{{ action([App\Http\Controllers\TipusRecursController::class, 'store']) }}" method="POST">
                                 @csrf
@@ -80,7 +80,7 @@ Tipus Recurs
                                     <div class="form-group row">
                                         <label class="col-2" for="sigles">Tipus</label>
                                         <div class="col-10">
-                                            <input class="form-control" type="text" name="tipus" id="tipus" value="{{ old('tipus') }}">
+                                            <input class="form-control" type="text" name="tipus" id="tipus">
                                         </div>
                                     </div>
                                 </div>
@@ -92,6 +92,36 @@ Tipus Recurs
                             </div>
                         </form>
                           </div>
+
+                          {{-- MODAL UPDATE --}}
+                          <div class="modal" id="modalCrear" tabindex="-1" role="dialog">
+                            <form action="{{ action([App\Http\Controllers\TipusRecursController::class, 'update'], ['tipus_recur' => $recurs->id]) }}" method="POST">
+                            @csrf
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+
+                              <h5 class="modal-title">Recurs</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-group row">
+                                    <label class="col-2" for="sigles">Tipus</label>
+                                    <div class="col-10">
+                                        <input class="form-control" type="text" name="tipus" id="tipus" value="{{ old('tipus') }}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-times"></i>Tancar</button>
+                                <button type="submit" class="btn btn-danger float-right" ><i class="fas fa-trash-alt"></i>Aceptar</button>
+                            </div>
+                          </div>
+                        </div>
+                    </form>
+                      </div>
                     </td>
                 </tr>
             @endforeach

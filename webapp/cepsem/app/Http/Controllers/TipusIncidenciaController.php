@@ -103,7 +103,7 @@ class TipusIncidenciaController extends Controller
         {
             $mensaje = Utilitat::handleErrorMessage($ex);
             $request->session()->flash('error', $mensaje);
-            $response = redirect()->action([TipusIncidenciaController::class, 'create'])->withInput();
+            $response = redirect()->action([TipusIncidenciaController::class, 'index'])->withInput();
         }
 
         return $response;
