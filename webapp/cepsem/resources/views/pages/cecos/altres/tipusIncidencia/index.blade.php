@@ -108,7 +108,7 @@ Tipus Incidencia
                                 <div class="form-group row">
                                     <label class="col-2" for="sigles">Tipus</label>
                                     <div class="col-10">
-                                        <input class="form-control" type="text" name="tipus" id="tipus" value="{{ old('tipus') }}">
+                                        <input class="form-control" type="text" name="tipus" id="tipus" value="{{ $incidencia->tipus }}">
                                     </div>
                                 </div>
                             </div>
