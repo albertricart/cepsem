@@ -59,7 +59,7 @@ class UsuariController extends Controller
      */
     public function index()
     {
-        //
+        return view('pages.cecos.usuaris.index');
     }
 
     /**
