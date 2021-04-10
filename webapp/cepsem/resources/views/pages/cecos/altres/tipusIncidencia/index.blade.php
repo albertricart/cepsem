@@ -30,11 +30,8 @@ Tipus Incidencia
 
                     <td>
                         <button type="submit" id="myBtn" class="btn btn-danger float-right" data-toggle="modal" data-target="#modal{{ $incidencia->id }}"><i class="fas fa-trash-alt"></i>Esborrar</button>
+                        <button type="submit" class="btn btn-secondary float-right" data-toggle="modal" data-target="#modalUpdate"><i class="far fa-edit"></i>Editar</button>
 
-                        <form action="{{ action([App\Http\Controllers\TipusIncidenciaController::class, 'edit'], ['tipus_incidencium' => $incidencia->id]) }}" method="get">
-                            @csrf
-                            <button type="submit" class="btn btn-secondary float-right"><i class="far fa-edit"></i>Editar</button>
-                        </form>
 
 
                         {{-- MODAL ELIMINAR --}}
@@ -95,7 +92,7 @@ Tipus Incidencia
 
 
                           {{-- MODAL UPDATE --}}
-                          <div class="modal" id="modalCrear" tabindex="-1" role="dialog">
+                          <div class="modal" id="modalUpdate" tabindex="-1" role="dialog">
                             <form action="{{ action([App\Http\Controllers\TipusIncidenciaController::class, 'update'], ['tipus_incidencium' => $incidencia->id]) }}" method="POST">
                             @csrf
                         <div class="modal-dialog" role="document">
