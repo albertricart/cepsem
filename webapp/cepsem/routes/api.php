@@ -22,5 +22,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::apiResource('alertants', AlertantController::class);
-Route::apiResource('incidencies', IncidenciaController::class);
+// Route::apiResource('incidencies', IncidenciaController::class);
 Route::apiResource('usuaris', UsuariController::class);

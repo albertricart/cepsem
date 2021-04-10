@@ -27,7 +27,7 @@ CECOS
                 </div>
 
                 <div class="col-12">
-                    <div class="custom-card custom-card--sm">ALERTANTS</div>
+                    <a href="{{ url('/cecos/alertants') }}" class="custom-card custom-card--sm">ALERTANTS</a>
                 </div>
             </div>
         </div>

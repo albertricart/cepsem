@@ -57,7 +57,7 @@ button[type="submit"]{
 }
 
 
-.custom-card {
+.cepsem-card {
     border-radius: 26px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     width: 100%;
@@ -132,3 +132,32 @@ button[type="submit"]{
     z-index: 10;
 }
 
+.cepsem-modal{
+    padding: 32px;
+
+    h2{
+        color: $c_blue;
+        font-weight: 700;
+    }
+
+    &-footer{
+
+    }
+}
+
+// BOOTSTRAP OVERRIDES
+
+//MODALS
+.modal-content{
+    border-radius: 32px !important;
+
+    .container{
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+}
+
+//SELECT
+.custom-select{
+    height: unset !important;
+}
