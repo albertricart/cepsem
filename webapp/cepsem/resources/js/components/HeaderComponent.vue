@@ -16,7 +16,10 @@
     <div class="header-trail">
       <div v-show="helpbox" class="header-icon header-icon--helpbox"></div>
       <div v-show="formacio" class="header-icon header-icon--formacio"></div>
-      <div v-show="logged" class="header-icon header-icon--login">Hola, Albert</div>
+      <div v-show="username">
+            <span>Hola, {{ username }}</span>
+            <a href="/cepsem/webapp/cepsem/public/logout" class="header-logout"></a>
+        </div>
 
       <!-- <a href="" class="header-formacio"></a>
       <a href="" class="header-help"></a> -->
@@ -38,13 +41,14 @@ export default {
       required: true,
     },
 
-    logged: {
-      type: Boolean,
-      required: true,
-    },
+    username:{
+        type: String,
+        required: false,
+    }
   },
   data() {
-    return {};
+    return {
+    };
   },
   created() {},
   mounted() {

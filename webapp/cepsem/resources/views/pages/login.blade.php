@@ -16,7 +16,8 @@ Login
                 @csrf
                 <div class="input input--col mb-4">
                     <label for="username">Usuari</label>
-                    <input type="text" name="username" id="username" placeholder="Introdueix el teu usuari..." autofocus value="{{ old('username') }}">
+                    <input type="text" name="username" id="username" placeholder="Introdueix el teu usuari..." autofocus
+                        value="{{ old('username') }}">
                 </div>
 
                 <div class="input input--icon input--col" style="margin-bottom: 12px">
@@ -24,14 +25,18 @@ Login
                     <div class="input-icon">
                         <input type="password" name="contrasenya" id="contrasenya"
                             placeholder="Introdueix la teva contrasenya..." value="{{ old('contrasenya') }}">
-                        <img class="icon" src="{{ asset('assets/icons/visibility.svg') }}" alt="">
+                        <div class="icon pw-icon" alt=""></div>
                     </div>
                 </div>
-                <div class="input-error input-error--show">
-                    <img src="{{ asset('assets/icons/alert.svg') }}" alt="" width="18px" height="18px"
-                        style="margin-bottom: auto">
-                    <span>{{ session('error') }}</span>
-                </div>
+
+                @if (session('error'))
+                    <div class="input-error input-error--show">
+                        <img src="{{ asset('assets/icons/alert.svg') }}" alt="" width="18px" height="18px"
+                            style="margin-bottom: auto">
+                        <span>{{ session('error') }}</span>
+                    </div>
+                @endif
+
                 <button type="submit" class="button button--pink">INICIAR SESSIÓ</button>
             </form>
         </div>

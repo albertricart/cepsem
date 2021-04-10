@@ -44,11 +44,15 @@
         background-position: center;
         background-repeat: no-repeat;
         background-size: contain;
-        margin-right: 20px;
-        width: 35px;
-        height: 35px;
+        margin-right: 25px;
+        width: 30px;
+        height: 30px;
+        transition: all 0.15s ease;
 
-
+        &:hover{
+            cursor: pointer;
+            opacity: 0.6;
+        }
 
         &--formacio {
             background-image: url('../assets/icons/class.svg');
@@ -57,14 +61,16 @@
         &--helpbox {
             background-image: url('../assets/icons/helpbox.svg');
         }
+    }
 
-        &--login {
-            background-image: url('../assets/icons/logout.svg');
-            background-position: 100% 50%;
-            background-repeat: no-repeat;
-            background-size: contain;
-            padding-right: 35px;
-        }
+    &-logout {
+        width: 30px;
+        height: 30px;
+        background-image: url('../assets/icons/logout.svg');
+        background-repeat: no-repeat;
+        background-size: contain;
+        padding-right: 35px;
+        margin-left: 10px;
     }
 
 }

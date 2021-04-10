@@ -5,7 +5,12 @@ Alertants
 @endsection
 
 @section('header')
-    <header-component :formacio="true" :helpbox="false" :logged="true"></header-component>
+@if (Auth::check())
+    <header-component username="{{ Auth::user()->nom }}" :formacio="true" :helpbox="true"></header-component>
+@else
+    <header-component :formacio="true" :helpbox="true"></header-component>
+@endif
+
 @endsection
 
 @section('content')
