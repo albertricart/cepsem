@@ -12748,6 +12748,13 @@ button[type=submit] {
   margin-bottom: 25px;
 }
 
+.flotante {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 10;
+}
+
 .home-header {
   display: flex;
   padding: 32px;

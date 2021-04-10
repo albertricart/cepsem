@@ -18,7 +18,7 @@ class UsuariController extends Controller
      */
     public function index()
     {
-        return UsuariResource::collection(Usuari::all());
+        return UsuariResource::collection(Usuari::with(['incidencies', 'recurs', 'rol'])->get());
     }
 
     /**
