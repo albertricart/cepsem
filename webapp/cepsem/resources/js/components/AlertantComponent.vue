@@ -42,7 +42,7 @@
     </div>
 
     <b-modal hide-footer hide-header centered size="lg" ref="alertant-modal">
-      <div class="cepsem-modal alertant-modal">
+      <div class="cepsem-modal">
         <h2 class="mb-4">ALERTANT</h2>
         <form>
           <div class="container">

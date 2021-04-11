@@ -41,9 +41,9 @@
       ></b-pagination>
     </div>
 
-    <b-modal hide-footer hide-header centered size="lg" ref="alertant-modal">
-      <div class="cepsem-modal alertant-modal">
-        <h2 class="mb-4">USUARIS</h2>
+    <b-modal hide-footer hide-header centered size="lg" ref="usuari-modal">
+      <div class="cepsem-modal">
+        <h2 class="mb-4">USUARI</h2>
         <form>
           <div class="container">
             <div class="row">
@@ -347,10 +347,10 @@ export default {
 
     //   MODALS   //
     showModal() {
-      this.$refs["alertant-modal"].show();
+      this.$refs["usuari-modal"].show();
     },
     hideModal() {
-      this.$refs["alertant-modal"].hide();
+      this.$refs["usuari-modal"].hide();
     },
   },
   computed: {
