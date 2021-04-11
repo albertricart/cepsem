@@ -3,18 +3,18 @@
     <h1 class="page-title">ALERTANTS</h1>
 
     <div class="d-flex justify-content-end mb-4">
-      <b-button
+      <button
         class="button button-icon button--pink"
         style="background-image: url('../assets/icons/add.svg')"
         id="show-btn"
         @click="showModal"
       >
         AFEGEIX UN NOU ALERTANT
-      </b-button>
+      </button>
     </div>
 
     <div v-if="loading" class="table-loading">
-      <p>{{ error }}</p>
+      <p>{{ loadingStatus }}</p>
       <div class="progress-line"></div>
     </div>
 
@@ -65,7 +65,7 @@
               <div class="col-lg-6">
                 <div class="input input--col mb-4">
                   <label for="telefon">Telèfon</label>
-                  <input type="text" name="telefon" id="telefon" v-model="alertant.telefon" placeholder="Introdueix el telèfon de l'alertant..."/>
+                  <input type="number" min="600000000" max="999999999" name="telefon" id="telefon" v-model="alertant.telefon" placeholder="Introdueix el telèfon de l'alertant..."/>
                 </div>
               </div>
 
@@ -106,8 +106,18 @@
 
             </div>
 
+            <div v-show="errors.length" class="input-error input-error--show" style="margin-bottom: 0;">
+                <img src="/cepsem/webapp/cepsem/public/assets/icons/alert.svg" alt="" width="18px" height="18px" style="margin-bottom: auto">
+                <div style="display: flex; flex-direction:column;">
+                    <span>Petició invàlida, corregeix els següents errors:</span>
+                <ul>
+                    <li v-for="(error, index) in errors" :key="index">{{error}}</li>
+                </ul>
+                </div>
+            </div>
+
             <div class="cepsem-modal-footer">
-                <button class="button button-icon button--rounded button--blue" type="button" style="background-image: url('../assets/icons/check.svg')" @click="insertAlertant">Afegir</button>
+                <button class="button button-icon button--rounded button--blue" type="button" style="background-image: url('../assets/icons/check.svg')" @click="checkNotNull">Afegir</button>
                 <button class="button button-icon button--rounded button-inverted button-inverted--red ml-2 mt-3" block @click="hideModal" type="button">Cancel·lar</button>
             </div>
           </div>
@@ -159,42 +169,35 @@ export default {
         { key: "tipus_alertant.tipus", label: "Tipus", sortable: true },
       ],
       loading: true,
-      error: "Carregant les dades...",
-        tipus: [
-          { value: null, text: 'Please select an option' },
-          { value: 'a', text: 'This is First option' },
-          { value: 'b', text: 'Selected Option' },
-          { value: { C: '3PO' }, text: 'This is an option with object value' },
-          { value: 'd', text: 'This one is disabled', disabled: true }
-        ]
+      loadingStatus: "Carregant les dades...",
+      errors: [],
     };
   },
   created() {
-    let me = this;
-
-    axios
-      .get("/alertants")
-      .then((response) => {
-        me.alertants = response.data;
-        this.loading = false;
-      })
-      .catch((error) => {
-        console.log(error);
-        this.error = error;
-      });
-
+      this.selectAlertants();
   },
   mounted() {
     console.log("Alertant component mounted.");
   },
   methods: {
-    showModal() {
-      this.$refs["alertant-modal"].show();
-    },
-    hideModal() {
-      this.$refs["alertant-modal"].hide();
+
+    //   SELECT - GET   //
+    selectAlertants(){
+        let me = this;
+
+        axios
+        .get("/alertants")
+        .then((response) => {
+            me.alertants = response.data;
+            this.loading = false;
+        })
+        .catch((error) => {
+            console.log(error);
+            this.loadingStatus = error;
+        });
     },
 
+    //   INSERT - POST   //
     insertAlertant(){
         let me = this;
 
@@ -202,21 +205,87 @@ export default {
         .post("/alertants", me.alertant)
         .then((response) => {
             console.log(response);
-            hideModal();
+
+            if(response.status == 201){
+                me.selectAlertants();
+                me.emptyAlertant();
+                me.errors = [];
+                me.hideModal();
+            }
+
         })
         .catch((error) => {
-            console.log(error);
-            console.log(error.status);
-            console.log(error.data);
+            console.log(error.response);
+            console.log(error.response.data.errorMessage);
         });
-    }
+    },
+
+
+    //   UTILS   //
+
+    /**
+     * Funció que fa control d'errors i redirecciona a la funcio insertAlertant() en cas d'OK
+     */
+    checkNotNull(){
+        this.errors = [];
+
+        if(this.alertant.telefon){
+            if(this.alertant.telefon.length != 9){
+                this.checkIfExistsError("El camp telèfon ha d'incloure 9 números");
+            }
+        }else{
+            this.checkIfExistsError("El camp telèfon és obligatori.");
+        }
+
+        if(!this.alertant.tipus_alertants_id){
+                this.checkIfExistsError("El camp tipus és obligatori.");
+        }
+
+        //
+        if(this.errors.length == 0){
+            this.insertAlertant();
+        }
+    },
+
+
+    /**
+     * Funció que rep un missatge d'error per paràmetre, si no existeix a la llista d'errors l'afegirà
+     *
+     * @param {String} errorMessage
+     */
+    checkIfExistsError(errorMessage){
+        if(!this.errors.includes(errorMessage)){
+            this.errors.push(errorMessage);
+        }
+    },
+
+    /**
+     * Funció per a buidar els camps del objecte alertant (associat al formulari amb v-model)
+     */
+    emptyAlertant(){
+        this.alertant.id = '',
+        this.alertant.nom = '';
+        this.alertant.cognoms = '';
+        this.alertant.telefon = '';
+        this.alertant.adreca = '';
+        this.alertant.municipis_id = '';
+        this.alertant.tipus_alertants_id = '';
+    },
+
+
+    //   MODALS   //
+    showModal() {
+      this.$refs["alertant-modal"].show();
+    },
+    hideModal() {
+      this.$refs["alertant-modal"].hide();
+    },
+
   },
   computed: {
     rows() {
       return this.alertants.length;
     },
-
-
   },
 };
 </script>

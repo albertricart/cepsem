@@ -17,27 +17,27 @@ CECOS
 <div class="container-xl">
     <div class="row mt-5">
         <div class="col-6">
-            <div class="custom-card custom-card--lg">INCIDÈNCIES</div>
+            <div class="cepsem-card cepsem-card--lg">INCIDÈNCIES</div>
         </div>
 
         <div class="col-6">
             <div class="row">
                 <div class="col-12">
-                    <div class="custom-card custom-card--sm">RECURSOS MÒBILS</div>
+                    <div class="cepsem-card cepsem-card--sm">RECURSOS MÒBILS</div>
                 </div>
 
                 <div class="col-12">
-                    <a href="{{ url('/cecos/alertants') }}" class="custom-card custom-card--sm">ALERTANTS</a>
+                    <a href="{{ url('/cecos/alertants') }}" class="cepsem-card cepsem-card--sm">ALERTANTS</a>
                 </div>
             </div>
         </div>
 
         <div class="col-6">
-            <div class="custom-card custom-card--sm">USUARIS</div>
+            <div class="cepsem-card cepsem-card--sm">USUARIS</div>
         </div>
 
         <div class="col-6">
-            <div class="custom-card custom-card--sm">ALTRES</div>
+            <div class="cepsem-card cepsem-card--sm">ALTRES</div>
         </div>
 
     </div>

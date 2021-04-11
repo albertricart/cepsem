@@ -9,7 +9,7 @@ Login
 
 <div class="login">
     <div style="padding-top: 150px">
-        <div class="form-container form-container--small custom-card">
+        <div class="form-container form-container--small cepsem-card">
             <h2>Iniciar Sessió</h2>
 
             <form action="{{ action([App\Http\Controllers\UsuariController::class, 'login']) }}" method="POST">

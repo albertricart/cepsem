@@ -40,44 +40,44 @@ Route::middleware(['auth'])->group(function () {
         return view('/login', compact('user'));
     });
 
-    Route::get('/cecos/usuaris', function () {
-        $user = Auth::user();
-        $rol = Auth::user()->rols_id;
-        if ($rol == 1) {
-            $view = view('pages.cecos.usuaris.index');
-        }
-        else
-        {
-            return $view = view('login', compact('user'));
-        }
-        return $view;
-    });
+    // Route::get('/cecos/usuaris', function () {
+    //     $user = Auth::user();
+    //     $rol = Auth::user()->rols_id;
+    //     if ($rol == 1) {
+    //         $view = view('pages.cecos.usuaris.index');
+    //     }
+    //     else
+    //     {
+    //         return $view = view('login', compact('user'));
+    //     }
+    //     return $view;
+    // });
 
-    Route::get('/cecos/alertants', function () {
-        $user = Auth::user();
-        $rol = Auth::user()->rols_id;
-        if ($rol == 1) {
-            $view = view('pages.cecos.alertants.index');
-        }
-        else
-        {
-            return $view = view('login', compact('user'));
-        }
-        return $view;
-    });
+    // Route::get('/cecos/alertants', function () {
+    //     $user = Auth::user();
+    //     $rol = Auth::user()->rols_id;
+    //     if ($rol == 1) {
+    //         $view = view('pages.cecos.alertants.index');
+    //     }
+    //     else
+    //     {
+    //         return $view = view('login', compact('user'));
+    //     }
+    //     return $view;
+    // });
 
-    Route::get('/cecos', function () {
-        $user = Auth::user();
-        $rol = Auth::user()->rols_id;
-        if ($rol == 1 || $rol == 2 ||$rol == 3) {
-            $view = view('pages.cecos.index');
-        }
-        else
-        {
-            return $view = view('login', compact('user'));
-        }
-        return $view;
-    });
+    // Route::get('/cecos', function () {
+    //     $user = Auth::user();
+    //     $rol = Auth::user()->rols_id;
+    //     if ($rol == 1 || $rol == 2 ||$rol == 3) {
+    //         $view = view('pages.cecos.index');
+    //     }
+    //     else
+    //     {
+    //         return $view = view('login', compact('user'));
+    //     }
+    //     return $view;
+    // });
 
     /* Route::get('/cecos/tipus-recurs', function () {
         $user = Auth::user();

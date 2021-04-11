@@ -1,30 +1,62 @@
 <template>
-  <div class="header">
+  <div style="position: sticky; top: 0">
+    <div class="header">
+        <!-- <a href="#" class="header-logo"></a> -->
+        <div href="#" class="header-logo"></div>
 
-    <div class="header-main">
-      <!-- <a href="#" class="header-logo"></a> -->
-      <div href="#" class="header-logo"></div>
+      <div class="header-main">
+        <nav class="header-nav">
+          <a href="/cepsem/webapp/cepsem/public/">Inici</a>
+          <a href="/cepsem/webapp/cepsem/public/cecos/">CECOS</a>
+          <a href="">Recursos Mòbils</a>
+          <a href="">Formació</a>
+        </nav>
+      </div>
 
-      <nav class="header-nav">
-        <a href="/cepsem/webapp/cepsem/public/">Inici</a>
-        <a href="/cepsem/webapp/cepsem/public/cecos/">CECOS</a>
-        <a href="">Recursos Mòbils</a>
-        <a href="">Formació</a>
-      </nav>
-    </div>
-
-    <div class="header-trail">
-      <div v-show="helpbox" class="header-icon header-icon--helpbox"></div>
-      <div v-show="formacio" class="header-icon header-icon--formacio"></div>
-      <div v-show="username">
-            <span>Hola, {{ username }}</span>
-            <a href="/cepsem/webapp/cepsem/public/logout" class="header-logout"></a>
+      <div class="header-trail">
+        <div v-show="helpbox" class="header-icon header-icon--helpbox"></div>
+        <div v-show="formacio" class="header-icon header-icon--formacio"></div>
+        <div v-show="username">
+          <span>Hola, {{ username }}</span>
+          <a
+            href="/cepsem/webapp/cepsem/public/logout"
+            class="header-logout"
+          ></a>
         </div>
+        <div class="header-icon  header-icon--menu"></div>
 
-      <!-- <a href="" class="header-formacio"></a>
+        <!-- <a href="" class="header-formacio"></a>
       <a href="" class="header-help"></a> -->
+      </div>
     </div>
 
+    <div class="formacio-llistat">
+      <a href="" class="video-item">
+        <div class="video-thumbail">v</div>
+        <div class="video-info">
+          <h3>video title</h3>
+          <p>video desc</p>
+        </div>
+      </a>
+
+      <a href="" class="video-item">
+        <div class="video-thumbail"></div>
+        <div class="video-info">
+          <h3>video title</h3>
+          <p>video desc</p>
+        </div>
+      </a>
+
+      <a href="" class="video-item">
+        <div class="video-thumbail"></div>
+        <div class="video-info">
+          <h3>video title</h3>
+          <p>video desc</p>
+        </div>
+      </a>
+
+      <a href="" class="button button-icon button--blue mt-4">VEURE MÉS</a>
+    </div>
   </div>
 </template>
 
@@ -41,14 +73,13 @@ export default {
       required: true,
     },
 
-    username:{
-        type: String,
-        required: false,
-    }
+    username: {
+      type: String,
+      required: false,
+    },
   },
   data() {
-    return {
-    };
+    return {};
   },
   created() {},
   mounted() {
