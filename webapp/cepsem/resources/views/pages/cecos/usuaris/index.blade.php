@@ -14,7 +14,7 @@ Usuaris
 
 @section('content')
 <div class="container-fluid my-5">
-    <usuari-component></usuari-component>
+    <usuari-component :rols="{{ $rols }}" :recursos="{{ $recursos }}"></usuari-component>
 </div>
 @endsection
 

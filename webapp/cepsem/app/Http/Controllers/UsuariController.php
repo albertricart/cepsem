@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Rol;
+use App\Models\Recurs;
 use App\Models\Usuari;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -59,7 +61,9 @@ class UsuariController extends Controller
      */
     public function index()
     {
-        return view('pages.cecos.usuaris.index');
+        $recursos = Recurs::all();
+        $rols = Rol::all();
+        return view('pages.cecos.usuaris.index', compact('recursos', 'rols'));
     }
 
     /**
