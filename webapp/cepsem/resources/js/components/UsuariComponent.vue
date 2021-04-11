@@ -128,7 +128,7 @@
                 </div>
               </div>
 
-              <div class="col-lg-6">
+              <div class="col-lg-6" v-if="usuari.rols_id == 3">
                 <div class="input input--col mb-4">
                   <label for="recurs">Recurs</label>
                   <b-form-select
@@ -332,7 +332,7 @@ export default {
     },
 
     /**
-     * Funció per a buidar els camps del objecte usuari (associat al formulari amb v-model)
+     * Funció per a buidar els camps del objecte alertant (associat al formulari amb v-model)
      */
     emptyUsuari() {
         this.usuari.id = '',
