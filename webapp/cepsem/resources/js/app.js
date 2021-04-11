@@ -27,6 +27,7 @@ Vue.component('table-component', require('./components/TableComponent.vue').defa
 Vue.component('alertant-component', require('./components/AlertantComponent.vue').default);
 Vue.component('header-component', require('./components/HeaderComponent.vue').default);
 Vue.component('usuari-component', require('./components/UsuariComponent.vue').default);
+Vue.component('menucard-component', require('./components/MenuCardComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
