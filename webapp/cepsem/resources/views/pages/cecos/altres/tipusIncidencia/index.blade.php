@@ -28,9 +28,10 @@ Tipus Incidencia
                     <th scope="row">{{ $incidencia->id }}</th>
                     <td>{{ $incidencia->tipus }}</td>
 
-                    <td>
-                        <button type="submit" id="myBtn" class="btn btn-danger float-right" data-toggle="modal" data-target="#modal{{ $incidencia->id }}"><i class="fas fa-trash-alt"></i>Esborrar</button>
-                        <button type="submit" class="btn btn-secondary float-right" data-toggle="modal" data-target="#modalUpdate"><i class="far fa-edit"></i>Editar</button>
+                    <td style="display: flex;
+                    justify-content: flex-end;">
+                        <button type="submit" id="myBtn" class="button button-icon button--rounded button-inverted button-inverted--red float-right ml-2" data-toggle="modal" data-target="#modal{{ $incidencia->id }}">Esborrar</button>
+                        <button type="submit" class="button button-icon button--rounded button--blue float-right ml-2" style="background-image: url('../assets/icons/edit.svg')" data-toggle="modal" data-target="#modalUpdate">Editar</button>
 
 
 
@@ -131,6 +132,6 @@ Tipus Incidencia
 
 @endsection
 
-<a class="btn btn-primary flotante" data-toggle="modal" data-target="#modalCrear"><i class="fas fa-plus" ></i>Nova incidencia</a>
+<a class="button button-icon button--pink flotante" style="background-image: url('../assets/icons/add.svg')" data-toggle="modal" data-target="#modalCrear"><i class="fas fa-plus" ></i>Nova incidencia</a>
 
 
