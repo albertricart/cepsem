@@ -17,6 +17,7 @@ img {
 
 a {
     color: inherit;
+
     &:hover {
         color: inherit;
         text-decoration: none;
@@ -31,7 +32,7 @@ a {
 //     margin-left: auto;
 // }
 
-button[type="submit"]{
+button[type="submit"] {
     outline: none;
 }
 
@@ -63,17 +64,21 @@ button[type="submit"]{
     width: 100%;
     padding: 32px;
     margin-bottom: 20px;
+    transition: all 0.2s ease;
 
+    h2 {
+        font-weight: 600;
+    }
 
-    &--sm{
+    &--sm {
         height: 200px;
     }
 
-    &--md{
+    &--md {
         height: 300px;
     }
 
-    &--lg{
+    &--lg {
         height: 400px;
     }
 }
@@ -97,6 +102,25 @@ button[type="submit"]{
     }
 }
 
+.cepsem-gradient {
+    transition: opacity .5s ease-in-out;
+    opacity: 0;
+
+    &:hover{
+        opacity: 1;
+        background: rgb(17, 174, 191);
+        background: linear-gradient(145deg, $c_lightest_blue 45%, $c_lightest_pink 95%);
+
+        &--pink {
+            background: linear-gradient(145deg, whitesmoke 55%, $c_lightest_pink 95%);
+        }
+
+        &--blue {
+            background: linear-gradient(145deg, white 35%, $c_lightest_blue 95%);
+        }
+    }
+}
+
 .form-grid {
     display: grid;
     grid-template: 1fr / 1fr 1fr;
@@ -112,7 +136,7 @@ button[type="submit"]{
     }
 }
 
-.table-loading{
+.table-loading {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -120,44 +144,44 @@ button[type="submit"]{
     width: 275px;
     text-align: center;
 
-    p{
+    p {
         margin-bottom: 25px;
     }
 }
 
-.flotante{
+.flotante {
     position: fixed;
-	bottom: 30px;
-	right: 30px;
+    bottom: 30px;
+    right: 30px;
     z-index: 10;
 }
 
-.cepsem-modal{
+.cepsem-modal {
     padding: 32px;
 
-    h2{
+    h2 {
         color: $c_blue;
         font-weight: 700;
     }
-
-    &-footer{
-
-    }
 }
+
+
+
+
 
 // BOOTSTRAP OVERRIDES
 
 //MODALS
-.modal-content{
+.modal-content {
     border-radius: 32px !important;
 
-    .container{
+    .container {
         padding-left: 0 !important;
         padding-right: 0 !important;
     }
 }
 
 //SELECT
-.custom-select{
+.custom-select {
     height: unset !important;
 }

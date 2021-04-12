@@ -1,6 +1,9 @@
 <template>
   <a :href="'/cepsem/webapp/cepsem/public/cecos/' + page ">
-    <div :class="'cepsem-card cepsem-card--' + size">{{ name }}</div>
+    <div :class="'cepsem-card  cepsem-card--' + size">
+        <h2>{{ name }}</h2>
+        <div class="cepsem-gradient cepsem-gradient--blue" style="width: 100%; height:100%; position: absolute; top: 0;left: 0; border-radius:inherit;"></div>
+    </div>
   </a>
 </template>
 
@@ -27,7 +30,7 @@ export default {
   },
   created() {},
   mounted() {
-    console.log("Menu card component mounted.");
+    console.log("Menu card " + this.name + " component mounted.");
   },
   computed: {},
 };

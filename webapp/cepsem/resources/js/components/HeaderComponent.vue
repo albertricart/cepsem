@@ -24,9 +24,6 @@
           ></a>
         </div>
         <div class="header-icon  header-icon--menu"></div>
-
-        <!-- <a href="" class="header-formacio"></a>
-      <a href="" class="header-help"></a> -->
       </div>
     </div>
 
