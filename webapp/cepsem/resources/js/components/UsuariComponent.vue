@@ -53,6 +53,9 @@
           <span class="sr-only">Not selected</span>
         </template>
       </template>
+      <template #cell(Editar)>
+            <svg @click="editButtonClick()" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#11AEBF"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M14.06 9.02l.92.92L5.92 19H5v-.92l9.06-9.06M17.66 3c-.25 0-.51.1-.7.29l-1.83 1.83 3.75 3.75 1.83-1.83c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.2-.2-.45-.29-.71-.29zm-3.6 3.19L3 17.25V21h3.75L17.81 9.94l-3.75-3.75z"/></svg>
+        </template>
       </b-table>
 
       <b-pagination
@@ -191,20 +194,25 @@
             </div>
 
             <div class="cepsem-modal-footer">
-              <button
+              <button v-if="this.selected.length == 0"
                 class="button button-icon button--rounded button--blue"
                 type="button"
                 style="background-image: url('../assets/icons/check.svg')"
-                @click="checkNotNull"
-              >
+                @click="checkNotNull(true)">
                 Afegir
+              </button>
+              <button v-else
+                class="button button-icon button--rounded button--blue"
+                type="button"
+                style="background-image: url('../assets/icons/check.svg')"
+                @click="checkNotNull(false)">
+                Modificar
               </button>
               <button
                 class="button button-icon button--rounded button-inverted button-inverted--red ml-2 mt-3"
                 block
                 @click="hideModal"
-                type="button"
-              >
+                type="button">
                 Cancel·lar
               </button>
             </div>
@@ -235,6 +243,8 @@ export default {
       perPage: 10,
       currentPage: 1,
       usuaris: [],
+      editClick: false,
+      lastSelectedIndex: 0,
       usuari: {
         id: "",
         username: "",
@@ -244,6 +254,7 @@ export default {
         cognoms: "",
         rols_id: "",
         recursos_id: "",
+
       },
       fields: [
           "selected",
@@ -255,6 +266,7 @@ export default {
         { key: "cognoms", label: "Cognoms", sortable: true },
         { key: "rol.nom", label: "Rol", sortable: true },
         { key: "recurs.codi", label: "Recurs", sortable: true },
+         "Editar",
       ],
       loading: true,
       loadingStatus: "Carregant les dades...",
@@ -307,9 +319,66 @@ export default {
           console.log(error.response.data.errorMessage);
         });
     },
+    updateUsuari(){
+        let me = this;
+
+      axios
+        .put("/usuaris/" + me.usuari.id, me.usuari)
+        .then((response) => {
+          console.log(response);
+
+          if (response.status == 201) {
+            me.selectUsuaris();
+            me.emptyUsuari();
+            me.errors = [];
+            me.hideModal();
+          }
+        })
+        .catch((error) => {
+          console.log(error.response);
+          console.log(error.response.data.errorMessage);
+        });
+    },
+    editUsuari(){
+        this.$refs["usuari-modal"].show();
+        this.$refs.selectableTable.clearSelected();
+    },
     onRowSelected(items) {
-        this.selected = items
+        if (this.editClick) {
+            if(items.length == 1){
+            this.usuari = items[0];
+            }else{
+                this.getLastSelected(this.selected, items);
+            }
+
+            this.editUsuari();
+            this.editClick = false;
+        }
+        this.selected = items;
+
       },
+    editButtonClick(){
+        this.editClick = true;
+    },
+    getLastSelected(oldarray, newarray){
+        let exists = false;
+        let found = false;
+        let i = 0;
+
+        while(!found && i < newarray.length){
+            oldarray.forEach(olditem => {
+                if(olditem.id == newarray[i].id){
+                    exists = true;
+                }
+            })
+            if(!exists){
+                found = true;
+                this.usuari = newarray[i];
+            }
+
+            i++;
+        }
+    },
     selectAllRows() {
         if (document.getElementById("selectAll").checked) {
             this.$refs.selectableTable.selectAllRows()
@@ -317,11 +386,7 @@ export default {
             this.$refs.selectableTable.clearSelected()
         }
 
-      },
-    clearSelected() {
-
-      },
-
+    },
     //   UTILS   //
 
     /**
@@ -356,7 +421,7 @@ export default {
 
       //
       if (this.errors.length == 0) {
-        this.insertUsuari();
+        this.updateUsuari();
       }
     },
 
