@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Recurs;
+use App\Models\TipusRecurs;
 use Illuminate\Http\Request;
 
 class RecursController extends Controller
@@ -14,7 +15,9 @@ class RecursController extends Controller
      */
     public function index()
     {
-        //
+        $tipusRecurs = TipusRecurs::all();
+
+        return view('pages.cecos.recursos.index',compact('tipusRecurs'));
     }
 
     /**

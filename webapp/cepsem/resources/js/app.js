@@ -25,10 +25,11 @@ Vue.use(BootstrapVue) // Telling Vue to use this in whole application
 
 Vue.component('table-component', require('./components/TableComponent.vue').default);
 Vue.component('alertant-component', require('./components/AlertantComponent.vue').default);
+Vue.component('incidencies-component', require('./components/IncidenciaComponent.vue').default);
 Vue.component('header-component', require('./components/HeaderComponent.vue').default);
 Vue.component('usuari-component', require('./components/UsuariComponent.vue').default);
 Vue.component('menucard-component', require('./components/MenuCardComponent.vue').default);
-
+Vue.component('recurs-component', require('./components/RecursosComponent.vue').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

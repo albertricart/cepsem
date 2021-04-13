@@ -1,5 +1,5 @@
 <template>
-  <div style="position: sticky; top: 0">
+  <div style="position: sticky; top: 0;z-index: 1000;">
     <div class="header">
         <!-- <a href="#" class="header-logo"></a> -->
         <div href="#" class="header-logo"></div>
