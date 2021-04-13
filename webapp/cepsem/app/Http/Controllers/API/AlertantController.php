@@ -100,7 +100,7 @@ class AlertantController extends Controller
 
             $response = (new AlertantResource($alertant))
                 ->response()
-                ->setStatusCode(201);
+                ->setStatusCode(204);
         } catch (QueryException $e) {
             $response = \response(['errorMessage' => Utilitat::handleErrorMessage($e)], 400);
         }
