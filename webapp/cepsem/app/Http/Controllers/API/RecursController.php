@@ -102,7 +102,7 @@ class RecursController extends Controller
 
             $response = (new RecursResource($recurs))
                 ->response()
-                ->setStatusCode(201);
+                ->setStatusCode(204);
         } catch (QueryException $e) {
             $response = \response(['errorMessage' => Utilitat::handleErrorMessage($e)], 400);
         }

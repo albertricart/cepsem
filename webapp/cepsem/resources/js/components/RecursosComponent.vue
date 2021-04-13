@@ -114,7 +114,6 @@
               </div>
 
 
-
             <div
               v-show="errors.length"
               class="input-error input-error--show"
@@ -243,6 +242,44 @@ export default {
           console.log(error.response.data.errorMessage);
         });
     },
+
+     //   UPDATE - PUT   //
+    updateRecurs() {
+      let me = this;
+
+      axios
+        .put("/recursos/" + me.recurs.id, me.cicle)
+        .then((response) => {
+          console.log(response);
+          me.selectAlertants();
+          me.hideModal("delete-modal");
+        })
+        .catch((error) => {
+          console.log(error.response);
+          console.log(error.response.data.errorMessage);
+        });
+    },
+
+    //   DELETE   //
+    deleteRecursos() {
+      let me = this;
+
+      me.selected.forEach((recurs) => {
+        axios
+          .delete("/recursos/" + recurs.id)
+          .then((response) => {
+            console.log(response);
+            me.selectRecursos();
+            me.hideModal("delete-modal");
+          })
+          .catch((error) => {
+            console.log(error.response);
+            console.log(error.response.data.errorMessage);
+          });
+      });
+    },
+
+
     onRowSelected(items) {
         this.selected = items
       },
