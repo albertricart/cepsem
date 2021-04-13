@@ -38,6 +38,10 @@ CECOS
             </div>
 
             <div class="col-md-6">
+                <menucard-component size="sm" page="altres" name="AFECTATS"></menucard-component>
+            </div>
+
+            <div class="col-md-12">
                 <menucard-component size="sm" page="altres" name="ALTRES"></menucard-component>
             </div>
 
