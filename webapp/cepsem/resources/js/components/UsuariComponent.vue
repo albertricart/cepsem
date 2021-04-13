@@ -7,7 +7,7 @@
         class="button button-icon button--pink"
         style="background-image: url('../assets/icons/add.svg')"
         id="show-btn"
-        @click="showModal"
+        @click="afegirUsuari"
       >
         AFEGEIX UN NOU USUARI
       </button>
@@ -20,13 +20,18 @@
 
     <div v-else>
         <div class="row">
-            <div>
-                <input type="checkbox" id="selectAll" @click="selectAllRows">
-                <label for="">Selecionar tot</label>
-            </div>
+            <div class="table-header">
+                <div>
+            <button size="sm" @click="selectAllRows">Select all</button>
+            <button size="sm" class="ml-2" @click="clearSelected">
+              Clear selected
+            </button>
+          </div>
 
-            <!-- <button size="sm" @click="selectAllRows">Select all</button>
-            <button size="sm" @click="clearSelected">Clear selected</button> -->
+          <button class="button button-icon" @click="showModal('delete-modal')">
+            ELIMINAR ({{ selected.length }})
+          </button>
+        </div>
         </div>
       <b-table
         id="usuaris-table"
@@ -54,7 +59,7 @@
         </template>
       </template>
       <template #cell(Editar)>
-            <svg @click="editButtonClick()" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#11AEBF"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M14.06 9.02l.92.92L5.92 19H5v-.92l9.06-9.06M17.66 3c-.25 0-.51.1-.7.29l-1.83 1.83 3.75 3.75 1.83-1.83c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.2-.2-.45-.29-.71-.29zm-3.6 3.19L3 17.25V21h3.75L17.81 9.94l-3.75-3.75z"/></svg>
+            <svg @click="editUsuari" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#11AEBF"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M14.06 9.02l.92.92L5.92 19H5v-.92l9.06-9.06M17.66 3c-.25 0-.51.1-.7.29l-1.83 1.83 3.75 3.75 1.83-1.83c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.2-.2-.45-.29-.71-.29zm-3.6 3.19L3 17.25V21h3.75L17.81 9.94l-3.75-3.75z"/></svg>
         </template>
       </b-table>
 
@@ -194,30 +199,62 @@
             </div>
 
             <div class="cepsem-modal-footer">
-              <button v-if="this.selected.length == 0"
+              <button
                 class="button button-icon button--rounded button--blue"
                 type="button"
                 style="background-image: url('../assets/icons/check.svg')"
-                @click="checkNotNull(true)">
-                Afegir
-              </button>
-              <button v-else
-                class="button button-icon button--rounded button--blue"
-                type="button"
-                style="background-image: url('../assets/icons/check.svg')"
-                @click="checkNotNull(false)">
-                Modificar
+                @click="checkNotNull">
+                <span v-if="insert">Afegir</span>
+                <span v-else>Modificar</span>
               </button>
               <button
                 class="button button-icon button--rounded button-inverted button-inverted--red ml-2 mt-3"
                 block
-                @click="hideModal"
+                @click="hideModal('usuari-modal')"
                 type="button">
                 Cancel·lar
               </button>
             </div>
           </div>
         </form>
+      </div>
+    </b-modal>
+
+    <b-modal hide-footer hide-header centered size="lg" ref="delete-modal">
+      <div class="cepsem-modal">
+        <div class="modal-header">
+          <h2>ESBORRAR</h2>
+        </div>
+
+        <div class="modal-body">
+          <p>Estàs segur que vols esborrar els següents usuaris?</p>
+          <ul>
+            <li v-for="(usuari, index) in selected" :key="index">
+              {{ usuari.id + " " }}
+              <span v-if="usuari.nom">{{ usuari.nom }}</span>
+              <span v-if="usuari.cognoms">{{ usuari.cognoms }}</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="cepsem-modal-footer">
+          <button
+            class="button button-icon button--rounded button--blue"
+            type="button"
+            style="background-image: url('../assets/icons/check.svg')"
+            @click="deleteUsuaris"
+          >
+            Eliminar
+          </button>
+          <button
+            class="button button-icon button--rounded button-inverted button-inverted--red ml-2 mt-3"
+            block
+            @click="hideModal('delete-modal')"
+            type="button"
+          >
+            Cancel·lar
+          </button>
+        </div>
       </div>
     </b-modal>
   </div>
@@ -244,7 +281,7 @@ export default {
       currentPage: 1,
       usuaris: [],
       editClick: false,
-      lastSelectedIndex: 0,
+      insert: false,
       usuari: {
         id: "",
         username: "",
@@ -311,7 +348,7 @@ export default {
             me.selectUsuaris();
             me.emptyUsuari();
             me.errors = [];
-            me.hideModal();
+            me.hideModal("usuari-modal");
           }
         })
         .catch((error) => {
@@ -327,11 +364,11 @@ export default {
         .then((response) => {
           console.log(response);
 
-          if (response.status == 201) {
+          if (response.status == 204) {
             me.selectUsuaris();
             me.emptyUsuari();
             me.errors = [];
-            me.hideModal();
+            me.hideModal("usuari-modal");
           }
         })
         .catch((error) => {
@@ -339,53 +376,80 @@ export default {
           console.log(error.response.data.errorMessage);
         });
     },
+    //   DELETE   //
+    deleteUsuaris() {
+      let me = this;
+
+      me.selected.forEach((usuari) => {
+        axios
+          .delete("/usuaris/" + usuari.id)
+          .then((response) => {
+            console.log(response);
+            me.selectUsuaris();
+            me.hideModal("delete-modal");
+          })
+          .catch((error) => {
+            console.log(error.response);
+            console.log(error.response.data.errorMessage);
+          });
+      });
+    },
+    afegirUsuari() {
+      this.insert = true;
+      this.emptyUsuari();
+      this.selectUsuaris();
+      this.showModal("usuari-modal");
+    },
     editUsuari(){
-        this.$refs["usuari-modal"].show();
-        this.$refs.selectableTable.clearSelected();
+        this.editClick = true;
+
+      if (this.insert) {
+        this.insert = false;
+      }
     },
     onRowSelected(items) {
-        if (this.editClick) {
-            if(items.length == 1){
-            this.usuari = items[0];
-            }else{
-                this.getLastSelected(this.selected, items);
-            }
+      if (this.editClick) {
+        this.getLastSelected(this.selected, items);
+        this.showModal("usuari-modal");
+        this.editClick = false;
+      }
 
-            this.editUsuari();
-            this.editClick = false;
-        }
-        this.selected = items;
-
-      },
+      this.selected = items;
+    },
     editButtonClick(){
         this.editClick = true;
     },
-    getLastSelected(oldarray, newarray){
-        let exists = false;
-        let found = false;
-        let i = 0;
+    getLastSelected(oldarray, newarray) {
+      let found = false;
+      let inarray = false;
+      let i = 0,
+        j = 0;
+      //   debugger;
 
-        while(!found && i < newarray.length){
-            oldarray.forEach(olditem => {
-                if(olditem.id == newarray[i].id){
-                    exists = true;
-                }
-            })
-            if(!exists){
-                found = true;
-                this.usuari = newarray[i];
-            }
+      while (!found && i < newarray.length) {
+        j = 0;
+        inarray = false;
 
-            i++;
+        while (!inarray && j < oldarray.length) {
+          if (oldarray[j].id == newarray[i].id) {
+            inarray = true;
+          }
+          j++;
         }
+
+        if (!inarray) {
+          this.usuari = newarray[i];
+          found = true;
+        }
+
+        i++;
+      }
     },
     selectAllRows() {
-        if (document.getElementById("selectAll").checked) {
-            this.$refs.selectableTable.selectAllRows()
-        } else {
-            this.$refs.selectableTable.clearSelected()
-        }
-
+      this.$refs.selectableTable.selectAllRows();
+    },
+    clearSelected() {
+      this.$refs.selectableTable.clearSelected();
     },
     //   UTILS   //
 
@@ -421,7 +485,11 @@ export default {
 
       //
       if (this.errors.length == 0) {
-        this.updateUsuari();
+        if (this.insert) {
+          this.insertUsuari();
+        } else {
+          this.updateUsuari();
+        }
       }
     },
 
@@ -451,11 +519,11 @@ export default {
     },
 
     //   MODALS   //
-    showModal() {
-      this.$refs["usuari-modal"].show();
+    showModal(modal) {
+      this.$refs[modal].show();
     },
-    hideModal() {
-      this.$refs["usuari-modal"].hide();
+    hideModal(modal) {
+      this.$refs[modal].hide();
     },
   },
   computed: {

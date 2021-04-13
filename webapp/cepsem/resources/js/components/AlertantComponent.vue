@@ -242,8 +242,7 @@
                 class="button button-icon button--rounded button-inverted button-inverted--red ml-2 mt-3"
                 block
                 @click="hideModal('alertant-modal')"
-                type="button"
-              >
+                type="button">
                 Cancel·lar
               </button>
             </div>
