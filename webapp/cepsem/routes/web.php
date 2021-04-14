@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AfectatController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RecursController;
@@ -26,6 +27,7 @@ Route::get('/cecos', function () {
 Route::resource('/cecos/alertants', AlertantController::class);
 Route::resource('/cecos/incidencies', IncidenciaController::class);
 Route::resource('/cecos/usuaris', UsuariController::class);
+Route::resource('/cecos/afectats', AfectatController::class);
 Route::resource('/cecos/recursos-mobils', RecursController::class);
 Route::resource('/cecos/tipus-recurs', TipusRecursController::class);
 Route::resource('/cecos/tipus-incidencia', TipusIncidenciaController::class);

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\AfectatController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\UsuariController;
@@ -26,3 +27,4 @@ Route::apiResource('alertants', AlertantController::class);
 Route::apiResource('incidencies', IncidenciaController::class);
 Route::apiResource('usuaris', UsuariController::class);
 Route::apiResource('recursos',RecursController::class);
+Route::apiResource('afectats',AfectatController::class);
