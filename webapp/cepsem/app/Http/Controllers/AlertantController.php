@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Alertant;
 use App\Models\Municipi;
+use App\Models\Provincia;
 use App\Models\TipusAlertant;
 use Illuminate\Http\Request;
 
@@ -17,9 +18,9 @@ class AlertantController extends Controller
      */
     public function index()
     {
+        $provincies = Provincia::with(['comarques', 'comarques.municipis'])->get();
         $tipusAlertants = TipusAlertant::all();
-        $municipis = Municipi::with(['comarca', 'comarca.provincia'])->get();
-        return view('pages.cecos.alertants.index', compact('tipusAlertants', 'municipis'));
+        return view('pages.cecos.alertants.index', compact('tipusAlertants', 'provincies'));
     }
 
     /**
