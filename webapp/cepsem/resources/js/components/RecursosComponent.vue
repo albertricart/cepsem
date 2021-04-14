@@ -7,7 +7,7 @@
         class="button button-icon button--pink"
         style="background-image: url('../assets/icons/add.svg')"
         id="show-btn"
-        @click="showModal"
+        @click="afegirRecurs"
       >
         AFEGEIX UN NOU RECURS
       </button>
@@ -18,30 +18,36 @@
       <div class="progress-line"></div>
     </div>
 
-    <div v-else>
-        <div class="row">
-            <div>
-                <input type="checkbox" id="selectAll" @click="selectAllRows">
-                <label for="">Selecionar tot</label>
-            </div>
+     <div v-else>
+      <div class="row">
+        <div class="table-header">
+          <div>
+            <button size="sm" @click="selectAllRows">Select all</button>
+            <button size="sm" class="ml-2" @click="clearSelected">
+              Clear selected
+            </button>
+          </div>
 
-            <!-- <button size="sm" @click="selectAllRows">Select all</button>
-            <button size="sm" @click="clearSelected">Clear selected</button> -->
+          <button class="button button-icon" @click="showModal('delete-modal')">
+            ELIMINAR ({{ selected.length }})
+          </button>
         </div>
+      </div>
+
       <b-table
-        id="recursos-table"
+     id="recursos-table"
         :fields="fields"
         :items="recursos"
         :per-page="perPage"
         :current-page="currentPage"
         :sort-by.sync="sortBy"
         :sort-desc.sync="sortDesc"
-        ref="selectableTable"
         sort-icon-left
+        ref="selectableTable"
         selectable
+        @row-selected="onRowSelected"
         large
         hover
-        @row-selected="onRowSelected"
       >
       <template #cell(selected)="{ rowSelected }">
         <template v-if="rowSelected">
@@ -53,6 +59,22 @@
           <span class="sr-only">Not selected</span>
         </template>
       </template>
+
+      <template #cell(Editar)>
+          <svg
+            @click="editRecurs"
+            xmlns="http://www.w3.org/2000/svg"
+            height="24px"
+            viewBox="0 0 24 24"
+            width="24px"
+            fill="#11AEBF"
+          >
+            <path d="M0 0h24v24H0V0z" fill="none" />
+            <path
+              d="M14.06 9.02l.92.92L5.92 19H5v-.92l9.06-9.06M17.66 3c-.25 0-.51.1-.7.29l-1.83 1.83 3.75 3.75 1.83-1.83c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.2-.2-.45-.29-.71-.29zm-3.6 3.19L3 17.25V21h3.75L17.81 9.94l-3.75-3.75z"
+            />
+          </svg>
+        </template>
       </b-table>
 
       <b-pagination
@@ -143,12 +165,13 @@
                 style="background-image: url('../assets/icons/check.svg')"
                 @click="checkNotNull"
               >
-                Afegir
+                <span v-if="insert">Afegir</span>
+                <span v-else>Modificar</span>
               </button>
               <button
                 class="button button-icon button--rounded button-inverted button-inverted--red ml-2 mt-3"
                 block
-                @click="hideModal"
+                @click="hideModal('recurs-modal')"
                 type="button"
               >
                 Cancel·lar
@@ -157,6 +180,43 @@
             </div>
           </div>
         </form>
+      </div>
+    </b-modal>
+    <b-modal hide-footer hide-header centered size="lg" ref="delete-modal">
+      <div class="cepsem-modal">
+        <div class="modal-header">
+          <h2>ESBORRAR</h2>
+        </div>
+
+        <div class="modal-body">
+          <p>Estàs segur que vols esborrar els següents recursos?</p>
+          <ul>
+            <li v-for="(recurs, index) in selected" :key="index">
+              {{ recurs.tipus_recurs.tipus + " " }}
+              <span v-if="recurs.codi">{{ recurs.codi }}</span>
+              <span v-if="recurs.actiu">{{ recurs.actiu }}</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="cepsem-modal-footer">
+          <button
+            class="button button-icon button--rounded button--blue"
+            type="button"
+            style="background-image: url('../assets/icons/check.svg')"
+            @click="deleteRecursos"
+          >
+            Eliminar
+          </button>
+          <button
+            class="button button-icon button--rounded button-inverted button-inverted--red ml-2 mt-3"
+            block
+            @click="hideModal('delete-modal')"
+            type="button"
+          >
+            Cancel·lar
+          </button>
+        </div>
       </div>
     </b-modal>
   </div>
@@ -178,6 +238,8 @@ export default {
       perPage: 10,
       currentPage: 1,
       recursos: [],
+      editClick: false,
+      insert: false,
       recurs: {
         id: "",
         codi: "",
@@ -190,6 +252,7 @@ export default {
         { key: "codi", label: "Codi", sortable: true },
         { key: "tipus_recurs.tipus", label: "Tipus", sortable: true },
         { key: "actiu", label: "Actiu", sortable: true },
+        "Editar",
       ],
       loading: true,
       loadingStatus: "Carregant les dades...",
@@ -232,9 +295,9 @@ export default {
 
           if (response.status == 201) {
             me.selectRecursos();
-            me.emptyRecursosi();
+            me.emptyRecurs();
             me.errors = [];
-            me.hideModal();
+            me.hideModal("recurs-modal");
           }
         })
         .catch((error) => {
@@ -251,7 +314,7 @@ export default {
         .put("/recursos/" + me.recurs.id, me.cicle)
         .then((response) => {
           console.log(response);
-          me.selectAlertants();
+          me.selectRecursos();
           me.hideModal("delete-modal");
         })
         .catch((error) => {
@@ -279,22 +342,6 @@ export default {
       });
     },
 
-
-    onRowSelected(items) {
-        this.selected = items
-      },
-    selectAllRows() {
-        if (document.getElementById("selectAll").checked) {
-            this.$refs.selectableTable.selectAllRows()
-        } else {
-            this.$refs.selectableTable.clearSelected()
-        }
-
-      },
-    clearSelected() {
-
-      },
-
     //   UTILS   //
 
     /**
@@ -314,7 +361,11 @@ export default {
 
       //
       if (this.errors.length == 0) {
-        this.insertRecurs();
+        if (this.insert) {
+          this.insertRecurs();
+        } else {
+          this.updateRecurs();
+        }
       }
     },
 
@@ -339,12 +390,80 @@ export default {
         this.recurs.actiu = false;
     },
 
-    //   MODALS   //
-    showModal() {
-      this.$refs["recurs-modal"].show();
+    afegirRecurs() {
+      this.insert = true;
+      //   this.clearSelected();
+      this.emptyRecurs();
+      this.selectRecursos();
+      this.showModal("recurs-modal");
     },
-    hideModal() {
-      this.$refs["recurs-modal"].hide();
+
+    editRecurs() {
+      this.editClick = true;
+
+      if (this.insert) {
+        this.insert = false;
+      }
+    },
+
+    /**
+     * Funció que recupera l'últim recursos seleccionat
+     *
+     * @param {Array} oldarray Array que conté els recursos seleccionats excepte l'últim que s'acaba de seleccionar
+     * @param {Array} newarray Array que conté els recursos seleccionats amb l'últim que s'acaba de seleccionar
+     */
+    getLastSelected(oldarray, newarray) {
+      let found = false;
+      let inarray = false;
+      let i = 0,
+        j = 0;
+      //   debugger;
+
+      while (!found && i < newarray.length) {
+        j = 0;
+        inarray = false;
+
+        while (!inarray && j < oldarray.length) {
+          if (oldarray[j].id == newarray[i].id) {
+            inarray = true;
+          }
+          j++;
+        }
+
+        if (!inarray) {
+          this.recurs = newarray[i];
+          found = true;
+        }
+
+        i++;
+      }
+    },
+
+    //   TABLE   //
+    onRowSelected(items) {
+      if (this.editClick) {
+        this.getLastSelected(this.selected, items);
+        this.showModal("recurs-modal");
+        this.editClick = false;
+      }
+
+      this.selected = items;
+    },
+
+    selectAllRows() {
+      this.$refs.selectableTable.selectAllRows();
+    },
+    clearSelected() {
+      this.$refs.selectableTable.clearSelected();
+    },
+
+
+    //   MODALS   //
+    showModal(modal) {
+      this.$refs[modal].show();
+    },
+    hideModal(modal) {
+      this.$refs[modal].hide();
     },
   },
   computed: {

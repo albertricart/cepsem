@@ -117,10 +117,10 @@ class RecursController extends Controller
      * @param  \App\Models\Recurs  $recurs
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Recurs $recurs)
+    public function destroy(Recurs $recurso)
     {
         try {
-            $recurs->delete();
+            $recurso->delete();
             $response = \response()->json(['message' => "Recurs esborrat correctament"], 200);
         } catch (QueryException $e) {
             $response = \response()->json(['errorMessage' => Utilitat::handleErrorMessage($e)], 400);
@@ -130,12 +130,12 @@ class RecursController extends Controller
 
     public function getRecurs($request)
     {
-        $recurs = new Recurs();
+        $recurso = new Recurs();
 
-        $recurs->codi = $request->input('codi');
-        $recurs->tipus_recursos_id = $request->input('tipus_recursos_id');
-        $recurs->actiu = ($request->input('actiu') == 'actiu');
+        $recurso->codi = $request->input('codi');
+        $recurso->tipus_recursos_id = $request->input('tipus_recursos_id');
+        $recurso->actiu = ($request->input('actiu') == 'actiu');
 
-        return $recurs;
+        return $recurso;
     }
 }
