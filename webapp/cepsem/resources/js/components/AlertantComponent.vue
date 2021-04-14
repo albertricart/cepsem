@@ -168,10 +168,11 @@
                   <b-form-select
                     name="provincia"
                     id="provincia"
+                    v-model="alertant.municipi.comarca.provincia.id"
                     class="select"
                     value-field="id"
                     text-field="nom"
-                    :options="tipusalertants"
+                    :options="provincies"
                   ></b-form-select>
                 </div>
               </div>
@@ -185,7 +186,8 @@
                     class="select"
                     value-field="id"
                     text-field="nom"
-                    :options="tipusalertants"
+                    v-model="alertant.municipi.comarca.id"
+                    :options="comarques"
                   ></b-form-select>
                 </div>
               </div>
@@ -300,7 +302,8 @@ export default {
       type: Array,
       required: false,
     },
-    municipis: {
+
+    provincies: {
       type: Array,
       required: false,
     },
@@ -314,15 +317,40 @@ export default {
       alertants: [],
       editClick: false,
       insert: false,
+      loading: true,
+      loadingStatus: "Carregant les dades...",
+      errors: [],
+      selected: [],
+
       alertant: {
-        id: "",
+        id: 0,
         telefon: "",
         nom: "",
         cognoms: "",
         adreca: "",
-        tipus_alertants_id: "",
-        municipis_id: "",
+        municipis_id: 0,
+        tipus_alertants_id: 0,
+        incidencies: [],
+        tipus_alertant: {
+          id: 0,
+          tipus: "",
+        },
+        municipi: {
+          id: 0,
+          nom: "",
+          comarques_id: 0,
+          comarca: {
+            id: 0,
+            nom: "",
+            provincies_id: 0,
+            provincia: {
+              id: 0,
+              nom: "",
+            },
+          },
+        },
       },
+
       fields: [
         "Seleccionat",
         { key: "id", label: "ID", sortable: true },
@@ -331,13 +359,15 @@ export default {
         { key: "cognoms", label: "Cognoms", sortable: true },
         { key: "adreca", label: "Adreça", sortable: true },
         { key: "municipi.nom", label: "Municipi", sortable: true },
+        { key: "municipi.comarca.nom", label: "Comarca", sortable: true },
+        {
+          key: "municipi.comarca.provincia.nom",
+          label: "Provincia",
+          sortable: true,
+        },
         { key: "tipus_alertant.tipus", label: "Tipus", sortable: true },
         "Editar",
       ],
-      loading: true,
-      loadingStatus: "Carregant les dades...",
-      errors: [],
-      selected: [],
     };
   },
   created() {
@@ -433,7 +463,7 @@ export default {
       this.errors = [];
 
       if (this.alertant.telefon) {
-        if (this.alertant.telefon.length != 9) {
+        if (this.alertant.telefon.toString().length != 9) {
           this.checkIfExistsError("El camp telèfon ha d'incloure 9 números");
         }
       } else {
@@ -468,23 +498,32 @@ export default {
      * Funció per a buidar els camps del objecte alertant (associat al formulari amb v-model)
      */
     emptyAlertant() {
-      this.alertant.id = "";
+      this.alertant.id = 0;
       this.alertant.nom = "";
       this.alertant.cognoms = "";
       this.alertant.telefon = "";
       this.alertant.adreca = "";
-      this.alertant.municipi = "";
-      this.alertant.tipus_alertant = "";
-      this.alertant.municipis_id = "";
-      this.alertant.tipus_alertants_id = "";
+      this.alertant.incidencies = [];
+      this.alertant.municipis_id = 0;
+      this.alertant.tipus_alertants_id = 0;
+      this.alertant.tipus_alertant.id = 0;
+      this.alertant.tipus_alertant.tipus = "";
+      this.alertant.municipi.id = 0;
+      this.alertant.municipi.nom = "";
+      this.alertant.municipi.comarques_id = 0;
+      this.alertant.municipi.comarca.id = 0;
+      this.alertant.municipi.comarca.nom = "";
+      this.alertant.municipi.comarca.provincies_id = 0;
+      this.alertant.municipi.comarca.provincia.id = 0;
+      this.alertant.municipi.comarca.provincia.nom = "";
     },
 
     afegirAlertant() {
       this.insert = true;
       //   this.clearSelected();
-      this.emptyAlertant();
       this.selectAlertants();
       this.showModal("alertant-modal");
+      this.emptyAlertant();
     },
 
     editAlertant() {
@@ -528,6 +567,7 @@ export default {
       }
     },
 
+
     //   TABLE   //
     onRowSelected(items) {
       if (this.editClick) {
@@ -557,6 +597,52 @@ export default {
   computed: {
     rows() {
       return this.alertants.length;
+    },
+
+    comarques() {
+      let comarques = [];
+      // comarques.push({ id: 0, nom: "Selecciona la comarca" });
+      let alertantProvincia = this.alertant.municipi.comarca.provincia.id;
+      if (alertantProvincia == 0) {
+        this.provincies.forEach((provincia) => {
+          provincia.comarques.forEach((comarca) => {
+            comarques.push(comarca);
+          });
+        });
+      } else {
+        this.provincies.forEach((provincia) => {
+          if (provincia.id == alertantProvincia) {
+            provincia.comarques.forEach((comarca) => {
+              comarques.push(comarca);
+            });
+          }
+        });
+      }
+
+      return comarques;
+    },
+
+    municipis() {
+      let municipis = [];
+      let alertantComarca = this.alertant.municipi.comarca.id;
+
+      if (alertantComarca == 0) {
+        this.comarques.forEach((comarca) => {
+          comarca.municipis.forEach((municipi) => {
+            municipis.push(municipi);
+          });
+        });
+      } else {
+        this.comarques.forEach((comarca) => {
+          if (alertantComarca == comarca.id) {
+            comarca.municipis.forEach((municipi) => {
+              municipis.push(municipi);
+            });
+          }
+        });
+      }
+
+      return municipis;
     },
   },
 };
