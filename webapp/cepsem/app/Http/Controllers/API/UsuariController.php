@@ -81,7 +81,7 @@ class UsuariController extends Controller
 
             $response = (new UsuariResource($usuari))
                 ->response()
-                ->setStatusCode(201);
+                ->setStatusCode(204);
         } catch (QueryException $e) {
             $response = \response(['errorMessage' => Utilitat::handleErrorMessage($e)], 400);
         }

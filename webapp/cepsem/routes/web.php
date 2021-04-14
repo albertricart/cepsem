@@ -39,88 +39,32 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/home', function () {
         $user = Auth::user();
 
-        return view('/login', compact('user'));
+        return view('login', compact('user'));
     });
 
-    // Route::get('/cecos/usuaris', function () {
-    //     $user = Auth::user();
-    //     $rol = Auth::user()->rols_id;
-    //     if ($rol == 1) {
-    //         $view = view('pages.cecos.usuaris.index');
-    //     }
-    //     else
-    //     {
-    //         return $view = view('login', compact('user'));
-    //     }
-    //     return $view;
-    // });
+});
 
-    // Route::get('/cecos/alertants', function () {
-    //     $user = Auth::user();
-    //     $rol = Auth::user()->rols_id;
-    //     if ($rol == 1) {
-    //         $view = view('pages.cecos.alertants.index');
-    //     }
-    //     else
-    //     {
-    //         return $view = view('login', compact('user'));
-    //     }
-    //     return $view;
-    // });
+/* Route::middleware(['admin'])->group(function () {
 
-    // Route::get('/cecos', function () {
-    //     $user = Auth::user();
-    //     $rol = Auth::user()->rols_id;
-    //     if ($rol == 1 || $rol == 2 ||$rol == 3) {
-    //         $view = view('pages.cecos.index');
-    //     }
-    //     else
-    //     {
-    //         return $view = view('login', compact('user'));
-    //     }
-    //     return $view;
-    // });
+
+}); */
+
+Route::middleware(['cecos'])->group(function () {
 
     /* Route::get('/cecos/tipus-recurs', function () {
         $user = Auth::user();
-        $rol = Auth::user()->rols_id;
-        if ($rol == 1) {
-            // $view = view('pages.cecos.altres.tipusRecursos.index');
-            $view = redirect()->action([TipusRecursController::class, 'index']);
-        }
-        else
-        {
-            return $view = view('login', compact('user'));
-        }
-        return $view;
-    }); */
 
-    /* Route::get('/cecos/tipus-alertants', function () {
+        return view('pages.login', compact('user'));
+    });
+    Route::get('/cecos/tipus-alertant', function () {
         $user = Auth::user();
-        $rol = Auth::user()->rols_id;
-        if ($rol == 1) {
-            // $view = view('pages.cecos.altres.tipusAlertant.index');
-            $view = redirect()->action([TipusAlertantController::class, 'index']);
-        }
-        else
-        {
-            return $view = view('login', compact('user'));
-        }
-        return $view;
-    }); */
 
-    /* Route::get('/cecos/tipus-incidencia', function () {
-        $user = Auth::user();
-        $rol = Auth::user()->rols_id;
-        if ($rol == 1) {
-            // $view = view('pages.cecos.altres.tipusIncidencia.index');
-            $view = redirect()->action([TipusIncidenciaController::class, 'index']);
-        }
-        else
-        {
-            return $view = view('login', compact('user'));
-        }
-        return $view;
-    }); */
+        return view('pages.login', compact('user'));
+    });
+ */
+});
+
+Route::middleware(['recurs.mobil'])->group(function () {
+
 
 });
