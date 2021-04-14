@@ -75,6 +75,14 @@
             />
           </svg>
         </template>
+        <template #cell(ActiuTest)>
+            <span v-if="recurs.actiu==1">
+                  <h5>Si</h5>
+            </span>
+            <span v-else>
+                <h5>No</h5>
+            </span>
+        </template>
       </b-table>
 
       <b-pagination
@@ -194,7 +202,7 @@
             <li v-for="(recurs, index) in selected" :key="index">
               {{ recurs.tipus_recurs.tipus + " " }}
               <span v-if="recurs.codi">{{ recurs.codi }}</span>
-              <span v-if="recurs.actiu">{{ recurs.actiu }}</span>
+
             </li>
           </ul>
         </div>
@@ -253,6 +261,7 @@ export default {
         { key: "tipus_recurs.tipus", label: "Tipus", sortable: true },
         { key: "actiu", label: "Actiu", sortable: true },
         "Editar",
+        "ActiuTest",
       ],
       loading: true,
       loadingStatus: "Carregant les dades...",
@@ -311,11 +320,11 @@ export default {
       let me = this;
 
       axios
-        .put("/recursos/" + me.recurs.id, me.cicle)
+        .put("/recursos/" + me.recurs.id,me.recurs)
         .then((response) => {
           console.log(response);
           me.selectRecursos();
-          me.hideModal("delete-modal");
+          me.hideModal("recurs-modal");
         })
         .catch((error) => {
           console.log(error.response);

@@ -11,7 +11,7 @@ class Recurs extends Model
 
     protected $table = "recursos";
     public $timestamps = false;
-
+    protected $fillable = ['codi', 'actiu', 'tipus_recursos_id'];
 
     /**
      * The incidencies that belong to the Recurs
