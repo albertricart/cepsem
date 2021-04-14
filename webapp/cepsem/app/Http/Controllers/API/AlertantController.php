@@ -37,7 +37,7 @@ class AlertantController extends Controller
             //     return $alertant;
             // });
 
-            return AlertantResource::collection(Alertant::with(['incidencies', 'municipi', 'tipus_alertant'])->get());
+            return AlertantResource::collection(Alertant::with(['incidencies', 'municipi', 'municipi.comarca', 'municipi.comarca.provincia', 'tipus_alertant'])->get());
         }
 
     /**

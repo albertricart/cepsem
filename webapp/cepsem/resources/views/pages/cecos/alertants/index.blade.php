@@ -15,6 +15,6 @@ Alertants
 
 @section('content')
 <div class="container-fluid my-5">
-    <alertant-component :tipusalertants="{{ $tipusAlertants }}" :municipis="{{ $municipis }}"></alertant-component>
+    <alertant-component :tipusalertants="{{ $tipusAlertants }}" :provincies="{{ $provincies }}"></alertant-component>
 </div>
 @endsection
