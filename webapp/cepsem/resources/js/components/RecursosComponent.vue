@@ -75,13 +75,13 @@
             />
           </svg>
         </template>
-        <template #cell(ActiuTest)>
-            <span v-if="recurs.actiu==1">
-                  <h5>Si</h5>
-            </span>
-            <span v-else>
-                <h5>No</h5>
-            </span>
+        <template #cell(actiu)="data">
+          <div v-if="data.item.actiu">
+            <input type="checkbox" checked>
+            </div>
+            <div v-else>
+              <input type="checkbox">
+            </div>
         </template>
       </b-table>
 
@@ -259,16 +259,26 @@ export default {
         { key: "id", label: "ID", sortable: true },
         { key: "codi", label: "Codi", sortable: true },
         { key: "tipus_recurs.tipus", label: "Tipus", sortable: true },
-        { key: "actiu", label: "Actiu", sortable: true },
+        { key: "actiu", label: "Actiu", sortable: true, formatter: (value, key, item) => {
+            if(value==1)
+              {
+                return true
+              }
+            else
+              {
+                return false
+              }
+            }
+            },
         "Editar",
-        "ActiuTest",
       ],
       loading: true,
-      loadingStatus: "Carregant les dades...",
+      loadingStatus: "CarreganA Qt les dades...",
       errors: [],
       selected: [],
     };
   },
+
   created() {
     this.selectRecursos();
 
