@@ -16,12 +16,12 @@ class UsuariController extends Controller
     {
         /* $user = new Usuari();
 
-        $user->id = '45';
-        $user->username = 'ivan';
-        $user->contrasenya = \bcrypt('ivan');
-        $user->email = 'ivan';
-        $user->nom = 'ivan';
-        $user->cognoms = 'ivan';
+
+        $user->username = 'hector';
+        $user->contrasenya = \bcrypt('hector');
+        $user->email = 'hector';
+        $user->nom = 'hector';
+        $user->cognoms = 'hector';
         $user->rols_id = 1;
         $user->recursos_id = 1;
 
@@ -61,6 +61,7 @@ class UsuariController extends Controller
      */
     public function index()
     {
+
         $recursos = Recurs::all();
         $rols = Rol::all();
         return view('pages.cecos.usuaris.index', compact('recursos', 'rols'));
