@@ -419,9 +419,9 @@ export default {
         this.checkIfExistsError("El camp telèfon és obligatori.");
       }
 
-      /* if (!this.afectat.tipus_alertants_id) {
-        this.checkIfExistsError("El camp tipus és obligatori.");
-      } */
+      if (!this.afectat.sexes_id) {
+        this.checkIfExistsError("El camp sexe és obligatori.");
+      }
 
       if (this.errors.length == 0) {
         if (this.insert) {
