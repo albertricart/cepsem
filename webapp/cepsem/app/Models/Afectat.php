@@ -11,6 +11,7 @@ class Afectat extends Model
 
     protected $table = "afectats";
     public $timestamps = false;
+    protected $fillable = ['telefon', 'cip', 'nom', 'cognoms', 'edat', 'te_cip', 'sexes_id'];
 
     /**
      * Get the sexe that owns the Afectat

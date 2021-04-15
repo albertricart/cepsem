@@ -1,15 +1,15 @@
 <template>
   <div>
-    <h1 class="page-title">ALERTANTS</h1>
+    <h1 class="page-title">AFECTATS</h1>
 
     <div class="d-flex justify-content-end mb-4">
       <button
         class="button button-icon button--pink"
         style="background-image: url('../assets/icons/add.svg')"
         id="show-btn"
-        @click="afegirAlertant"
+        @click="afegirAfectat"
       >
-        AFEGEIX UN NOU ALERTANT
+        AFEGEIX UN NOU AFECTAT
       </button>
     </div>
 
@@ -35,9 +35,9 @@
       </div>
 
       <b-table
-        id="alertants-table"
+        id="afectats-table"
         :fields="fields"
-        :items="alertants"
+        :items="afectats"
         :per-page="perPage"
         :current-page="currentPage"
         :sort-by.sync="sortBy"
@@ -62,7 +62,7 @@
 
         <template #cell(Editar)>
           <svg
-            @click="editAlertant"
+            @click="editAfectats"
             xmlns="http://www.w3.org/2000/svg"
             height="24px"
             viewBox="0 0 24 24"
@@ -82,13 +82,13 @@
         v-model="currentPage"
         :total-rows="rows"
         :per-page="perPage"
-        aria-controls="incidencies-table"
+        aria-controls="afectats-table"
       ></b-pagination>
     </div>
 
-    <b-modal hide-footer hide-header centered size="lg" ref="alertant-modal">
+    <b-modal hide-footer hide-header centered size="lg" ref="afectat-modal">
       <div class="cepsem-modal">
-        <h2 class="mb-4">ALERTANT</h2>
+        <h2 class="mb-4">AFECTAT</h2>
         <form>
           <div class="container">
             <div class="row">
@@ -99,8 +99,8 @@
                     type="text"
                     name="nom"
                     id="nom"
-                    placeholder="Introdueix el nom de l'alertant..."
-                    v-model="alertant.nom"
+                    placeholder="Introdueix el nom de l'afectat..."
+                    v-model="afectat.nom"
                     autofocus
                   />
                 </div>
@@ -113,8 +113,8 @@
                     type="text"
                     name="cognoms"
                     id="cognoms"
-                    v-model="alertant.cognoms"
-                    placeholder="Introdueix els cognoms de l'usuari..."
+                    v-model="afectat.cognoms"
+                    placeholder="Introdueix els cognoms de l'afectat..."
                   />
                 </div>
               </div>
@@ -128,81 +128,61 @@
                     max="999999999"
                     name="telefon"
                     id="telefon"
-                    v-model="alertant.telefon"
-                    placeholder="Introdueix el telèfon de l'alertant..."
+                    v-model="afectat.telefon"
+                    placeholder="Introdueix el telèfon de l'afectat..."
                   />
                 </div>
               </div>
 
               <div class="col-lg-6">
                 <div class="input input--col mb-4">
-                  <label for="adreca">Adreça</label>
+                  <label for="edat">Edat</label>
+                  <input
+                    type="number"
+                    name="edat"
+                    id="edat"
+                    v-model="afectat.edat"
+                    placeholder="Introdueix l'edat de l'afectat..."
+                  />
+                </div>
+              </div>
+
+              <div class="col-lg-6">
+                <div class="input input--col mb-4">
+                  <label for="cip">Cip</label>
                   <input
                     type="text"
-                    name="adreca"
-                    id="adreca"
-                    v-model="alertant.adreca"
-                    placeholder="Introdueix l'adreça de l'alertant..."
+                    name="cip"
+                    id="cip"
+                    v-model="afectat.cip"
+                    placeholder="Introdueix el cip de l'afectat..."
                   />
                 </div>
               </div>
 
-              <div class="col-lg-6">
+              <div class="col-lg-6" >
                 <div class="input input--col mb-4">
-                  <label for="tipus">Tipus</label>
-                  <b-form-select
-                    name="tipus"
-                    id="tipus"
-                    v-model="alertant.tipus_alertants_id"
-                    class="select"
-                    value-field="id"
-                    text-field="tipus"
-                    :options="tipusalertants"
-                  ></b-form-select>
+                 <label class="col-form-check-label" for="te_cip">Te cip</label>
+                        <input
+                        class="form-check-input"
+                        type="checkbox"
+                        id="te_cip"
+                        name="te_cip"
+                        v-model="afectat.te_cip"
+                        value="te_cip">
                 </div>
               </div>
 
               <div class="col-lg-6">
                 <div class="input input--col mb-4">
-                  <label for="provincia">Provincia</label>
+                  <label for="sexe">Sexe</label>
                   <b-form-select
-                    name="provincia"
-                    id="provincia"
-                    v-model="alertant.municipi.comarca.provincia.id"
+                    name="sexe"
+                    id="sexe"
                     class="select"
                     value-field="id"
-                    text-field="nom"
-                    :options="provincies"
-                  ></b-form-select>
-                </div>
-              </div>
-
-              <div class="col-lg-6">
-                <div class="input input--col mb-4">
-                  <label for="comarca">Comarca</label>
-                  <b-form-select
-                    name="comarca"
-                    id="comarca"
-                    class="select"
-                    value-field="id"
-                    text-field="nom"
-                    v-model="alertant.municipi.comarca.id"
-                    :options="comarques"
-                  ></b-form-select>
-                </div>
-              </div>
-
-              <div class="col-lg-6">
-                <div class="input input--col mb-4">
-                  <label for="municipi">Municipi</label>
-                  <b-form-select
-                    name="municipi"
-                    id="municipi"
-                    v-model="alertant.municipis_id"
-                    class="select"
-                    value-field="id"
-                    text-field="nom"
-                    :options="municipis"
+                    text-field="sexe"
+                    :options="sexes"
                   ></b-form-select>
                 </div>
               </div>
@@ -243,13 +223,14 @@
               <button
                 class="button button-icon button--rounded button-inverted button-inverted--red ml-2 mt-3"
                 block
-                @click="hideModal('alertant-modal')"
+                @click="hideModal('afectat-modal')"
                 type="button">
                 Cancel·lar
               </button>
             </div>
           </div>
         </form>
+
       </div>
     </b-modal>
 
@@ -260,13 +241,12 @@
         </div>
 
         <div class="modal-body">
-          <p>Estàs segur que vols esborrar els següents alertants?</p>
+          <p>Estàs segur que vols esborrar els següents afectats?</p>
           <ul>
-            <li v-for="(alertant, index) in selected" :key="index">
-              {{ alertant.tipus_alertant.tipus + " " }}
-              <span v-if="alertant.nom">{{ alertant.nom }}</span>
-              <span v-if="alertant.cognoms">{{ alertant.cognoms }}</span> amb
-              tlf. {{ alertant.telefon }}
+            <li v-for="(afectat, index) in selected" :key="index">
+              <span v-if="afectat.nom">{{ afectat.nom }}</span>
+              <span v-if="afectat.cognoms">{{ afectat.cognoms }}</span> amb
+              tlf. {{ afectat.telefon }}
             </li>
           </ul>
         </div>
@@ -276,7 +256,7 @@
             class="button button-icon button--rounded button--blue"
             type="button"
             style="background-image: url('../assets/icons/check.svg')"
-            @click="deleteAlertants"
+            @click="deleteAfectats"
           >
             Eliminar
           </button>
@@ -297,12 +277,7 @@
 <script>
 export default {
   props: {
-    tipusalertants: {
-      type: Array,
-      required: false,
-    },
-
-    provincies: {
+    sexes: {
       type: Array,
       required: false,
     },
@@ -316,74 +291,49 @@ export default {
       alertants: [],
       editClick: false,
       insert: false,
-      loading: true,
-      loadingStatus: "Carregant les dades...",
-      errors: [],
-      selected: [],
-
-      alertant: {
-        id: 0,
+      afectat: {
+        id: "",
         telefon: "",
+        cip: "",
         nom: "",
         cognoms: "",
-        adreca: "",
-        municipis_id: 0,
-        tipus_alertants_id: 0,
-        incidencies: [],
-        tipus_alertant: {
-          id: 0,
-          tipus: "",
-        },
-        municipi: {
-          id: 0,
-          nom: "",
-          comarques_id: 0,
-          comarca: {
-            id: 0,
-            nom: "",
-            provincies_id: 0,
-            provincia: {
-              id: 0,
-              nom: "",
-            },
-          },
-        },
+        edat: "",
+        te_cip: "",
+        sexes_id: "",
       },
-
       fields: [
         "Seleccionat",
         { key: "id", label: "ID", sortable: true },
         { key: "telefon", label: "Telèfon", sortable: true },
+        { key: "cip", label: "Cip", sortable: true },
         { key: "nom", label: "Nom", sortable: true },
         { key: "cognoms", label: "Cognoms", sortable: true },
-        { key: "adreca", label: "Adreça", sortable: true },
-        { key: "municipi.nom", label: "Municipi", sortable: true },
-        { key: "municipi.comarca.nom", label: "Comarca", sortable: true },
-        {
-          key: "municipi.comarca.provincia.nom",
-          label: "Provincia",
-          sortable: true,
-        },
-        { key: "tipus_alertant.tipus", label: "Tipus", sortable: true },
+        { key: "edat", label: "Edat", sortable: true },
+        { key: "te_cip", label: "Te cip", sortable: true },
+        { key: "sexes.sexe", label: "Sexe", sortable: true },
         "Editar",
       ],
+      loading: true,
+      loadingStatus: "Carregant les dades...",
+      errors: [],
+      selected: [],
     };
   },
   created() {
-    this.selectAlertants();
+    this.selectAfectats();
   },
   mounted() {
-    console.log("Alertant component mounted.");
+    console.log("Afectat component mounted.");
   },
   methods: {
     //   SELECT - GET   //
-    selectAlertants() {
+    selectAfectats() {
       let me = this;
 
       axios
-        .get("/alertants")
+        .get("/afectats")
         .then((response) => {
-          me.alertants = response.data;
+          me.afectats = response.data;
           this.loading = false;
         })
         .catch((error) => {
@@ -393,19 +343,19 @@ export default {
     },
 
     //   INSERT - POST   //
-    insertAlertant() {
+    insertAfectat() {
       let me = this;
 
       axios
-        .post("/alertants", me.alertant)
+        .post("/afectats", me.afectat)
         .then((response) => {
           console.log(response);
 
           if (response.status == 201) {
-            me.selectAlertants();
-            me.emptyAlertant();
+            me.selectAfectats();
+            me.emptyAfectat();
             me.errors = [];
-            me.hideModal("alertant-modal");
+            me.hideModal("afectat-modal");
           }
         })
         .catch((error) => {
@@ -415,18 +365,18 @@ export default {
     },
 
     //   UPDATE - PUT   //
-    updateAlertant() {
+    updateAfectat() {
       let me = this;
       axios
-        .put("/alertants/" + me.alertant.id, me.alertant)
+        .put("/afectats/" + me.afectat.id, me.afectat)
         .then((response) => {
           console.log(response);
 
           if (response.status == 204) {
-            me.selectAlertants();
-            me.emptyAlertant();
+            me.selectAfectats();
+            me.emptyAfectat();
             me.errors = [];
-            me.hideModal("alertant-modal");
+            me.hideModal("afectat-modal");
           }
         })
         .catch((error) => {
@@ -436,15 +386,15 @@ export default {
     },
 
     //   DELETE   //
-    deleteAlertants() {
+    deleteAfectats() {
       let me = this;
 
-      me.selected.forEach((alertant) => {
+      me.selected.forEach((afectat) => {
         axios
-          .delete("/alertants/" + alertant.id)
+          .delete("/afectats/" + afectat.id)
           .then((response) => {
             console.log(response);
-            me.selectAlertants();
+            me.selectAfectats();
             me.hideModal("delete-modal");
           })
           .catch((error) => {
@@ -461,23 +411,23 @@ export default {
     checkNotNull() {
       this.errors = [];
 
-      if (this.alertant.telefon) {
-        if (this.alertant.telefon.toString().length != 9) {
+      if (this.afectat.telefon) {
+        if (this.afectat.telefon.length != 9) {
           this.checkIfExistsError("El camp telèfon ha d'incloure 9 números");
         }
       } else {
         this.checkIfExistsError("El camp telèfon és obligatori.");
       }
 
-      if (!this.alertant.tipus_alertants_id) {
+      /* if (!this.afectat.tipus_alertants_id) {
         this.checkIfExistsError("El camp tipus és obligatori.");
-      }
+      } */
 
       if (this.errors.length == 0) {
         if (this.insert) {
-          this.insertAlertant();
+          this.insertAfectat();
         } else {
-          this.updateAlertant();
+          this.updateAfectat();
         }
       }
     },
@@ -496,36 +446,26 @@ export default {
     /**
      * Funció per a buidar els camps del objecte alertant (associat al formulari amb v-model)
      */
-    emptyAlertant() {
-      this.alertant.id = 0;
-      this.alertant.nom = "";
-      this.alertant.cognoms = "";
-      this.alertant.telefon = "";
-      this.alertant.adreca = "";
-      this.alertant.incidencies = [];
-      this.alertant.municipis_id = 0;
-      this.alertant.tipus_alertants_id = 0;
-      this.alertant.tipus_alertant.id = 0;
-      this.alertant.tipus_alertant.tipus = "";
-      this.alertant.municipi.id = 0;
-      this.alertant.municipi.nom = "";
-      this.alertant.municipi.comarques_id = 0;
-      this.alertant.municipi.comarca.id = 0;
-      this.alertant.municipi.comarca.nom = "";
-      this.alertant.municipi.comarca.provincies_id = 0;
-      this.alertant.municipi.comarca.provincia.id = 0;
-      this.alertant.municipi.comarca.provincia.nom = "";
+    emptyAfectat() {
+      this.afectat.id = "";
+      this.afectat.telefon = "";
+      this.afectat.cip = "";
+      this.afectat.nom = "";
+      this.afectat.cognoms = "";
+      this.afectat.edat = "";
+      this.afectat.te_cip = "";
+      this.afectat.sexes_id = "";
     },
 
-    afegirAlertant() {
+    afegirAfectat() {
       this.insert = true;
       //   this.clearSelected();
-      this.selectAlertants();
-      this.showModal("alertant-modal");
-      this.emptyAlertant();
+      this.emptyAfectat();
+      this.selectAfectats();
+      this.showModal("afectat-modal");
     },
 
-    editAlertant() {
+    editAfectat() {
       this.editClick = true;
 
       if (this.insert) {
@@ -558,7 +498,7 @@ export default {
         }
 
         if (!inarray) {
-          this.alertant = newarray[i];
+          this.afectat = newarray[i];
           found = true;
         }
 
@@ -566,12 +506,11 @@ export default {
       }
     },
 
-
     //   TABLE   //
     onRowSelected(items) {
       if (this.editClick) {
         this.getLastSelected(this.selected, items);
-        this.showModal("alertant-modal");
+        this.showModal("afectat-modal");
         this.editClick = false;
       }
 
@@ -595,53 +534,7 @@ export default {
   },
   computed: {
     rows() {
-      return this.alertants.length;
-    },
-
-    comarques() {
-      let comarques = [];
-      // comarques.push({ id: 0, nom: "Selecciona la comarca" });
-      let alertantProvincia = this.alertant.municipi.comarca.provincia.id;
-      if (alertantProvincia == 0) {
-        this.provincies.forEach((provincia) => {
-          provincia.comarques.forEach((comarca) => {
-            comarques.push(comarca);
-          });
-        });
-      } else {
-        this.provincies.forEach((provincia) => {
-          if (provincia.id == alertantProvincia) {
-            provincia.comarques.forEach((comarca) => {
-              comarques.push(comarca);
-            });
-          }
-        });
-      }
-
-      return comarques;
-    },
-
-    municipis() {
-      let municipis = [];
-      let alertantComarca = this.alertant.municipi.comarca.id;
-
-      if (alertantComarca == 0) {
-        this.comarques.forEach((comarca) => {
-          comarca.municipis.forEach((municipi) => {
-            municipis.push(municipi);
-          });
-        });
-      } else {
-        this.comarques.forEach((comarca) => {
-          if (alertantComarca == comarca.id) {
-            comarca.municipis.forEach((municipi) => {
-              municipis.push(municipi);
-            });
-          }
-        });
-      }
-
-      return municipis;
+      return this.afectats.length;
     },
   },
 };
