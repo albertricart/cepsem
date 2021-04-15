@@ -91,16 +91,16 @@ class RecursController extends Controller
      * @param  \App\Models\Recurs  $recurs
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Recurs $recurs)
+    public function update(Request $request, Recurs $recurso)
     {
         try {
-            $recurs->update([
+            $recurso->update([
                 'codi' => $request->input('codi'),
                 'tipus_recursos_id' => $request->input('tipus_recursos_id'),
-                'actiu' => ($request->input('actiu') == 'actiu'),
+                'actiu' => ($request->input('actiu') == 'actiu')
             ]);
 
-            $response = (new RecursResource($recurs))
+            $response = (new RecursResource($recurso))
                 ->response()
                 ->setStatusCode(204);
         } catch (QueryException $e) {

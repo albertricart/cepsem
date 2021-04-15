@@ -22,9 +22,9 @@
       <div class="row">
         <div class="table-header">
           <div>
-            <button size="sm" @click="selectAllRows">Select all</button>
-            <button size="sm" class="ml-2" @click="clearSelected">
-              Clear selected
+            <button size="sm" class="button" @click="selectAllRows">SELECCIONAR TOTS</button>
+            <button size="sm" class="button ml-2" @click="clearSelected">
+                DESSELECCIONAR TOTS
             </button>
           </div>
 
@@ -74,6 +74,14 @@
               d="M14.06 9.02l.92.92L5.92 19H5v-.92l9.06-9.06M17.66 3c-.25 0-.51.1-.7.29l-1.83 1.83 3.75 3.75 1.83-1.83c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.2-.2-.45-.29-.71-.29zm-3.6 3.19L3 17.25V21h3.75L17.81 9.94l-3.75-3.75z"
             />
           </svg>
+        </template>
+        <template #cell(actiu)="data">
+          <div v-if="data.item.actiu">
+            <input type="checkbox" checked>
+            </div>
+            <div v-else>
+              <input type="checkbox">
+            </div>
         </template>
       </b-table>
 
@@ -194,7 +202,7 @@
             <li v-for="(recurs, index) in selected" :key="index">
               {{ recurs.tipus_recurs.tipus + " " }}
               <span v-if="recurs.codi">{{ recurs.codi }}</span>
-              <span v-if="recurs.actiu">{{ recurs.actiu }}</span>
+
             </li>
           </ul>
         </div>
@@ -251,15 +259,26 @@ export default {
         { key: "id", label: "ID", sortable: true },
         { key: "codi", label: "Codi", sortable: true },
         { key: "tipus_recurs.tipus", label: "Tipus", sortable: true },
-        { key: "actiu", label: "Actiu", sortable: true },
+        { key: "actiu", label: "Actiu", sortable: true, formatter: (value, key, item) => {
+            if(value==1)
+              {
+                return true
+              }
+            else
+              {
+                return false
+              }
+            }
+            },
         "Editar",
       ],
       loading: true,
-      loadingStatus: "Carregant les dades...",
+      loadingStatus: "CarreganA Qt les dades...",
       errors: [],
       selected: [],
     };
   },
+
   created() {
     this.selectRecursos();
 
@@ -311,11 +330,11 @@ export default {
       let me = this;
 
       axios
-        .put("/recursos/" + me.recurs.id, me.cicle)
+        .put("/recursos/" + me.recurs.id,me.recurs)
         .then((response) => {
           console.log(response);
           me.selectRecursos();
-          me.hideModal("delete-modal");
+          me.hideModal("recurs-modal");
         })
         .catch((error) => {
           console.log(error.response);
