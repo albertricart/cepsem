@@ -41,21 +41,21 @@ class IncidenciaController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Incidencia  $incidencia
+     * @param  \App\Models\Incidencia  $incidency
      * @return \Illuminate\Http\Response
      */
-    public function show(Incidencia $incidencia)
+    public function show(Incidencia $incidency)
     {
-        //
+        return view('pages.cecos.incidencies.incidencia', compact('incidency'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Incidencia  $incidencia
+     * @param  \App\Models\Incidencia  $incidency
      * @return \Illuminate\Http\Response
      */
-    public function edit(Incidencia $incidencia)
+    public function edit(Incidencia $incidency)
     {
         //
     }
@@ -64,10 +64,10 @@ class IncidenciaController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Incidencia  $incidencia
+     * @param  \App\Models\Incidencia  $incidency
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Incidencia $incidencia)
+    public function update(Request $request, Incidencia $incidency)
     {
         //
     }
@@ -75,10 +75,10 @@ class IncidenciaController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Incidencia  $incidencia
+     * @param  \App\Models\Incidencia  $incidency
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Incidencia $incidencia)
+    public function destroy(Incidencia $incidency)
     {
         //
     }

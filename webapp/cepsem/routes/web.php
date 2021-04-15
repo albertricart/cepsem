@@ -11,6 +11,7 @@ use App\Http\Controllers\IncidenciaController;
 use App\Http\Controllers\TipusRecursController;
 use App\Http\Controllers\TipusAlertantController;
 use App\Http\Controllers\TipusIncidenciaController;
+use Illuminate\Support\Facades\Artisan;
 
 Route::get('/', function () {
     return view('pages.home');
@@ -23,6 +24,12 @@ Route::get('/login', function () {
 Route::get('/cecos', function () {
     return view('pages.cecos.index');
 });
+
+Route::get('/cecos/incidencia/{id}', function ($id) {
+    return redirect()->action([App\Http\Controllers\IncidenciaController::class, 'show'], ['incidency' => $id]);
+});
+
+Route::get('/cecos/incidencia', [IncidenciaController::class, 'show']);
 
 Route::resource('/cecos/alertants', AlertantController::class);
 Route::resource('/cecos/incidencies', IncidenciaController::class);
@@ -68,5 +75,35 @@ Route::middleware(['cecos'])->group(function () {
 
 Route::middleware(['recurs.mobil'])->group(function () {
 
+
+});
+
+
+
+Route::get('/clearcache', function() {
+
+    $notice = '';
+
+    $notice.= ' / APPLICATION';
+    // Laravel Clear APPLICATION Cache On Shared Hosting
+    $exitCode = Artisan::call('cache:clear');
+
+    $notice.= ' / VIEW';
+    // Laravel Clear VIEW Cache On Shared Hosting
+    $exitCode = Artisan::call('view:clear');
+
+    // $notice.= ' / ROUTE';
+    // Laravel Clear ROUTE Cache On Shared Hosting
+    // $exitCode = Artisan::call('route:cache');
+
+    $notice.= ' / CONFIG';
+    // Laravel Clear CONFIG Cache On Shared Hosting
+    $exitCode = Artisan::call('config:clear');
+    $exitCode = Artisan::call('config:cache');
+
+
+    $notice.= ' cleared';
+
+    return $notice;
 
 });

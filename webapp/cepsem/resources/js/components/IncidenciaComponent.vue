@@ -3,14 +3,14 @@
     <h1 class="page-title">INCIDÈNCIES</h1>
 
     <div class="d-flex justify-content-end mb-4">
-      <button
+      <a
+        href="/cepsem/webapp/cepsem/public/cecos/incidencia"
         class="button button-icon button--pink"
         style="background-image: url('../assets/icons/add.svg')"
         id="show-btn"
-
       >
         AFEGEIX UNA NOVA INCIDÈNCIA
-      </button>
+      </a>
     </div>
 
     <div v-if="loading" class="table-loading">
@@ -22,9 +22,11 @@
       <div class="row">
         <div class="table-header">
           <div>
-            <button size="sm" @click="selectAllRows">Select all</button>
-            <button size="sm" class="ml-2" @click="clearSelected">
-              Clear selected
+            <button size="sm" class="button" @click="selectAllRows">
+              SELECCIONAR TOTS
+            </button>
+            <button size="sm" class="button ml-2" @click="clearSelected">
+              DESSELECCIONAR TOTS
             </button>
           </div>
 
@@ -61,19 +63,20 @@
         </template>
 
         <template #cell(Editar)>
-          <svg
-            @click="editButtonClick()"
-            xmlns="http://www.w3.org/2000/svg"
-            height="24px"
-            viewBox="0 0 24 24"
-            width="24px"
-            fill="#11AEBF"
-          >
-            <path d="M0 0h24v24H0V0z" fill="none" />
-            <path
-              d="M14.06 9.02l.92.92L5.92 19H5v-.92l9.06-9.06M17.66 3c-.25 0-.51.1-.7.29l-1.83 1.83 3.75 3.75 1.83-1.83c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.2-.2-.45-.29-.71-.29zm-3.6 3.19L3 17.25V21h3.75L17.81 9.94l-3.75-3.75z"
-            />
-          </svg>
+          <a :href="'/cepsem/webapp/cepsem/public/cecos/incidencia/' + 1 ">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="24px"
+              viewBox="0 0 24 24"
+              width="24px"
+              fill="#11AEBF"
+            >
+              <path d="M0 0h24v24H0V0z" fill="none" />
+              <path
+                d="M14.06 9.02l.92.92L5.92 19H5v-.92l9.06-9.06M17.66 3c-.25 0-.51.1-.7.29l-1.83 1.83 3.75 3.75 1.83-1.83c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.2-.2-.45-.29-.71-.29zm-3.6 3.19L3 17.25V21h3.75L17.81 9.94l-3.75-3.75z"
+              />
+            </svg>
+          </a>
         </template>
       </b-table>
 
@@ -86,7 +89,6 @@
       ></b-pagination>
     </div>
 
-
     <b-modal hide-footer hide-header centered size="lg" ref="delete-modal">
       <div class="cepsem-modal">
         <div class="modal-header">
@@ -96,12 +98,26 @@
         <div class="modal-body">
           <p>Estàs segur que vols esborrar les següents incidències?</p>
           <ul>
-            <!-- <li v-for="(alertant, index) in selected" :key="index">
-              {{ alertant.tipus_alertant.tipus + " " }}
-              <span v-if="alertant.nom">{{ alertant.nom }}</span>
-              <span v-if="alertant.cognoms">{{ alertant.cognoms }}</span> amb
-              tlf. {{ alertant.telefon }}
-            </li> -->
+            <li v-for="(incidencia, index) in selected" :key="index">
+              {{
+                incidencia.tipus_incidencia.tipus +
+                " a " +
+                incidencia.adreca +
+                " (" +
+                incidencia.municipi.nom +
+                ", " +
+                incidencia.municipi.comarca.nom +
+                ", " +
+                incidencia.municipi.comarca.provincia.nom +
+                ") el " +
+                incidencia.data +
+                " a les " +
+                incidencia.hora +
+                " (ID " +
+                incidencia.id +
+                ")"
+              }}
+            </li>
           </ul>
         </div>
 
@@ -110,6 +126,7 @@
             class="button button-icon button--rounded button--blue"
             type="button"
             style="background-image: url('../assets/icons/check.svg')"
+            @click="deleteIncidencies"
           >
             Eliminar
           </button>
@@ -129,9 +146,7 @@
 
 <script>
 export default {
-  props: {
-
-  },
+  props: {},
   data() {
     return {
       sortBy: "id",
@@ -140,7 +155,6 @@ export default {
       currentPage: 1,
       incidencies: [],
       editClick: false,
-      insert: false,
 
       fields: [
         "Seleccionat",
@@ -153,6 +167,8 @@ export default {
         { key: "adreca_complement", label: "Adreça Comp.", sortable: true },
         { key: "descripcio", label: "Descripció", sortable: true },
         { key: "nom_metge", label: "Metge", sortable: true },
+        { key: "tipus_incidencia.tipus", label: "Tipus", sortable: true },
+        { key: "municipi.nom", label: "Municipi", sortable: true },
         "Editar",
       ],
       loading: true,
@@ -162,20 +178,20 @@ export default {
     };
   },
   created() {
-    this.selectAlertants();
+    this.selectIncidencies();
   },
   mounted() {
     console.log("Incidencies component mounted.");
   },
   methods: {
     //   SELECT - GET   //
-    selectAlertants() {
+    selectIncidencies() {
       let me = this;
 
       axios
-        .get("/alertants")
+        .get("/incidencies")
         .then((response) => {
-          me.alertants = response.data;
+          me.incidencies = response.data;
           this.loading = false;
         })
         .catch((error) => {
@@ -184,16 +200,17 @@ export default {
         });
     },
 
+
     //   DELETE   //
-    deleteAlertants() {
+    deleteIncidencies() {
       let me = this;
 
-      me.selected.forEach((alertant) => {
+      me.selected.forEach((incidencia) => {
         axios
-          .delete("/alertants/" + alertant.id)
+          .delete("/incidencies/" + incidencia.id)
           .then((response) => {
             console.log(response);
-            me.selectAlertants();
+            me.selectIncidencies();
             me.hideModal("delete-modal");
           })
           .catch((error) => {
@@ -205,83 +222,59 @@ export default {
 
     //   UTILS   //
 
+    // /**
+    //  * Funció per a buidar els camps del objecte alertant (associat al formulari amb v-model)
+    //  */
+    // emptyAlertant() {
+    //   this.alertant.id = "";
+    //   this.alertant.nom = "";
+    //   this.alertant.cognoms = "";
+    //   this.alertant.telefon = "";
+    //   this.alertant.adreca = "";
+    //   this.alertant.municipi = "";
+    //   this.alertant.tipus_alertant = "";
+    //   this.alertant.municipis_id = "";
+    //   this.alertant.tipus_alertants_id = "";
+    // },
 
-    /**
-     * Funció que rep un missatge d'error per paràmetre, si no existeix a la llista d'errors l'afegirà
-     *
-     * @param {String} errorMessage
-     */
-    checkIfExistsError(errorMessage) {
-      if (!this.errors.includes(errorMessage)) {
-        this.errors.push(errorMessage);
-      }
-    },
 
-    /**
-     * Funció per a buidar els camps del objecte alertant (associat al formulari amb v-model)
-     */
-    emptyAlertant() {
-      this.alertant.id = "";
-      this.alertant.nom = "";
-      this.alertant.cognoms = "";
-      this.alertant.telefon = "";
-      this.alertant.adreca = "";
-      this.alertant.municipis_id = "";
-      this.alertant.tipus_alertants_id = "";
-    },
+    // /**
+    //  * Funció que recupera l'últim alertant seleccionat
+    //  *
+    //  * @param {Array} oldarray Array que conté els alertants seleccionats excepte l'últim que s'acaba de seleccionar
+    //  * @param {Array} newarray Array que conté els alertants seleccionats amb l'últim que s'acaba de seleccionar
+    //  */
+    // getLastSelected(oldarray, newarray) {
+    //   let found = false;
+    //   let inarray = false;
+    //   let i = 0,
+    //     j = 0;
+    //   //   debugger;
 
-    editButtonClick() {
-      this.editClick = true;
-    },
+    //   while (!found && i < newarray.length) {
+    //     j = 0;
+    //     inarray = false;
 
-    editAlertant() {
-      this.showModal("alertant-modal");
-      this.clearSelected();
-    },
+    //     while (!inarray && j < oldarray.length) {
+    //       if (oldarray[j].id == newarray[i].id) {
+    //         inarray = true;
+    //       }
+    //       j++;
+    //     }
 
-    nouAlertant() {
-      this.emptyAlertant();
-      this.insert = true;
-      this.showModal("alertant-modal");
-    },
+    //     if (!inarray) {
+    //       this.alertant = newarray[i];
+    //       found = true;
+    //     }
 
-    /**
-     * Funció que recupera l'últim alertant seleccionat
-     *
-     * @param {Array} oldarray Array que conté els alertants seleccionats excepte l'últim que s'acaba de seleccionar
-     * @param {Array} newarray Array que conté els alertants seleccionats amb l'últim que s'acaba de seleccionar
-     */
-    getLastSelected(oldarray, newarray) {
-      let exists = false;
-      let i = 0,
-        j = 0;
-
-      while (exists && i < newarray.length) {
-        while (exists && j < oldarray.length) {
-          if (olditem.id == newarray[i].id) {
-            exists = true;
-          }
-          j++;
-        }
-
-        if (!exists) {
-          this.alertant = newarray[i];
-        }
-
-        i++;
-      }
-    },
+    //     i++;
+    //   }
+    // },
 
     //   TABLE   //
     onRowSelected(items) {
     //   if (this.editClick) {
-    //     if (items.length == 1) {
-    //       this.alertant = items[0];
-    //     } else {
-    //       this.getLastSelected(this.selected, items);
-    //     }
-
-    //     this.editAlertant();
+    //     this.getLastSelected(this.selected, items);
     //     this.editClick = false;
     //   }
 
