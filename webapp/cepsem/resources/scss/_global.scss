@@ -106,7 +106,7 @@ button[type="submit"] {
     transition: opacity .5s ease-in-out;
     opacity: 0;
 
-    &:hover{
+    &:hover {
         opacity: 1;
         background: rgb(17, 174, 191);
         background: linear-gradient(145deg, $c_lightest_blue 45%, $c_lightest_pink 95%);
@@ -165,7 +165,7 @@ button[type="submit"] {
     }
 }
 
-.table-header{
+.table-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -174,24 +174,36 @@ button[type="submit"] {
     background-color: whitesmoke;
     border-radius: 4px;
     border: 1px solid #b3b3b3;
+    font-family: $font_Roboto !important;
+    margin-left: 1px;
+    margin-right: 1px;
 
-
-    .button{
-        background-image: url('../assets/icons/delete.svg');
+    .button {
+        color: $c_text;
         background-color: whitesmoke;
-        color: $c_red;
+        border: 1px solid #d4d4d4;
         font-weight: 700;
-        font-size: 14px;
-        padding-left: 45px;
-    }
+        font-size: 12px;
+        padding-top: 12px;
+        padding-bottom: 12px;
 
-    &-seleccionar{
-        display: flex;
-        align-items: center;
+        &:hover{
+            opacity: 1;
+            border: 1px solid $c_blue;
+            color: $c_blue;
+        }
 
-        label{
-            margin-bottom: 0;
-            margin-left: 8px;
+        &-icon{
+            font-size: 14px;
+            background-image: url('../assets/icons/delete.svg');
+            color: $c_red;
+            padding-left: 45px;
+            transition: all 0.2s ease;
+
+            &:hover{
+                border: 1px solid $c_red;
+                color: $c_red;
+            }
         }
     }
 }

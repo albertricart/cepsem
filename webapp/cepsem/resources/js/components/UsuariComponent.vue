@@ -19,12 +19,12 @@
     </div>
 
     <div v-else>
-        <div class="row">
-            <div class="table-header">
-                <div>
-            <button size="sm" @click="selectAllRows">Select all</button>
-            <button size="sm" class="ml-2" @click="clearSelected">
-              Clear selected
+      <div class="row">
+        <div class="table-header">
+          <div>
+            <button size="sm" class="button" @click="selectAllRows">SELECCIONAR TOTS</button>
+            <button size="sm" class="button ml-2" @click="clearSelected">
+                DESSELECCIONAR TOTS
             </button>
           </div>
 
@@ -32,7 +32,7 @@
             ELIMINAR ({{ selected.length }})
           </button>
         </div>
-        </div>
+      </div>
       <b-table
         id="usuaris-table"
         :fields="fields"
