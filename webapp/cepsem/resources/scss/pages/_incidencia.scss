@@ -1,0 +1,92 @@
+.incidencia-form {
+
+    h1{
+        max-width: 300px;
+        width: 100%;
+    }
+
+    &-nav {
+        position: relative;
+        left: -1px;
+        top: 0px;
+        display: block;
+        border-radius: 25px 25px 0px 0px;
+        padding-top: 12px;
+        padding-bottom: 12px;
+
+        span {
+            color: $c_blue;
+            font-family: $font_Roboto;
+            margin-right: 10px;
+            font-size: 14px;
+            font-weight: 700;
+            padding: 4px 8px;
+            transition: all 0.2s ease;
+
+            &:hover {
+                color: $c_pink;
+                cursor: pointer;
+            }
+        }
+
+        .active {
+            color: $c_pink;
+        }
+    }
+
+    &-body {
+        background-color: whitesmoke;
+        padding: 24px;
+        border-radius: 0px 0px 25px 25px;
+        border-bottom: 1px solid #b3b3b3;
+        border-left: 1px solid #b3b3b3;
+        border-right: 1px solid #b3b3b3;
+        box-shadow: 0px 2px 4px 0px rgb(0 0 0 / 20%);
+
+        input {
+            padding: 12px;
+        }
+
+        .input-button {
+            display: flex;
+
+            input {
+                flex: 7;
+            }
+
+            button {
+                padding: 12px;
+                margin-left: 10px;
+                flex: 3;
+            }
+        }
+    }
+
+    &-footer {
+        width: 100%;
+        text-align: end;
+        margin-top: 50px;
+    }
+}
+
+.incidencia-hora {
+    margin-left: auto;
+    max-width: 400px;
+    width: 100%;
+    padding: 18px;
+    background-color: $c_lightest_blue;
+    border-radius: 10px;
+
+    .button {
+        font-size: 14px;
+        padding: 12px 24px;
+    }
+
+    .button--pink {
+        background-color: $c_light_pink;
+    }
+
+    .button-blue {
+        background-color: $c_light_blue;
+    }
+}

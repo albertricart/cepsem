@@ -68,6 +68,7 @@ button[type="submit"] {
 
     h2 {
         font-weight: 600;
+        font-size: 28px !important;
     }
 
     &--sm {
@@ -80,6 +81,14 @@ button[type="submit"] {
 
     &--lg {
         height: 400px;
+    }
+
+    &--secondary{
+        background-color: whitesmoke !important;
+
+        h2{
+            font-size: 24px !important;
+        }
     }
 }
 
