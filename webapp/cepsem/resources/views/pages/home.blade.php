@@ -32,12 +32,12 @@ Home
 
 
     <div class="home-body">
-        <a href="{{ url('cecos') }}" class="home-option home-option__cecos">
+        <a href="{{ url('login') }}" class="home-option home-option__cecos">
             <h2><b>CE</b>NTRAL DE <b>CO</b>ORDINACIÓ <b>S</b>ANITÀRIA</h2>
             {{-- <img src="{{ asset('assets/img/cecos/cecos1.jpg') }}" alt=""> --}}
         </a>
 
-        <a href="{{ url('recursosmobils') }}" class="home-option home-option__rm">
+        <a href="{{ url('login') }}" class="home-option home-option__rm">
             <h2>RECURSOS MÒBILS</h2>
             {{-- <img src="{{ asset('assets/img/rm/rm1.jpg') }}" alt=""> --}}
         </a>

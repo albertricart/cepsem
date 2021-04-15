@@ -136,8 +136,6 @@ class UsuariController extends Controller
             $response = \response(['errorMessage' => "El camp cognoms és obligatori"]);
         } else if (empty($request->input('rols_id'))) {
             $response = \response(['errorMessage' => "El camp rol és obligatori"]);
-        } else if (empty($request->input('recursos_id'))) {
-            $response = \response(['errorMessage' => "El camp recurs és obligatori"]);
         } else {
             $response = ' ';
         }
