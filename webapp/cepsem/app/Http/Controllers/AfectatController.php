@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Sexe;
 use App\Models\Afectat;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,9 @@ class AfectatController extends Controller
      */
     public function index()
     {
-        //
+
+        $sexe = Sexe::all();
+        return view('pages.cecos.afectats.index', compact('sexe'));
     }
 
     /**
