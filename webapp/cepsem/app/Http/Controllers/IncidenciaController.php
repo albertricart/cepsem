@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\IncidenciaResource;
 use App\Models\Incidencia;
 use Illuminate\Http\Request;
 
@@ -44,9 +45,9 @@ class IncidenciaController extends Controller
      * @param  \App\Models\Incidencia  $incidency
      * @return \Illuminate\Http\Response
      */
-    public function show(Incidencia $incidency)
+    public function show($idincidencia)
     {
-        return view('pages.cecos.incidencies.incidencia', compact('incidency'));
+        return view('pages.cecos.incidencies.incidencia', compact('idincidencia'));
     }
 
     /**

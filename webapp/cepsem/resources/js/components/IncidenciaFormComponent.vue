@@ -106,7 +106,46 @@
         </div>
       </section>
 
-      <section id="localitzacio"></section>
+      <section id="localitzacio">
+        <div class="row">
+          <div class="col-lg-8">
+            <div class="row">
+              <div class="col-lg-6">
+                <div class="input input--col mb-4">
+                  <label for="provincia">Provincia</label>
+                  <b-form-select
+                    name="provincia"
+                    id="provincia"
+                    class="select"
+                  ></b-form-select>
+                </div>
+              </div>
+
+              <div class="col-lg-6">
+                <div class="input input--col mb-4">
+                  <label for="comarca">Comarca</label>
+                  <b-form-select
+                    name="comarca"
+                    id="comarca"
+                    class="select"
+                  ></b-form-select>
+                </div>
+              </div>
+
+              <div class="col-lg-12">
+                <div class="input input--col mb-4">
+                  <label for="municipi">Municipi</label>
+                  <b-form-select
+                    name="municipi"
+                    id="municipi"
+                    class="select"
+                  ></b-form-select>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
       <section id="afectats"></section>
       <section id="recursos"></section>
     </div>
@@ -116,15 +155,35 @@
 <script>
 export default {
   props: {
-    incidencia: {
-      type: Object,
+    idincidencia: {
+      type: Number,
       required: true,
     },
   },
   data() {
-    return {};
+    return {
+      incidencia: {},
+    };
   },
-  created() {},
+  methods: {
+    emptyIncidencia() {},
+  },
+  created() {
+    if (this.idincidencia != -1) {
+      let me = this;
+
+      axios
+        .get("/incidencies/" + this.idincidencia)
+        .then((response) => {
+          me.incidencia = response.data;
+          this.loading = false;
+        })
+        .catch((error) => {
+          console.log(error);
+          this.loadingStatus = error;
+        });
+    }
+  },
   mounted() {
     console.log("Incidència component mounted.");
   },

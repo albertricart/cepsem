@@ -41,7 +41,7 @@ class IncidenciaController extends Controller
      */
     public function show(Incidencia $incidency)
     {
-        return new IncidenciaResource($incidency);
+        return new IncidenciaResource(Incidencia::with(['incidencia_has_recursos.recurs','incidencia_has_recursos.afectat' ])->find($incidency->id));
     }
 
     /**

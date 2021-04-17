@@ -33,4 +33,24 @@ class Afectat extends Model
     {
         return $this->belongsToMany(Incidencia::class, 'incidencies_has_afectats', 'afectats_id', 'incidencies_id');
     }
+
+    /**
+     * The recursos that belong to the Afectat
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function recursos()
+    {
+        return $this->belongsToMany(Role::class, 'role_user_table', 'user_id', 'role_id');
+    }
+
+    /**
+     * Get all of the incidencia_has_recursos for the Afectat
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function incidencia_has_recursos()
+    {
+        return $this->hasMany(IncidenciaHasRecurs::class, 'afectats_id');
+    }
 }

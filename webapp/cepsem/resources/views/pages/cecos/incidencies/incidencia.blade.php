@@ -14,9 +14,9 @@ Incidència
 @endsection
 
 @section('content')
-    @if ($incidency)
-        <incidenciaform-component :incidencia="{{ $incidency }}"></incidenciaform-component>
+    @if ($idincidencia)
+        <incidenciaform-component :idincidencia="{{ $idincidencia }}"></incidenciaform-component>
     @else
-        <incidenciaform-component :incidencia="-1"></incidenciaform-component>
+        <incidenciaform-component :idincidencia="-1"></incidenciaform-component>
     @endif
 @endsection
