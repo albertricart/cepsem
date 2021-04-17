@@ -42,4 +42,14 @@ class Recurs extends Model
     {
         return $this->hasMany(Usuari::class, 'recursos_id');
     }
+
+    /**
+     * Get all of the incidencia_has_recursos for the Recurs
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function incidencia_has_recursos()
+    {
+        return $this->hasMany(IncidenciaHasRecurs::class, 'recursos_id');
+    }
 }

@@ -4,7 +4,7 @@
 
     <div class="d-flex justify-content-end mb-4">
       <a
-        href="/cepsem/webapp/cepsem/public/cecos/incidencia"
+        href="/cepsem/webapp/cepsem/public/cecos/incidencia/-1"
         class="button button-icon button--pink"
         style="background-image: url('../assets/icons/add.svg')"
         id="show-btn"
@@ -62,8 +62,8 @@
           </template>
         </template>
 
-        <template #cell(Editar)>
-          <a :href="'/cepsem/webapp/cepsem/public/cecos/incidencia/' + 1 ">
+        <template #cell(Editar)="data">
+          <a :href="'/cepsem/webapp/cepsem/public/cecos/incidencia/' + data.item.id ">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               height="24px"

@@ -39,7 +39,7 @@ class Incidencia extends Model
      */
     public function recursos()
     {
-        return $this->belongsToMany(Recurs::class, 'incidencies_has_recursos', 'incidencies_id', 'recursos_id')->withPivot('hora_activacio', 'hora_mobilitzacio', 'hora_assistencia', 'hora_transport', 'hora_arribada_hospital', 'hora_transferencia', 'hora_finalitzacio', 'prioritat', 'desti');
+        return $this->belongsToMany(Recurs::class, 'incidencies_has_recursos', 'incidencies_id', 'recursos_id', 'afectats_id')->withPivot('hora_activacio', 'hora_mobilitzacio', 'hora_assistencia', 'hora_transport', 'hora_arribada_hospital', 'hora_transferencia', 'hora_finalitzacio', 'prioritat', 'desti');
     }
 
 
@@ -71,5 +71,15 @@ class Incidencia extends Model
     public function usuari()
     {
         return $this->belongsTo(Usuari::class, 'usuaris_id');
+    }
+
+    /**
+     * Get all of the incidencia_has_recursos for the Incidencia
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function incidencia_has_recursos()
+    {
+        return $this->hasMany(IncidenciaHasRecurs::class, 'incidencies_id');
     }
 }
