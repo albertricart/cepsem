@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Database\QueryException;
 use App\Classes\Utilitat;
+use Illuminate\Support\Facades\DB;
 
 class IncidenciaController extends Controller
 {
@@ -19,7 +20,7 @@ class IncidenciaController extends Controller
     public function index()
     {
         // return IncidenciaResource::collection(Incidencia::all());
-        return IncidenciaResource::collection(Incidencia::with(['afectats', 'tipus_incidencia', 'recursos', 'municipi','municipi.comarca', 'municipi.comarca.provincia', 'alertant', 'usuari'])->get());
+        return IncidenciaResource::collection(Incidencia::with(['afectats', 'tipus_incidencia', 'recursos', 'municipi.comarca.provincia', 'alertant', 'usuari'])->get());
     }
 
     /**
@@ -30,7 +31,55 @@ class IncidenciaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $response = Utilitat::checkIncidencia($request);
+
+        //si tots els camps obligatoris han estat omplerts
+        if ($response == "") {
+            $incidencia = Utilitat::getIncidencia($request);
+
+            try {
+                DB::beginTransaction();
+                $incidencia->save();
+
+
+                $incidencia_has_recursos = $request->input('incidencia_has_recursos');
+
+                $i = 0;
+                while ($response == "" && $i < count($incidencia_has_recursos)) {
+                    $incidencia_has_recurs = $incidencia_has_recursos[$i];
+
+                    $response = Utilitat::checkIncidenciaHasRecurs($incidencia_has_recurs);
+
+                    //si tots els camps obligatoris de incidencia_has_recurs han estat omplerts
+                    if ($response == "") {
+                        $incidencia_has_recurs = Utilitat::getIncidenciaHasRecurs($incidencia_has_recurs);
+                        $incidencia_has_recurs->save();
+
+                        //afegirem l'afectat en cas que no existeixi
+
+
+
+                        //afegirem l'alertant en cas que no existeixi
+
+
+
+                    }else{
+                        DB::rollBack();
+                    }
+
+                    $i++;
+                }
+
+                DB::commit();
+                $incidencia->update();
+
+            } catch (QueryException $e) {
+                DB::rollBack();
+                $response = \response(['errorMessage' => Utilitat::handleErrorMessage($e)], 400);
+            }
+        }
+
+        return $response;
     }
 
     /**
@@ -41,7 +90,7 @@ class IncidenciaController extends Controller
      */
     public function show(Incidencia $incidency)
     {
-        return new IncidenciaResource(Incidencia::with(['incidencia_has_recursos.recurs','incidencia_has_recursos.afectat' ])->find($incidency->id));
+        return new IncidenciaResource(Incidencia::with(['tipus_incidencia','usuari', 'municipi.comarca.provincia','alertant','incidencia_has_recursos.recurs', 'incidencia_has_recursos.afectat'])->find($incidency->id));
     }
 
     /**

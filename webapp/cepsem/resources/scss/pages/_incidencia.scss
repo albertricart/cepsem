@@ -24,13 +24,13 @@
             transition: all 0.2s ease;
 
             &:hover {
-                color: $c_pink;
+                color: $c_light_pink;
                 cursor: pointer;
             }
         }
 
         .active {
-            color: $c_pink;
+            color: $c_light_pink;
         }
     }
 

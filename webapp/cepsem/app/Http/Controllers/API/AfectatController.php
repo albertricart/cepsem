@@ -29,11 +29,11 @@ class AfectatController extends Controller
      */
     public function store(Request $request)
     {
-        $response = $this->checkAfectat($request);
+        $response = Utilitat::checkAfectat($request);
 
         try {
-            if (($response) == ' ') {
-                $nouAfectat = $this->getAfectat($request);
+            if ($response == '') {
+                $nouAfectat = Utilitat::getAfectat($request);
                 $nouAfectat->save();
 
                 $response = (new AfectatResource($nouAfectat))
@@ -107,41 +107,4 @@ class AfectatController extends Controller
         return $response;
     }
 
-    public function getAfectat($request)
-    {
-        $afectat = new Afectat();
-
-        $afectat->telefon = $request->input('telefon');
-        $afectat->cip = $request->input('cip');
-        $afectat->nom = $request->input('nom');
-        $afectat->cognoms = $request->input('cognoms');
-        $afectat->edat = $request->input('edat');
-        $afectat->te_cip = $request->input('te_cip');
-        $afectat->sexes_id = $request->input('sexes_id');
-
-        return $afectat;
-    }
-
-    public function checkAfectat($request)
-    {
-        if (empty($request->input('username'))) {
-            $response = \response(['errorMessage' => "El camp username és obligatori"]);
-        } else if (empty($request->input('contrasenya'))) {
-            $response = \response(['errorMessage' => "El camp contrasenya és obligatori"]);
-        } else if (empty($request->input('email'))) {
-            $response = \response(['errorMessage' => "El camp email és obligatori"]);
-        } else if (empty($request->input('nom'))) {
-            $response = \response(['errorMessage' => "El camp nom és obligatori"]);
-        } else if (empty($request->input('cognoms'))) {
-            $response = \response(['errorMessage' => "El camp cognoms és obligatori"]);
-        } else if (empty($request->input('rols_id'))) {
-            $response = \response(['errorMessage' => "El camp rol és obligatori"]);
-        } else if (empty($request->input('recursos_id'))) {
-            $response = \response(['errorMessage' => "El camp recurs és obligatori"]);
-        } else {
-            $response = ' ';
-        }
-
-        return $response;
-    }
 }

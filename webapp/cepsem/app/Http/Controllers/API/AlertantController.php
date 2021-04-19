@@ -128,17 +128,5 @@ class AlertantController extends Controller
 
 
 
-    public function getAlertant($request)
-    {
-        $alertant = new Alertant();
 
-        $alertant->telefon = $request->input('telefon');
-        $alertant->nom = $request->input('nom');
-        $alertant->cognoms = $request->input('cognoms');
-        $alertant->adreca = $request->input('adreca');
-        $alertant->municipis_id = $request->input('municipis_id');
-        $alertant->tipus_alertants_id = $request->input('tipus_alertants_id');
-
-        return $alertant;
-    }
 }

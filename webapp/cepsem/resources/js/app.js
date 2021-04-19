@@ -32,6 +32,7 @@ Vue.component('usuari-component', require('./components/UsuariComponent.vue').de
 Vue.component('menucard-component', require('./components/MenuCardComponent.vue').default);
 Vue.component('recurs-component', require('./components/RecursosComponent.vue').default);
 Vue.component('afectat-component', require('./components/AfectatComponent.vue').default);
+Vue.component('afectatitem-component', require('./components/AfectatItemComponent.vue').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

@@ -6,6 +6,7 @@ use App\Models\Alertant;
 use App\Models\Municipi;
 use App\Models\Provincia;
 use App\Models\TipusAlertant;
+use App\Models\TipusIncidencia;
 use Illuminate\Http\Request;
 
 

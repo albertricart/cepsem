@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\IncidenciaResource;
 use App\Models\Incidencia;
+use App\Models\Provincia;
+use App\Models\TipusAlertant;
+use App\Models\TipusIncidencia;
 use Illuminate\Http\Request;
 
 class IncidenciaController extends Controller
@@ -47,7 +49,10 @@ class IncidenciaController extends Controller
      */
     public function show($idincidencia)
     {
-        return view('pages.cecos.incidencies.incidencia', compact('idincidencia'));
+        $provincies = Provincia::with(['comarques', 'comarques.municipis'])->get();
+        $tipusAlertants = TipusAlertant::all();
+        $tipusIncidents = TipusIncidencia::all();
+        return view('pages.cecos.incidencies.incidencia', compact('idincidencia', 'provincies', 'tipusAlertants', 'tipusIncidents'));
     }
 
     /**
