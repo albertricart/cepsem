@@ -8,6 +8,7 @@ use App\Http\Controllers\UsuariController;
 use SebastianBergmann\Environment\Console;
 use App\Http\Controllers\AlertantController;
 use App\Http\Controllers\IncidenciaController;
+use App\Http\Controllers\IncidenciaHasRecursController;
 use App\Http\Controllers\TipusRecursController;
 use App\Http\Controllers\TipusAlertantController;
 use App\Http\Controllers\TipusIncidenciaController;
@@ -31,46 +32,28 @@ Route::get('/cecos/incidencia/{id}', function ($id) {
 
 Route::get('/cecos/incidencia', [IncidenciaController::class, 'show']);
 
-Route::resource('/cecos/alertants', AlertantController::class);
-Route::resource('/cecos/incidencies', IncidenciaController::class);
-Route::resource('/cecos/usuaris', UsuariController::class);
-Route::resource('/cecos/afectats', AfectatController::class);
-Route::resource('/cecos/recursos-mobils', RecursController::class);
-Route::resource('/cecos/tipus-recurs', TipusRecursController::class);
-Route::resource('/cecos/tipus-incidencia', TipusIncidenciaController::class);
-Route::resource('/cecos/tipus-alertant', TipusAlertantController::class);
 
 Route::get('/login', [UsuariController::class, 'showLogin'])->name('login');
 Route::post('/login', [UsuariController::class, 'login'] );
 Route::get('/logout', [UsuariController::class, 'logout']);
 
-Route::middleware(['auth'])->group(function () {
-    Route::get('/home', function () {
-        $user = Auth::user();
-
-        return view('login', compact('user'));
-    });
+Route::middleware(['auth' ,'admin'])->group(function () {
+    Route::resource('/cecos/tipus-recurs', TipusRecursController::class);
+    Route::resource('/cecos/alertants', AlertantController::class);
+    Route::resource('/cecos/incidencies', IncidenciaController::class);
+    Route::resource('/cecos/usuaris', UsuariController::class);
+    Route::resource('/cecos/afectats', AfectatController::class);
+    Route::resource('/cecos/recursos-mobils', RecursController::class);
+    Route::resource('/cecos/tipus-incidencia', TipusIncidenciaController::class);
+    Route::resource('/cecos/tipus-alertant', TipusAlertantController::class);
+    Route::resource('/cecos/recursMobil', IncidenciaHasRecursController::class);
 
 });
 
-/* Route::middleware(['admin'])->group(function () {
+Route::middleware(['auth' ,'cecos'])->group(function () {
 
+    Route::resource('/cecos/incidencies', IncidenciaController::class);
 
-}); */
-
-Route::middleware(['cecos'])->group(function () {
-
-    /* Route::get('/cecos/tipus-recurs', function () {
-        $user = Auth::user();
-
-        return view('pages.login', compact('user'));
-    });
-    Route::get('/cecos/tipus-alertant', function () {
-        $user = Auth::user();
-
-        return view('pages.login', compact('user'));
-    });
- */
 });
 
 Route::middleware(['recurs.mobil'])->group(function () {

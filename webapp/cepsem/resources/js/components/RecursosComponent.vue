@@ -273,7 +273,7 @@ export default {
         "Editar",
       ],
       loading: true,
-      loadingStatus: "CarreganA Qt les dades...",
+      loadingStatus: "Carregan les dades...",
       errors: [],
       selected: [],
     };

@@ -1,7 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
+use App\Http\Controllers\Controller;
+use App\Http\Resources\IncidenciaHasRecursResource;
 use App\Models\IncidenciaHasRecurs;
 use Illuminate\Http\Request;
 
@@ -14,17 +16,7 @@ class IncidenciaHasRecursController extends Controller
      */
     public function index()
     {
-        return view('pages.recursMobil.index');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return IncidenciaHasRecursResource::collection(IncidenciaHasRecurs::with(['incidencia', 'recurs', 'afectat'])->get());
     }
 
     /**
@@ -45,17 +37,6 @@ class IncidenciaHasRecursController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(IncidenciaHasRecurs $incidenciaHasRecurs)
-    {
-        return view('pages.cecos.incidencies.incidencia', compact('incidenciaHasRecurs'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\IncidenciaHasRecurs  $incidenciaHasRecurs
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(IncidenciaHasRecurs $incidenciaHasRecurs)
     {
         //
     }
