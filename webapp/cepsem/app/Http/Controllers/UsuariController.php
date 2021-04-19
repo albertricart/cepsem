@@ -17,15 +17,16 @@ class UsuariController extends Controller
         /* $user = new Usuari();
 
 
-        $user->username = 'hector';
-        $user->contrasenya = \bcrypt('hector');
-        $user->email = 'hector';
-        $user->nom = 'hector';
-        $user->cognoms = 'hector';
-        $user->rols_id = 1;
+        $user->username = 'a';
+        $user->contrasenya = \bcrypt('a');
+        $user->email = 'a';
+        $user->nom = 'a';
+        $user->cognoms = 'a';
+        $user->rols_id = 2;
         $user->recursos_id = 1;
 
         $user->save(); */
+
 
         return view('pages.login');
     }

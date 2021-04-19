@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\UsuariController;
 use App\Http\Controllers\API\AlertantController;
 use App\Http\Controllers\API\IncidenciaController;
+use App\Http\Controllers\API\IncidenciaHasRecursController;
 use App\Http\Controllers\API\RecursController;
 
 /*
@@ -28,3 +29,4 @@ Route::apiResource('incidencies', IncidenciaController::class);
 Route::apiResource('usuaris', UsuariController::class);
 Route::apiResource('recursos',RecursController::class);
 Route::apiResource('afectats',AfectatController::class);
+Route::apiResource('recursMobil',IncidenciaHasRecursController::class);
