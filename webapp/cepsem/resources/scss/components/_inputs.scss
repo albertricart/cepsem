@@ -2,6 +2,11 @@
     color: $c_text;
 }
 
+input[type=checkbox]{
+    width: 15px;
+    height: 15px;
+}
+
 
 .input {
     display: flex;

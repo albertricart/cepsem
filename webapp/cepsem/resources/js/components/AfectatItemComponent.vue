@@ -16,8 +16,13 @@
         />
       </div>
 
-      <div style="text-align:end;">
-          <button class="button button--blue" style="padding-top: 8px; padding-bottom: 8px;">CARREGAR DADES</button>
+      <div style="text-align: end">
+        <button
+          class="button button--blue"
+          style="padding-top: 8px; padding-bottom: 8px"
+        >
+          CARREGAR DADES
+        </button>
       </div>
     </div>
 
@@ -63,29 +68,46 @@
 
     <div class="mt-5" style="text-align: center">
       <button
-        class="button button-icon button--rounded button-inverted button-inverted--red"
-        style="
-          background-image: url('/cepsem/webapp/cepsem/public/assets/icons/deleteUser.svg');
-        "
+        class="button button-icon button--rounded button-inverted button-inverted--red removeAfectat"
       >
         Eliminar afectat
       </button>
     </div>
   </div>
-
 </template>
 
 <script>
 export default {
-  props: {},
-  data() {
-    return {};
+  props: {
+      editAfectat:{
+          type: Object,
+          required: false
+      }
   },
-  created() {},
+  data() {
+    return {
+      afectat: {
+        id: 0,
+        telefon: "",
+        cip: "",
+        nom: "",
+        cognoms: "",
+        edat: 0,
+        te_cip: 0,
+        sexes_id: 0,
+        saveAfectat: false,
+      },
+    };
+  },
+  created() {
+      this.editAfectat = this.afectat;
+  },
   mounted() {
     console.log("Afectat component mounted.");
   },
   methods: {},
-  computed: {},
+  computed: {
+
+  },
 };
 </script>

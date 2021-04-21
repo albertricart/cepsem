@@ -1,3 +1,8 @@
+.afectats-list{
+
+}
+
+
 .afectat-item{
     padding: 32px;
     background-color: whitesmoke;
@@ -5,4 +10,12 @@
     border-radius: 27px;
     max-width: 400px;
     width: 100%;
+
+    .removeAfectat{
+        background-image: url('/cepsem/webapp/cepsem/public/assets/icons/deleteUser.svg') ;
+
+        &:hover{
+            background-image: url('/cepsem/webapp/cepsem/public/assets/icons/deleteUser_white.svg');
+        }
+    }
 }

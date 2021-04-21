@@ -1,6 +1,7 @@
 .incidencia-form {
+    z-index: 500;
 
-    h1{
+    h1 {
         max-width: 300px;
         width: 100%;
     }
@@ -11,23 +12,25 @@
         top: 0px;
         display: block;
         border-radius: 25px 25px 0px 0px;
-        padding-top: 12px;
-        padding-bottom: 12px;
 
-        span {
+        .nav-link {
+            display: inline-block;
             color: $c_blue;
             font-family: $font_Roboto;
             margin-right: 10px;
             font-size: 14px;
             font-weight: 700;
-            padding: 4px 8px;
+            padding: 8px;
             transition: all 0.2s ease;
+            border-radius: 12px;
 
             &:hover {
                 color: $c_light_pink;
+                background-color: $c_lightest_pink;
                 cursor: pointer;
             }
         }
+
 
         .active {
             color: $c_light_pink;
@@ -88,5 +91,19 @@
 
     .button-blue {
         background-color: $c_light_blue;
+    }
+}
+
+
+.section-title {
+    font-size: 24px;
+    font-weight: 600;
+    color: rgba(17, 174, 191, 0.8);
+    padding-bottom: 10px;
+    border-bottom: 3px solid $c_lightest_blue;
+
+    img {
+        width: 30px;
+        vertical-align: middle;
     }
 }

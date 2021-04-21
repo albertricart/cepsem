@@ -9,7 +9,7 @@
       <div class="progress-line"></div>
     </div>
 
-    <div v-else>
+    <div v-else class="animate__animated animate__fadeIn">
 
       <b-table
         id="recursMobil-table"

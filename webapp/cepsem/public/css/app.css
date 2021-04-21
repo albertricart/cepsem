@@ -12639,7 +12639,7 @@ input[type=color].form-control:disabled {
   font-style: bold;
 }
 :root {
-  --text: #333333;
+  --text: #353535;
   --blue: #11AEBF;
   --pink: #D91480;
   --lighter-blue: rgba(17, 174, 191, 0.3);
@@ -12650,7 +12650,7 @@ input[type=color].form-control:disabled {
 
 * {
   font-family: "Inter", sans-serif;
-  color: #333333;
+  color: #353535;
   scroll-behavior: smooth;
   box-sizing: border-box;
 }
@@ -12701,6 +12701,11 @@ button[type=submit] {
   width: 100%;
   padding: 32px;
   margin-bottom: 20px;
+  transition: all 0.2s ease;
+}
+.cepsem-card h2 {
+  font-weight: 600;
+  font-size: 28px !important;
 }
 .cepsem-card--sm {
   height: 200px;
@@ -12709,7 +12714,13 @@ button[type=submit] {
   height: 300px;
 }
 .cepsem-card--lg {
-  height: 400px;
+  height: 415px;
+}
+.cepsem-card--secondary {
+  background-color: whitesmoke !important;
+}
+.cepsem-card--secondary h2 {
+  font-size: 24px !important;
 }
 
 .form-container {
@@ -12723,6 +12734,22 @@ button[type=submit] {
 .form-container--small {
   max-width: 475px;
   padding: 50px 80px;
+}
+
+.cepsem-gradient {
+  transition: opacity 0.5s ease-in-out;
+  opacity: 0;
+}
+.cepsem-gradient:hover {
+  opacity: 1;
+  background: #11aebf;
+  background: linear-gradient(145deg, rgba(17, 174, 191, 0.15) 45%, rgba(217, 20, 128, 0.15) 95%);
+}
+.cepsem-gradient:hover--pink {
+  background: linear-gradient(145deg, whitesmoke 55%, rgba(217, 20, 128, 0.15) 95%);
+}
+.cepsem-gradient:hover--blue {
+  background: linear-gradient(145deg, white 35%, rgba(17, 174, 191, 0.15) 95%);
 }
 
 .form-grid {
@@ -12762,6 +12789,46 @@ button[type=submit] {
   color: #11AEBF;
   font-weight: 700;
 }
+
+.table-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 8px 12px;
+  background-color: whitesmoke;
+  border-radius: 4px;
+  border: 1px solid #b3b3b3;
+  font-family: "Roboto", sans-serif !important;
+  margin-left: 1px;
+  margin-right: 1px;
+}
+.table-header .button {
+  color: #353535;
+  background-color: whitesmoke;
+  border: 1px solid #d4d4d4;
+  font-weight: 700;
+  font-size: 12px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+.table-header .button:hover {
+  opacity: 1;
+  border: 1px solid #11AEBF;
+  color: #11AEBF;
+}
+.table-header .button-icon {
+  font-size: 14px;
+  background-image: url("../assets/icons/delete.svg");
+  color: #ff2e2e;
+  padding-left: 45px;
+  transition: all 0.2s ease;
+}
+.table-header .button-icon:hover {
+  border: 1px solid #ff2e2e;
+  color: #ff2e2e;
+}
+
 .modal-content {
   border-radius: 32px !important;
 }
@@ -12844,7 +12911,7 @@ button[type=submit] {
   background-size: cover;
 }
 .login h2 {
-  color: #333333;
+  color: #353535;
   margin-top: 0;
   margin-bottom: 30px;
   font-size: 38px;
@@ -12865,6 +12932,120 @@ button[type=submit] {
 }
 .pw-icon--hide {
   background-image: url("../assets/icons/visibility_off.svg");
+}
+
+.cecos {
+  padding-top: 30px;
+  padding-bottom: 200px;
+  background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url("../assets/img/cecos/cecos1.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow-y: hidden;
+}
+@media (max-width: 1199.98px) {
+  .cecos {
+    overflow-y: auto;
+  }
+}
+.cecos .cepsem-card {
+  background-color: white;
+}
+.cecos .cepsem-card--scale:hover {
+  transform: scale(1.04);
+}
+
+.incidencia-form {
+  z-index: 500;
+}
+.incidencia-form h1 {
+  max-width: 300px;
+  width: 100%;
+}
+.incidencia-form-nav {
+  position: relative;
+  left: -1px;
+  top: 0px;
+  display: block;
+  border-radius: 25px 25px 0px 0px;
+}
+.incidencia-form-nav .nav-link {
+  display: inline-block;
+  color: #11AEBF;
+  font-family: "Roboto", sans-serif;
+  margin-right: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 8px;
+  transition: all 0.2s ease;
+  border-radius: 12px;
+}
+.incidencia-form-nav .nav-link:hover {
+  color: rgba(217, 20, 128, 0.6);
+  background-color: rgba(217, 20, 128, 0.15);
+  cursor: pointer;
+}
+.incidencia-form-nav .active {
+  color: rgba(217, 20, 128, 0.6);
+}
+.incidencia-form-body {
+  background-color: whitesmoke;
+  padding: 24px;
+  border-radius: 0px 0px 25px 25px;
+  border-bottom: 1px solid #b3b3b3;
+  border-left: 1px solid #b3b3b3;
+  border-right: 1px solid #b3b3b3;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.2);
+}
+.incidencia-form-body input {
+  padding: 12px;
+}
+.incidencia-form-body .input-button {
+  display: flex;
+}
+.incidencia-form-body .input-button input {
+  flex: 7;
+}
+.incidencia-form-body .input-button button {
+  padding: 12px;
+  margin-left: 10px;
+  flex: 3;
+}
+.incidencia-form-footer {
+  width: 100%;
+  text-align: end;
+  margin-top: 50px;
+}
+
+.incidencia-hora {
+  margin-left: auto;
+  max-width: 400px;
+  width: 100%;
+  padding: 18px;
+  background-color: rgba(17, 174, 191, 0.15);
+  border-radius: 10px;
+}
+.incidencia-hora .button {
+  font-size: 14px;
+  padding: 12px 24px;
+}
+.incidencia-hora .button--pink {
+  background-color: rgba(217, 20, 128, 0.6);
+}
+.incidencia-hora .button-blue {
+  background-color: rgba(17, 174, 191, 0.6);
+}
+
+.section-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: rgba(17, 174, 191, 0.8);
+  padding-bottom: 10px;
+  border-bottom: 3px solid rgba(17, 174, 191, 0.15);
+}
+.section-title img {
+  width: 30px;
+  vertical-align: middle;
 }
 
 .header {
@@ -13050,21 +13231,29 @@ button[type=submit] {
   border-radius: 24px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
 }
+.button span {
+  color: white;
+}
 .button:hover {
   cursor: pointer;
   opacity: 0.75;
 }
 
 ::-moz-placeholder {
-  color: #333333;
+  color: #353535;
 }
 
 :-ms-input-placeholder {
-  color: #333333;
+  color: #353535;
 }
 
 ::placeholder {
-  color: #333333;
+  color: #353535;
+}
+
+input[type=checkbox] {
+  width: 15px;
+  height: 15px;
 }
 
 .input {
@@ -13183,4 +13372,18 @@ button[type=submit] {
     margin-left: 100%;
     margin-right: 0;
   }
+}
+.afectat-item {
+  padding: 32px;
+  background-color: whitesmoke;
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.5);
+  border-radius: 27px;
+  max-width: 400px;
+  width: 100%;
+}
+.afectat-item .removeAfectat {
+  background-image: url("/cepsem/webapp/cepsem/public/assets/icons/deleteUser.svg");
+}
+.afectat-item .removeAfectat:hover {
+  background-image: url("/cepsem/webapp/cepsem/public/assets/icons/deleteUser_white.svg");
 }
