@@ -339,7 +339,9 @@
           id="recursos"
           data-tab="3"
           style="display: none"
-        ></section>
+        >
+        <recursitem-component></recursitem-component>
+        </section>
 
         <div class="incidencia-form-footer">
           <button

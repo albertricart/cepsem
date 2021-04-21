@@ -31,7 +31,7 @@
         <div class="input input--col mb-2">
           <label for="horaActi">Hora d'activació</label>
           <input
-            type="text"
+            type="time"
             name="horaActi"
             id="horaActi"
             placeholder="Introdueix l'hora d'activació..."
@@ -69,7 +69,7 @@
         <div class="input input--col mb-2">
           <label for="horatransport">Hora de Transport</label>
           <input
-            type="text"
+            type="time"
             name="horatransport"
             id="horatransport"
             placeholder="Introdueix l'hora de transport..."/>
@@ -77,7 +77,7 @@
         <div class="input input--col mb-2">
           <label for="horatransferencia">Hora de Transferència</label>
           <input
-            type="text"
+            type="time"
             name="horatransferencia"
             id="horatransferencia"
             placeholder="Introdueix l'hora de transferencia..."
@@ -88,7 +88,7 @@
         <div class="input input--col mb-2">
           <label for="horahospital">Hora d'arribada a l'hospital</label>
           <input
-            type="text"
+            type="time"
             name="horahospital"
             id="horahospital"
             placeholder="Introdueix l'hora d'arribada a l'hospital..."/>
@@ -96,23 +96,14 @@
         <div class="input input--col mb-2">
           <label for="horafinal">Hora de Finalització</label>
           <input
-            type="text"
+            type="time"
             name="horafinal"
             id="horafinal"
             placeholder="Introdueix l'hora de finalització..."
           />
         </div>
       </div>
-      <div class="incidencia-form-footer">
-          <button
-            class="button button-icon button--pink button--rounded"
-            style="
-              background-image: url('/cepsem/webapp/cepsem/public/assets/icons/next.svg');
-            "
-          >
-            Finalitzar
-          </button>
-        </div>
+
     </div>
 
 
