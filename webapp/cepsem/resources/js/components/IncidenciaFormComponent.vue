@@ -317,7 +317,9 @@
       <section id="afectats">
         <afectatitem-component></afectatitem-component>
       </section>
-      <section id="recursos"></section>
+      <section id="recursos">
+          <recursitem-component></recursitem-component>
+      </section>
     </div>
   </div>
 </template>
