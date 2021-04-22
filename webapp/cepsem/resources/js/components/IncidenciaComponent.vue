@@ -6,7 +6,7 @@
       <a
         href="/cepsem/webapp/cepsem/public/cecos/incidencia/-1"
         class="button button-icon button--pink"
-        style="background-image: url('../assets/icons/add.svg')"
+        style="background-image: url('../assets/icons/add_white.svg')"
         id="show-btn"
       >
         AFEGEIX UNA NOVA INCIDÈNCIA

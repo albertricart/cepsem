@@ -17,12 +17,12 @@ input[type=checkbox]{
         font-weight: 600;
     }
 
-    input {
+    input, textarea {
         padding: 16px;
         border: 1px solid rgb(207, 214, 228);
         outline: none;
         border-radius: 8px;
-        transition: all 0.3s ease;
+        transition: border 0.3s ease, box-shadow 0.3s ease;
         width: 100%;
         font-size: 14px;
 

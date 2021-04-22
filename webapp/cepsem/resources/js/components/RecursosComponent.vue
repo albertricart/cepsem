@@ -5,7 +5,7 @@
     <div class="d-flex justify-content-end mb-4">
       <button
         class="button button-icon button--pink"
-        style="background-image: url('../assets/icons/add.svg')"
+        style="background-image: url('../assets/icons/add_white.svg')"
         id="show-btn"
         @click="afegirRecurs"
       >
