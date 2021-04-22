@@ -37,7 +37,7 @@
             placeholder="Introdueix l'hora d'activació..."
           />
         </div>
-        <input type="checkbox" name="trasllat" id="trasllat" />
+        <input type="checkbox" name="trasllat" id="trasllat" v-model="trasllat"/>
         <label for="trasllat">Trasllat Hospitalari</label>
       </div>
       <div class="col-lg-4">
@@ -51,7 +51,7 @@
         </div>
       </div>
     </div>
-    <div class="row">
+    <div class="row" v-if="trasllat">
       <div class="col-lg-4">
         <div class="input input--col mb-4">
           <label for="desti">Destí Hospitalari</label>
@@ -116,31 +116,17 @@
 export default {
   data() {
     return {
-      fields: ["selected", "isActive", "age", "first_name", "last_name"],
-      items: [
-        {
-          isActive: true,
-          age: 40,
-          first_name: "Dickerson",
-          last_name: "Macdonald",
-        },
-        { isActive: false, age: 21, first_name: "Larsen", last_name: "Shaw" },
-        { isActive: false, age: 89, first_name: "Geneva", last_name: "Wilson" },
-        { isActive: true, age: 38, first_name: "Jami", last_name: "Carney" },
+        trasllat: false,
+        fields: ["selected", "isActive", "age", "first_name", "last_name"],
+        items: [
+
       ],
-      selected: [],
+
     };
   },
   methods: {
-    onRowSelected(items) {
-      this.selected = items;
-    },
-    selectAllRows() {
-      this.$refs.selectableTable.selectAllRows();
-    },
-    clearSelected() {
-      this.$refs.selectableTable.clearSelected();
-    },
+
   },
+
 };
 </script>
