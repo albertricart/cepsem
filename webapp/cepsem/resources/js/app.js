@@ -34,6 +34,7 @@ Vue.component('recurs-component', require('./components/RecursosComponent.vue').
 Vue.component('afectat-component', require('./components/AfectatComponent.vue').default);
 Vue.component('afectatitem-component', require('./components/AfectatItemComponent.vue').default);
 Vue.component('recursmobil-component', require('./components/IncidenciaHasRecursComponent.vue').default);
+Vue.component('recursitem-component', require('./components/AsignarAfectatComponent.vue').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
