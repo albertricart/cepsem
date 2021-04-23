@@ -12,7 +12,7 @@
             class="select"
             value-field="id"
             text-field="tipus"
-            :options="tipusrecurs"
+            :options="recursos.tipus_recursos_id"
           ></b-form-select>
         </div>
         <div class="input input--col mb-4">
@@ -23,7 +23,7 @@
             class="select"
             value-field="id"
             text-field="tipus"
-            :options="prioritat"
+            :options="incidencies_has_recurs.prioritat"
           ></b-form-select>
         </div>
       </div>
@@ -61,7 +61,7 @@
             class="select"
             value-field="id"
             text-field="tipus"
-            :options="desti"
+            :options="incidencies_has_recurs.desti"
           ></b-form-select>
         </div>
       </div>
@@ -103,7 +103,6 @@
           />
         </div>
       </div>
-
     </div>
 
 
@@ -114,19 +113,29 @@
 
 <script>
 export default {
+    props: {
+        editrecurs: {
+            type: Object,
+            required: false,
+        }
+    },
   data() {
+
     return {
         trasllat: false,
-        fields: ["selected", "isActive", "age", "first_name", "last_name"],
-        items: [
+        recurs: {
 
-      ],
-
+        }
     };
   },
-  methods: {
+  created() {
+      this.recurs = this.editrecurs;
+  },
+  mounted() {
 
   },
+  methods: {},
+  computed: {},
 
 };
 </script>
