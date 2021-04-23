@@ -189,49 +189,49 @@
               </div>
 
               <!-- <div class="col-lg-6">
-              <div class="input input--col mb-4">
-                <label for="provincia">Provincia</label>
-                <b-form-select
-                  name="provincia"
-                  id="provincia"
-                  v-model="incidencia.alertant.municipi.comarca.provincia.id"
-                  class="select"
-                  value-field="id"
-                  text-field="nom"
-                  :options="provincies"
-                ></b-form-select>
+                <div class="input input--col mb-4">
+                  <label for="provincia">Provincia</label>
+                  <b-form-select
+                    name="provincia"
+                    id="provincia"
+                    v-model="incidencia.alertant.municipi.comarca.provincia.id"
+                    class="select"
+                    value-field="id"
+                    text-field="nom"
+                    :options="provincies"
+                  ></b-form-select>
+                </div>
               </div>
-            </div>
 
-            <div class="col-lg-6">
-              <div class="input input--col mb-4">
-                <label for="comarca">Comarca</label>
-                <b-form-select
-                  name="comarca"
-                  id="comarca"
-                  class="select"
-                  value-field="id"
-                  text-field="nom"
-                  v-model="incidencia.alertant.municipi.comarca.id"
-                  :options="alertantComarques"
-                ></b-form-select>
+              <div class="col-lg-6">
+                <div class="input input--col mb-4">
+                  <label for="comarca">Comarca</label>
+                  <b-form-select
+                    name="comarca"
+                    id="comarca"
+                    class="select"
+                    value-field="id"
+                    text-field="nom"
+                    v-model="incidencia.alertant.municipi.comarca.id"
+                    :options="alertantComarques"
+                  ></b-form-select>
+                </div>
               </div>
-            </div>
 
-            <div class="col-lg-6">
-              <div class="input input--col mb-4">
-                <label for="municipi">Municipi</label>
-                <b-form-select
-                  name="municipi"
-                  id="municipi"
-                  v-model="incidencia.alertant.municipis_id"
-                  class="select"
-                  value-field="id"
-                  text-field="nom"
-                  :options="alertantMunicipis"
-                ></b-form-select>
-              </div>
-            </div> -->
+              <div class="col-lg-6">
+                <div class="input input--col mb-4">
+                  <label for="municipi">Municipi</label>
+                  <b-form-select
+                    name="municipi"
+                    id="municipi"
+                    v-model="incidencia.alertant.municipis_id"
+                    class="select"
+                    value-field="id"
+                    text-field="nom"
+                    :options="alertantMunicipis"
+                  ></b-form-select>
+                </div>
+              </div> -->
 
               <div class="col-lg-4" v-show="insert">
                 <input
@@ -336,50 +336,30 @@
             </div>
           </section>
 
-
-
-
-
-
-
-
-
-
-
-        <!--  -->
+          <!--  -->
           <section
             class="js-tab-content animate__animated animate__faster"
             id="afectats"
             data-tab="2"
             style="display: none"
           >
-            <div v-if="insert">
-              <afectatitem-component></afectatitem-component>
-            </div>
-            <div v-else class="afectats-list">
-              <div class="row">
-                <afectatitem-component
-                  v-for="afectat in afectats"
-                  :key="afectat.id"
-                  :editafectat="afectat"
-                  :sexes="sexes"
-                ></afectatitem-component>
+            <div class="row">
+              <afectatitem-component
+                v-for="afectat in afectats"
+                :key="afectat.id"
+                :editafectat="afectat"
+                :sexes="sexes"
+              ></afectatitem-component>
 
-                <div class="col-3 m-auto">
-                  <button
-                    class="button button-icon button-inverted button-inverted--blue button--rounded"
-                    @click="addAfectat"
-                  >
-                    Afegir Afectat
-                  </button>
-                </div>
+              <div class="col-3 m-auto">
+                <button
+                  class="button button-icon button-inverted button-inverted--blue button--rounded addButton"
+                  @click="addAfectat"
+                >
+                  Afegir Afectat
+                </button>
               </div>
             </div>
-
-            <!-- <div class="afectats-list"> -->
-            <!-- <afectatitem-component v-if="getAfectats == 0" ></afectatitem-component>
-          <afectatitem-component v-else v-for="afectat in afectats" :key="afectat.id"></afectatitem-component> -->
-            <!-- </div> -->
           </section>
 
           <section
@@ -387,7 +367,9 @@
             id="recursos"
             data-tab="3"
             style="display: none"
-          ></section>
+          >
+            <recursitem-component></recursitem-component>
+          </section>
 
           <div class="incidencia-form-footer">
             <button
@@ -431,9 +413,9 @@ export default {
       required: false,
     },
     sexes: {
-        type: Array,
-        required: false,
-    }
+      type: Array,
+      required: false,
+    },
   },
   data() {
     return {
@@ -535,9 +517,7 @@ export default {
 
   mounted() {
     console.log("Incidència component mounted.");
-    if (this.insert) {
-      // this.actualitzarDateTime();
-    }
+    this.actualitzarDateTime();
   },
   computed: {
     // filtrarAlertantComarques() {
@@ -658,9 +638,7 @@ export default {
       var today = year + "-" + month + "-" + day,
         displayTime = hour + ":" + min;
 
-      document.getElementById("data").value = today;
       this.incidencia.data = today;
-      document.getElementById("hora").value = displayTime;
       this.incidencia.hora = displayTime;
     },
 
@@ -672,9 +650,15 @@ export default {
           .get("/incidencies")
           .then((response) => {
             let incidencies = response.data;
-            let lastIncidencia = incidencies[incidencies.length - 1];
-            me.incidencia.id = lastIncidencia.id + 1;
+            var assignarId;
+            if (incidencies.length == 0) {
+              assignarId = 1;
+            } else {
+              assignarId = incidencies[incidencies.length - 1].id + 1;
+            }
+            me.incidencia.id = assignarId;
             this.loading = false;
+            this.addAfectat();
           })
           .catch((error) => {
             console.log(error);
@@ -744,6 +728,7 @@ export default {
       };
       afectat.id = Math.random();
       this.afectats.push(afectat);
+    //   this.incidencia.incidencia_has_recurs.push(emptyIncidenciaHasRecurs);
       this.getAfectats();
     },
 

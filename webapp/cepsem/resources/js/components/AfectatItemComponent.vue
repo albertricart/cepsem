@@ -3,10 +3,10 @@
     <div class="afectat-item">
       <h3 class="mb-4">Afectat</h3>
 
-      <input type="checkbox" name="notecip" id="notecip" />
-      <label for="notecip">No té CIP*</label>
+      <input type="checkbox" name="notecip" id="notecip" v-model="afectat.te_cip"/>
+      <label for="tecip" class="mb-3">Té CIP*</label>
 
-      <div class="mb-4">
+      <div class="mb-4" v-show="afectat.te_cip">
         <div class="input input--col mb-2">
           <label for="cip">CIP</label>
           <input
@@ -71,7 +71,7 @@
           v-model="afectat.edat"
         />
       </div>
-<!--
+      <!--
       <div class="input input--col mb-4">
         <label for="sexe">Sexe</label>
         <b-form-select
@@ -114,33 +114,41 @@ export default {
       required: false,
     },
 
-    sexes:{
-        type: Array,
-        required: false,
-    }
+    sexes: {
+      type: Array,
+      required: false,
+    },
   },
   data() {
     return {
-      afectat: {
+      afectat: {},
+    };
+  },
+  created() {
+    if(this.editafectat === undefined){
+        this.afectat = this.emptyAfectat();
+    }else{
+        this.afectat = this.editafectat;
+    }
+  },
+  mounted() {
+    console.log("Afectat " + this.afectat.cip + " component mounted.");
+  },
+  methods: {
+    emptyAfectat() {
+      return {
         id: 0,
         telefon: "",
         cip: "",
         nom: "",
         cognoms: "",
         edat: 0,
-        te_cip: 0,
+        te_cip: false,
         sexes_id: 0,
         saveAfectat: false,
-      },
-    };
+      };
+    },
   },
-  created() {
-    this.afectat = this.editafectat;
-  },
-  mounted() {
-    console.log("Afectat " + this.afectat.cip + " component mounted.");
-  },
-  methods: {},
   computed: {},
 };
 </script>
