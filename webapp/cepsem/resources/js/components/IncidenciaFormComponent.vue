@@ -368,7 +368,12 @@
             data-tab="3"
             style="display: none"
           >
-            <recursitem-component></recursitem-component>
+            <recursitem-component
+                v-for="incidencia_has_recurs in incidencia.incidencia_has_recursos"
+                :key="incidencia_has_recurs.id"
+                :editrecurs="incidencia_has_recurs"
+                :tipusrecursos="tipusrecursos">
+            </recursitem-component>
           </section>
 
           <div class="incidencia-form-footer">
@@ -416,6 +421,10 @@ export default {
       type: Array,
       required: false,
     },
+    tipusrecursos: {
+        type: Array,
+      required: false,
+    }
   },
   data() {
     return {
@@ -640,6 +649,7 @@ export default {
 
       this.incidencia.data = today;
       this.incidencia.hora = displayTime;
+
     },
 
     initComponent() {
@@ -726,10 +736,26 @@ export default {
         sexes_id: 0,
         saveAfectat: false,
       };
+
       afectat.id = Math.random();
       this.afectats.push(afectat);
-    //   this.incidencia.incidencia_has_recurs.push(emptyIncidenciaHasRecurs);
+      this.incidencia.incidencia_has_recursos.push(this.emptyIncidenciaHasRecurs());
       this.getAfectats();
+    },
+    emptyIncidenciaHasRecurs() {
+        return {
+            incidencies_id: 0,
+            recursos_id: 0,
+            hora_activacio: 0,
+            hora_mobilitzacio: 0,
+            hora_assistencia: 0,
+            hora_transport: 0,
+            hora_arribada_hospital: 0,
+            hora_transferencia: 0,
+            hora_finalitzacio: 0,
+            prioritat: 0,
+            desti: ""
+        }
     },
 
     removeAfectat(id) {
