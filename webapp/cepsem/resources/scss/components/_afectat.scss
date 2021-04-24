@@ -1,15 +1,14 @@
-.afectats-list{
-    .button-inverted--blue{
-        background-image: url('/cepsem/webapp/cepsem/public/assets/icons/add.svg') ;
+.addButton {
+    background-image: url('/cepsem/webapp/cepsem/public/assets/icons/add.svg');
 
-        &:hover{
-            background-image: url('/cepsem/webapp/cepsem/public/assets/icons/add_white.svg');
-        }
+    &:hover {
+        background-image: url('/cepsem/webapp/cepsem/public/assets/icons/add_white.svg');
     }
 }
 
 
-.afectat-item{
+
+.afectat-item {
     padding: 32px;
     background-color: whitesmoke;
     box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.5);
@@ -17,10 +16,10 @@
     max-width: 375px;
     width: 100%;
 
-    .removeAfectat{
-        background-image: url('/cepsem/webapp/cepsem/public/assets/icons/deleteUser.svg') ;
+    .removeAfectat {
+        background-image: url('/cepsem/webapp/cepsem/public/assets/icons/deleteUser.svg');
 
-        &:hover{
+        &:hover {
             background-image: url('/cepsem/webapp/cepsem/public/assets/icons/deleteUser_white.svg');
         }
     }

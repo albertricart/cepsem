@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Incidencia;
+use App\Models\IncidenciaHasRecurs;
 use App\Models\Provincia;
 use App\Models\Sexe;
 use App\Models\TipusAlertant;
 use App\Models\TipusIncidencia;
+use App\Models\TipusRecurs;
 use Illuminate\Http\Request;
 
 class IncidenciaController extends Controller
@@ -54,7 +56,8 @@ class IncidenciaController extends Controller
         $tipusAlertants = TipusAlertant::all();
         $tipusIncidents = TipusIncidencia::all();
         $sexes = Sexe::all();
-        return view('pages.cecos.incidencies.incidencia', compact('idincidencia', 'provincies', 'tipusAlertants', 'tipusIncidents', 'sexes'));
+        $tipusRecursos = TipusRecurs::all();
+        return view('pages.cecos.incidencies.incidencia', compact('idincidencia', 'provincies', 'tipusAlertants', 'tipusIncidents', 'sexes', 'tipusRecursos'));
     }
 
     /**

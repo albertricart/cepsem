@@ -9,7 +9,7 @@
           <a href="/cepsem/webapp/cepsem/public/">Inici</a>
           <a href="/cepsem/webapp/cepsem/public/cecos/">CECOS</a>
           <a href="">Recursos Mòbils</a>
-          <a href="">Formació</a>
+          <a href="/cepsem/webapp/cepsem/public/formacio">Formació</a>
         </nav>
       </div>
 
