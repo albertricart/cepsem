@@ -1,10 +1,20 @@
 <template>
 
-  <div class="recurs-item">
-    <h3 class="mb-4">Recurs mòbil</h3>
+  <div class="recurs-item mb-4">
+    <h3 class="mb-4">RECURS MÒBIL</h3>
+
 
     <div class="row">
-      <div class="col-lg-4">
+        <div class="col-lg-12 mb-3">
+            <h3 class="section-title">
+                <img
+                src="/cepsem/webapp/cepsem/public/assets/icons/person.svg"
+                alt=""
+                class="mr-3"
+                />
+            </h3>
+        </div>
+      <div class="col-lg-6">
         <div class="input input--col mb-4">
           <label for="tipusrecurs">Tipus recurs Mòbil</label>
           <b-form-select
@@ -26,7 +36,7 @@
           ></b-form-select>
         </div>
       </div>
-      <div class="col-lg-4">
+      <div class="col-lg-6">
         <div class="input input--col mb-2">
           <label for="horaActi" >Hora d'activació</label>
           <input type="time" name="horaActi" id="horaActi" v-model="hora" />
@@ -39,18 +49,6 @@
           style="margin-top:65px"
         />
         <label for="trasllat">Trasllat Hospitalari</label>
-      </div>
-      <div class="col-lg-4">
-        <div class="mt-5" style="text-align: center">
-          <button
-            class="button button-icon button--rounded button-inverted button-inverted--red"
-            style="
-              background-image: url('/cepsem/webapp/cepsem/public/assets/icons/deleteUser.svg');
-            "
-          >
-            Eliminar recurs
-          </button>
-        </div>
       </div>
     </div>
     <div class="row" v-if="trasllat">

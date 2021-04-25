@@ -4,4 +4,15 @@
     background-color: whitesmoke;
     box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.5);
     border-radius: 27px;
+
+    h3{
+        font-weight: 600;
+
+    }
+    .section-title{
+        font-size: 18px;
+        display: flex;
+        align-items: center;
+        padding-bottom: 6px;
+    }
 }
