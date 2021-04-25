@@ -19,7 +19,7 @@
         <div class="formacio-video">
             <h2>RCP: Reanimació Cardiopulmonar</h2>
             <div style="background-color: rgb(24, 24, 24); padding: 24px">
-                <video id="myVideo" src="/cepsem/webapp/cepsem/public/assets/media/CLIP1.mp4" >
+                <video id="myVideo" src="http://daw.abp-politecnics.com/daw2b02/cepsem/public/assets/media/CLIP1.mp4" >
                     Your browser does not support HTML5 video.
                 </video>
             </div>
@@ -63,5 +63,5 @@
             </div>
 
         </div>
-
-    @endsection
+    </div>
+@endsection
