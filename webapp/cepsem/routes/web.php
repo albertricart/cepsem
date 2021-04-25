@@ -30,6 +30,10 @@ Route::get('/cecos/incidencia/{id}', function ($id) {
     return redirect()->action([App\Http\Controllers\IncidenciaController::class, 'show'], ['incidency' => $id]);
 });
 
+Route::get('/formacio', function(){
+    return view('pages.formacio.index');
+});
+
 Route::get('/cecos/incidencia', [IncidenciaController::class, 'show']);
 
 
@@ -47,6 +51,7 @@ Route::middleware(['auth' ,'admin'])->group(function () {
     Route::resource('/cecos/tipus-incidencia', TipusIncidenciaController::class);
     Route::resource('/cecos/tipus-alertant', TipusAlertantController::class);
     Route::resource('/cecos/recursMobil', IncidenciaHasRecursController::class);
+
 
 });
 

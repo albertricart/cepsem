@@ -21,7 +21,7 @@
     <script src="{{ asset('js/maps.js') }}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/login.js') }}"></script>
-
+    <script src="{{ asset('js/formacio.js') }}"></script>
 </body>
 
 

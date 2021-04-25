@@ -401,7 +401,12 @@
             data-tab="3"
             style="display: none"
           >
-            <!-- <recursitem-component></recursitem-component> -->
+            <recursitem-component
+                v-for="incidencia_has_recurs in incidencia.incidencia_has_recursos"
+                :key="incidencia_has_recurs.id"
+                :editrecurs="incidencia_has_recurs"
+                :tipusrecursos="tipusrecursos">
+            </recursitem-component>
           </section>
 
           <div class="incidencia-form-footer">
@@ -450,6 +455,10 @@ export default {
       type: Array,
       required: false,
     },
+    tipusrecursos: {
+        type: Array,
+      required: false,
+    }
   },
   data() {
     return {
@@ -687,6 +696,7 @@ export default {
 
       this.incidencia.data = today;
       this.incidencia.hora = displayTime;
+
     },
 
     initComponent() {
@@ -782,7 +792,6 @@ export default {
       let found = false;
       let incidencia_has_recursos = this.incidencia.incidencia_has_recursos;
 
-        // debugger;
       while (!found && i < incidencia_has_recursos.length) {
         let afectat = incidencia_has_recursos[i].afectat;
 
