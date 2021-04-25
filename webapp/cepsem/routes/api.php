@@ -25,6 +25,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::apiResource('alertants', AlertantController::class);
+Route::get('alertant/{tlf}', [AlertantController::class, 'getAlertantbyTelefon']);
 Route::apiResource('incidencies', IncidenciaController::class);
 Route::apiResource('usuaris', UsuariController::class);
 Route::apiResource('recursos',RecursController::class);

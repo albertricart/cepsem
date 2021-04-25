@@ -15,7 +15,6 @@ class AfectatController extends Controller
      */
     public function index()
     {
-
         $sexe = Sexe::all();
         return view('pages.cecos.afectats.index', compact('sexe'));
     }

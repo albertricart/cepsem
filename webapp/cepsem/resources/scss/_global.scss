@@ -14,6 +14,12 @@ img {
     max-height: 100%;
 }
 
+// html,
+// body {
+//   height: 100%;
+//   margin: 0;
+//   padding: 0;
+// }
 
 a {
     color: inherit;
@@ -31,6 +37,13 @@ a {
 //     margin-right: auto;
 //     margin-left: auto;
 // }
+
+#map {
+    background-color: #b3b3b3;
+    width: 100%;
+    min-height: 350px;
+    height: 100%;
+}
 
 button[type="submit"] {
     outline: none;
@@ -83,10 +96,10 @@ button[type="submit"] {
         height: 415px;
     }
 
-    &--secondary{
+    &--secondary {
         background-color: whitesmoke !important;
 
-        h2{
+        h2 {
             font-size: 24px !important;
         }
     }
@@ -196,20 +209,20 @@ button[type="submit"] {
         padding-top: 12px;
         padding-bottom: 12px;
 
-        &:hover{
+        &:hover {
             opacity: 1;
             border: 1px solid $c_blue;
             color: $c_blue;
         }
 
-        &-icon{
+        &-icon {
             font-size: 14px;
             background-image: url('../assets/icons/delete.svg');
             color: $c_red;
             padding-left: 45px;
             transition: all 0.2s ease;
 
-            &:hover{
+            &:hover {
                 border: 1px solid $c_red;
                 color: $c_red;
             }

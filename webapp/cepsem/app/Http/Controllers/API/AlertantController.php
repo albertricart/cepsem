@@ -74,10 +74,24 @@ class AlertantController extends Controller
      * @param  \App\Models\Alertant  $alertant
      * @return \Illuminate\Http\Response
      */
+    public function getAlertantbyTelefon($telefon)
+    {
+        return new AlertantResource(Alertant::with(['municipi.comarca.provincia', 'tipus_alertant'])->where("telefon", "=", $telefon)->get());
+    }
+
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Alertant  $alertant
+     * @return \Illuminate\Http\Response
+     */
     public function show(Alertant $alertant)
     {
         return new AlertantResource($alertant);
     }
+
+
 
     /**
      * Update the specified resource in storage.

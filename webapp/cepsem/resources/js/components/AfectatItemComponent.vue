@@ -1,12 +1,17 @@
 <template>
   <div class="col-lg-6 col-xl-4 mb-5">
     <div class="afectat-item">
-      <h3 class="mb-4">Afectat</h3>
+      <h3 class="mb-3">Afectat</h3>
 
-      <input type="checkbox" name="notecip" id="notecip" v-model="afectat.te_cip"/>
-      <label for="tecip" class="mb-3">Té CIP*</label>
+      <input
+        type="checkbox"
+        name="notecip"
+        id="notecip"
+        v-model="afectat.te_cip"
+      />
+      <label for="tecip" class="mb-3">Té CIP</label>
 
-      <div class="mb-4" v-show="afectat.te_cip">
+      <div class="mb-3" v-show="afectat.te_cip">
         <div class="input input--col mb-2">
           <label for="cip">CIP</label>
           <input
@@ -18,18 +23,30 @@
           />
         </div>
 
+        <div v-show="error" class="input-error input-error--show">
+          <img
+            src="/cepsem/webapp/cepsem/public/assets/icons/alert.svg"
+            alt=""
+            width="18px"
+            height="18px"
+            style="margin-bottom: auto"
+          />
+          <span>No s'ha trobat cap resultat</span>
+        </div>
+
         <div style="text-align: end">
           <button
             class="button button--blue"
             style="padding-top: 8px; padding-bottom: 8px"
+            @click="getAfectat"
           >
             CARREGAR DADES
           </button>
         </div>
       </div>
 
-      <div class="input input--col mb-4">
-        <label for="telefon">Telèfon*</label>
+      <div class="input input--col mb-3">
+        <label for="telefon">Telèfon</label>
         <input
           type="text"
           name="telefon"
@@ -39,7 +56,7 @@
         />
       </div>
 
-      <div class="input input--col mb-4">
+      <div class="input input--col mb-3">
         <label for="nom">Nom</label>
         <input
           type="text"
@@ -50,7 +67,7 @@
         />
       </div>
 
-      <div class="input input--col mb-4">
+      <div class="input input--col mb-3">
         <label for="cognoms">Cognoms</label>
         <input
           type="text"
@@ -61,43 +78,39 @@
         />
       </div>
 
-      <div class="input input--col mb-4">
-        <label for="edat">Edat</label>
-        <input
-          type="number"
-          name="edat"
-          id="edat"
-          placeholder="Introdueix l'edat de l'afectat..."
-          v-model="afectat.edat"
-        />
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="input input--col mb-3">
+            <label for="edat">Edat</label>
+            <input
+              type="number"
+              name="edat"
+              id="edat"
+              placeholder="Introdueix l'edat de l'afectat..."
+              v-model="afectat.edat"
+            />
+          </div>
+        </div>
+        <div class="col-lg-8">
+          <div class="input input--col mb-3">
+            <label for="sexe">Sexe</label>
+            <b-form-select
+              name="sexe"
+              id="sexe"
+              v-model="afectat.sexes_id"
+              class="select"
+              value-field="id"
+              text-field="sexe"
+              :options="sexes"
+            ></b-form-select>
+          </div>
+        </div>
       </div>
-      <!--
-      <div class="input input--col mb-4">
-        <label for="sexe">Sexe</label>
-        <b-form-select
-          name="sexe"
-          id="sexe"
-          v-model="alertant.sexes_id"
-          class="select"
-          value-field="id"
-          text-field="sexe"
-          :options="sexes"
-        ></b-form-select>
-      </div> -->
 
-      <!-- <div class="input input--col mb-4">
-        <label for="adreca">Sexe</label>
-        <input
-          type="text"
-          name="telefon"
-          id="telefon"
-          placeholder="Introdueix el telefon de l'afectat..."
-        />
-      </div> -->
-
-      <div class="mt-5" style="text-align: center">
+      <div class="mt-4" style="text-align: center">
         <button
           class="button button-icon button--rounded button-inverted button-inverted--red removeAfectat"
+          @click="removeAfectat"
         >
           Eliminar afectat
         </button>
@@ -122,17 +135,21 @@ export default {
   data() {
     return {
       afectat: {},
+      error: "",
     };
   },
   created() {
-    if(this.editafectat === undefined){
-        this.afectat = this.emptyAfectat();
-    }else{
-        this.afectat = this.editafectat;
+    if (this.editafectat === undefined) {
+      this.afectat = this.emptyAfectat();
+    } else {
+      this.afectat = this.editafectat;
     }
   },
   mounted() {
     console.log("Afectat " + this.afectat.cip + " component mounted.");
+  },
+  destroyed() {
+    console.log("Afectat " + this.afectat.cip + " component destroyed.");
   },
   methods: {
     emptyAfectat() {
@@ -145,8 +162,38 @@ export default {
         edat: 0,
         te_cip: false,
         sexes_id: 0,
+        sexe: {
+          id: 0,
+          sexe: "",
+        },
         saveAfectat: false,
       };
+    },
+
+    removeAfectat() {
+      this.$emit("remove-afectat", this.afectat.id);
+    },
+
+    getAfectat() {
+      let me = this;
+
+      axios
+        .get("/afectats/" + me.afectat.cip)
+        .then((response) => {
+          let afectat = response.data[0];
+          me.afectat.id = afectat.id;
+          me.afectat.telefon = afectat.telefon;
+          me.afectat.cip = afectat.cip;
+          me.afectat.nom = afectat.nom;
+          me.afectat.cognoms = afectat.cognoms;
+          me.afectat.edat = afectat.edat;
+          me.afectat.te_cip = afectat.te_cip;
+          me.afectat.sexes_id = afectat.sexes_id;
+          me.afectat.sexe = afectat.sexe;
+        })
+        .catch((error) => {
+          me.error = error;
+        });
     },
   },
   computed: {},

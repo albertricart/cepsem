@@ -55,26 +55,44 @@
                   </div>
 
                   <div class="col-lg-12">
-                    <div class="input input--col mb-4">
-                      <label for="nom">Cerca un alertant existent</label>
+                    <div class="input input--col mb-2">
+                      <label for="cercaTlf">Cerca un alertant existent</label>
                       <div class="input-button">
                         <input
                           type="text"
-                          name="telefon"
-                          id="telefon"
+                          name="cercaTlf"
+                          id="cercaTlf"
+                          v-model="cercaAlertant"
                           placeholder="Introdueix el telèfon de l'alertant..."
                           autofocus
                         />
-                        <button class="button button--blue" style="width: 100%">
+                        <button
+                          class="button button--blue"
+                          style="width: 100%"
+                          @click="cercaAlertantbyTlf"
+                        >
                           CARREGAR DADES
                         </button>
                       </div>
+                    </div>
+                    <div
+                      v-show="loadingStatus"
+                      class="input-error input-error--show"
+                    >
+                      <img
+                        src="/cepsem/webapp/cepsem/public/assets/icons/alert.svg"
+                        alt=""
+                        width="18px"
+                        height="18px"
+                        style="margin-bottom: auto"
+                      />
+                      <span>No s'ha trobat cap resultat</span>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div class="col-lg-5">
+              <div class="col-lg-5 mb-5 mb-lg-0">
                 <div class="incidencia-hora">
                   <div class="input input--row mb-4">
                     <label for="data">Data</label>
@@ -119,7 +137,7 @@
                 </h3>
               </div>
 
-              <div class="col-lg-6">
+              <div class="col-lg-6 order-1">
                 <div class="input input--col mb-4">
                   <label for="nom">Nom</label>
                   <input
@@ -132,7 +150,20 @@
                 </div>
               </div>
 
-              <div class="col-lg-6">
+              <div class="col-lg-6 order-5 order-lg-2">
+                <div class="input input--col mb-4">
+                  <label for="adrecaAlertant">Adreça</label>
+                  <input
+                    type="text"
+                    name="adrecaAlertant"
+                    id="adrecaAlertant"
+                    v-model="incidencia.alertant.adreca"
+                    placeholder="Introdueix l'adreça de l'alertant..."
+                  />
+                </div>
+              </div>
+
+              <div class="col-lg-6 order-2 order-lg-3">
                 <div class="input input--col mb-4">
                   <label for="cognoms">Cognoms</label>
                   <input
@@ -145,7 +176,23 @@
                 </div>
               </div>
 
-              <div class="col-lg-6">
+              <div class="col-lg-6 order-6 order-lg-4">
+                <div class="input input--col mb-4">
+                  <label for="provincia">Provincia</label>
+                  <b-form-select
+                    name="provincia"
+                    id="provincia"
+                    v-model="incidencia.alertant.municipi.comarca.provincia.id"
+                    class="select"
+                    value-field="id"
+                    text-field="nom"
+                    :options="provincies"
+                    @change="filtrarAlertantComarques"
+                  ></b-form-select>
+                </div>
+              </div>
+
+              <div class="col-lg-6 order-3 order-lg-5">
                 <div class="input input--col mb-4">
                   <label for="telefon">Telèfon</label>
                   <input
@@ -160,20 +207,23 @@
                 </div>
               </div>
 
-              <div class="col-lg-6">
+              <div class="col-lg-6 order-7 order-lg-6">
                 <div class="input input--col mb-4">
-                  <label for="adrecaAlertant">Adreça</label>
-                  <input
-                    type="text"
-                    name="adrecaAlertant"
-                    id="adrecaAlertant"
-                    v-model="incidencia.alertant.adreca"
-                    placeholder="Introdueix l'adreça de l'alertant..."
-                  />
+                  <label for="comarca">Comarca</label>
+                  <b-form-select
+                    name="comarca"
+                    id="comarca"
+                    class="select"
+                    value-field="id"
+                    text-field="nom"
+                    v-model="incidencia.alertant.municipi.comarca.id"
+                    :options="alertantComarques"
+                    @change="filtrarAlertantMunicipis"
+                  ></b-form-select>
                 </div>
               </div>
 
-              <div class="col-lg-6">
+              <div class="col-lg-6 order-4 order-lg-7">
                 <div class="input input--col mb-4">
                   <label for="tipus">Tipus</label>
                   <b-form-select
@@ -188,37 +238,7 @@
                 </div>
               </div>
 
-              <!-- <div class="col-lg-6">
-                <div class="input input--col mb-4">
-                  <label for="provincia">Provincia</label>
-                  <b-form-select
-                    name="provincia"
-                    id="provincia"
-                    v-model="incidencia.alertant.municipi.comarca.provincia.id"
-                    class="select"
-                    value-field="id"
-                    text-field="nom"
-                    :options="provincies"
-                  ></b-form-select>
-                </div>
-              </div>
-
-              <div class="col-lg-6">
-                <div class="input input--col mb-4">
-                  <label for="comarca">Comarca</label>
-                  <b-form-select
-                    name="comarca"
-                    id="comarca"
-                    class="select"
-                    value-field="id"
-                    text-field="nom"
-                    v-model="incidencia.alertant.municipi.comarca.id"
-                    :options="alertantComarques"
-                  ></b-form-select>
-                </div>
-              </div>
-
-              <div class="col-lg-6">
+              <div class="col-lg-6 order-8">
                 <div class="input input--col mb-4">
                   <label for="municipi">Municipi</label>
                   <b-form-select
@@ -231,9 +251,9 @@
                     :options="alertantMunicipis"
                   ></b-form-select>
                 </div>
-              </div> -->
+              </div>
 
-              <div class="col-lg-4" v-show="insert">
+              <div class="col-lg-4 order-9" v-show="insert">
                 <input
                   type="checkbox"
                   name="saveAlertant"
@@ -252,86 +272,98 @@
             style="display: none"
           >
             <div class="row">
-              <!-- <div class="col-lg-6">
-              <div class="input input--col mb-4">
-                <label for="provincia">Provincia</label>
-                <b-form-select
-                  name="provincia"
-                  id="provincia"
-                  class="select"
-                  v-model="incidencia.municipi.comarca.provincia.id"
-                  value-field="id"
-                  text-field="nom"
-                  :options="provincies"
-                ></b-form-select>
-              </div>
-            </div>
+              <div class="col-lg-7 order-2 order-lg-1">
+                <div class="row">
+                  <div class="col-xl-4">
+                    <div class="input input--col mb-4">
+                      <label for="provincia">Provincia</label>
+                      <b-form-select
+                        name="provincia"
+                        id="provincia"
+                        v-model="incidencia.municipi.comarca.provincia.id"
+                        class="select"
+                        value-field="id"
+                        text-field="nom"
+                        :options="provincies"
+                        @change="filtrarIncidenciaComarques"
+                      ></b-form-select>
+                    </div>
+                  </div>
+                  <div class="col-xl-4">
+                    <div class="input input--col mb-4">
+                      <label for="comarca">Comarca</label>
+                      <b-form-select
+                        name="comarca"
+                        id="comarca"
+                        class="select"
+                        value-field="id"
+                        text-field="nom"
+                        v-model="incidencia.municipi.comarca.id"
+                        :options="incidenciaComarques"
+                        @change="filtrarIncidenciaMunicipis"
+                      ></b-form-select>
+                    </div>
+                  </div>
+                  <div class="col-xl-4">
+                    <div class="input input--col mb-4">
+                      <label for="municipi">Municipi</label>
+                      <b-form-select
+                        name="municipi"
+                        id="municipi"
+                        v-model="incidencia.municipis_id"
+                        class="select"
+                        value-field="id"
+                        text-field="nom"
+                        :options="incidenciaMunicipis"
+                      ></b-form-select>
+                    </div>
+                  </div>
 
-            <div class="col-lg-6">
-              <div class="input input--col mb-4">
-                <label for="comarca">Comarca</label>
-                <b-form-select
-                  name="comarca"
-                  id="comarca"
-                  class="select"
-                  v-model="incidencia.municipi.comarca.id"
-                  value-field="id"
-                  text-field="nom"
-                  :options="incidenciaComarques"
-                ></b-form-select>
-              </div>
-            </div>
+                  <div class="col-lg-7">
+                    <div class="input input--col mb-4">
+                      <label for="adreca">Adreça</label>
+                      <input
+                        type="text"
+                        name="adreca"
+                        id="address"
+                        v-model="incidencia.adreca"
+                        placeholder="Introdueix l'adreça de l'alertant..."
+                      />
+                    </div>
+                  </div>
 
-            <div class="col-lg-6">
-              <div class="input input--col mb-4">
-                <label for="municipi">Municipi</label>
-                <b-form-select
-                  name="municipi"
-                  id="municipi"
-                  class="select"
-                  v-model="incidencia.municipis_id"
-                  value-field="id"
-                  text-field="nom"
-                  :options="incidenciaMunicipis"
-                ></b-form-select>
-              </div>
-            </div> -->
+                  <div class="col-lg-5 m-auto">
+                    <button
+                      class="button button--blue button-icon"
+                      style="
+                        background-image: url('/cepsem/webapp/cepsem/public/assets/icons/map.svg');
+                      "
+                      id="submitAddress"
+                      type="button"
+                      value="Geocode"
+                    >
+                      Geocode
+                    </button>
+                  </div>
 
-              <div class="col-lg-5">
-                <div class="input input--col mb-4">
-                  <label for="adreca">Adreça</label>
-                  <input
-                    type="text"
-                    name="adreca"
-                    id="adreca"
-                    v-model="incidencia.alertant.adreca"
-                    placeholder="Introdueix l'adreça de l'alertant..."
-                  />
+                  <div class="col-lg-12">
+                    <div class="input input--col mb-4">
+                      <label for="complementadreca">Complement Adreça</label>
+                      <textarea
+                        name="complementadreca"
+                        id="complementadreca"
+                        cols="30"
+                        rows="7"
+                        v-model="incidencia.adreca_complement"
+                        placeholder="Indica informació complementària sobre l’adreça del incident..."
+                      ></textarea>
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div class="col-lg-3">
-                <div class="input input--col mb-4">
-                  <label for="numero_adreca">Número</label>
-                  <input
-                    type="text"
-                    name="numero_adreca"
-                    id="numero_adreca"
-                    placeholder="Introdueix el número de l'adreça de l'incident..."
-                  />
-                </div>
-              </div>
-              <div class="col-lg-8">
-                <div class="input input--col mb-4">
-                  <label for="complementadreca">Complement Adreça</label>
-                  <textarea
-                    name="complementadreca"
-                    id="complementadreca"
-                    cols="30"
-                    rows="7"
-                    v-model="incidencia.alertant.adreca_complement"
-                    placeholder="Indica informació complementària sobre l’adreça del incident..."
-                  ></textarea>
-                </div>
+
+              <div class="col-lg-5 mb-5 mb-lg-0 order-1 order-lg-2">
+                <div id="map"></div>
               </div>
             </div>
           </section>
@@ -345,10 +377,11 @@
           >
             <div class="row">
               <afectatitem-component
-                v-for="afectat in afectats"
-                :key="afectat.id"
-                :editafectat="afectat"
+                v-for="incidencia_has_recurs in incidencia.incidencia_has_recursos"
+                :key="incidencia_has_recurs.afectat.id"
+                :editafectat="incidencia_has_recurs.afectat"
                 :sexes="sexes"
+                @remove-afectat="removeAfectat"
               ></afectatitem-component>
 
               <div class="col-3 m-auto">
@@ -368,7 +401,7 @@
             data-tab="3"
             style="display: none"
           >
-            <recursitem-component></recursitem-component>
+            <!-- <recursitem-component></recursitem-component> -->
           </section>
 
           <div class="incidencia-form-footer">
@@ -388,6 +421,7 @@
     </div>
   </div>
 </template>
+
 
 <script>
 export default {
@@ -423,7 +457,7 @@ export default {
       alertantMunicipis: [],
       incidenciaComarques: [],
       incidenciaMunicipis: [],
-      afectats: [],
+      cercaAlertant: "",
       currentTab: 0,
       loading: true,
       loadingStatus: "Carregant les dades...",
@@ -442,7 +476,6 @@ export default {
         municipis_id: 0,
         usuaris_id: 0,
         saveAlertant: false,
-        afectats: [],
         alertant: {
           id: 0,
           telefon: "",
@@ -485,141 +518,155 @@ export default {
           },
         },
         incidencia_has_recursos: [],
-        //  {
-        //   afectat: {
-        //     id: "",
-        //     telefon: "",
-        //     cip: "",
-        //     nom: "",
-        //     cognoms: "",
-        //     edat: "",
-        //     te_cip: "",
-        //     sexes_id: "",
-        //   },
-        //   afectats_id: 1,
-        //   desti: null,
-        //   hora_activacio: null,
-        //   hora_arribada_hospital: null,
-        //   hora_assistencia: null,
-        //   hora_finalitzacio: null,
-        //   hora_mobilitzacio: null,
-        //   hora_transferencia: null,
-        //   hora_transport: null,
-        //   incidencies_id: 2,
-        //   prioritat: null,
-        // },
       },
     };
   },
   created() {
     this.initComponent();
+    this.alertantComarques = this.filtrarComarques(
+      this.incidencia.alertant.municipi.comarca.provincia.id
+    );
+    this.alertantMunicipis = this.filtrarMunicipis(
+      this.incidencia.alertant.municipi.comarca.id,
+      this.alertantComarques
+    );
+    this.incidenciaComarques = this.filtrarComarques(
+      this.incidencia.municipi.comarca.provincia.id
+    );
+    this.incidenciaMunicipis = this.filtrarMunicipis(
+      this.incidencia.municipi.comarca.id,
+      this.incidenciaComarques
+    );
   },
 
   mounted() {
     console.log("Incidència component mounted.");
     this.actualitzarDateTime();
   },
-  computed: {
-    // filtrarAlertantComarques() {
-    //   this.alertantComarques = this.filtrarComarques(
-    //     this.incidencia.alertant.municipi.comarca.provincia.id
-    //   );
-    // },
-    // filtrarAlertantMunicipis() {
-    //   this.alertantMunicipis = this.filtrarMunicipis(
-    //     this.incidencia.alertant.municipi.comarca.id,
-    //     this.alertantComarques
-    //   );
-    // },
-    // filtrarIncidenciaComarques() {
-    //   this.incidenciaComarques = this.filtrarComarques(
-    //     this.incidencia.municipi.comarca.provincia.id
-    //   );
-    // },
-    // filtrarIncidenciaMunicipis() {
-    //   this.incidenciaMunicipis = this.filtrarMunicipis(
-    //     this.incidencia.municipi.comarca.id,
-    //     this.incidenciaComarques
-    //   );
-    // },
-  },
+
   methods: {
-    // emptyIncidencia() {
-    //   empty = {
-    //     id: 0,
-    //     num_incident: 0,
-    //     data: 0,
-    //     hora: 0,
-    //     telefon_alertant: "",
-    //     adreca: "",
-    //     adreca_complement: "",
-    //     descripcio: "",
-    //     nom_metge: "",
-    //     tipus_incidencies_id: 0,
-    //     alertants_id: 0,
-    //     municipis_id: 0,
-    //     usuaris_id: 0,
-    //     municipi: {
-    //       id: 0,
-    //       nom: "",
-    //       comarques_id: 0,
-    //       comarca: {
-    //         id: 0,
-    //         nom: "",
-    //         provincies_id: 0,
-    //         provincia: {
-    //           id: 0,
-    //           nom: "",
-    //         },
-    //       },
-    //     },
-    //   };
+    filtrarAlertantComarques() {
+      this.alertantComarques = this.filtrarComarques(
+        this.incidencia.alertant.municipi.comarca.provincia.id
+      );
 
-    //   this.incidencia = empty;
-    // },
-    // filtrarComarques(idProvincia) {
-    //   let comarques = [];
+      this.alertantMunicipis = [];
+      var found = false;
+      var i = 0;
+      var selectedProvincia = this.incidencia.alertant.municipi.comarca
+        .provincia.id;
 
-    //   if (idProvincia == 0) {
-    //     this.provincies.forEach((provincia) => {
-    //       provincia.comarques.forEach((comarca) => {
-    //         comarques.push(comarca);
-    //       });
-    //     });
-    //   } else {
-    //     this.provincies.forEach((provincia) => {
-    //       if (provincia.id == idProvincia) {
-    //         provincia.comarques.forEach((comarca) => {
-    //           comarques.push(comarca);
-    //         });
-    //       }
-    //     });
-    //   }
+      if (selectedProvincia == 0) {
+        this.alertantMunicipis = this.filtrarMunicipis(
+          0,
+          this.alertantComarques
+        );
+      }
 
-    //   return comarques;
-    // },
+      while (!found && i < this.provincies.length) {
+        let provincia = this.provincies[i];
+        if (
+          provincia.id == this.incidencia.alertant.municipi.comarca.provincia.id
+        ) {
+          found = true;
+          provincia.comarques.forEach((comarca) => {
+            comarca.municipis.forEach((municipi) => {
+              this.alertantMunicipis.push(municipi);
+            });
+          });
+        }
+        i++;
+      }
+    },
 
-    // filtrarMunicipis(idComarca, comarques) {
-    //   let municipis = [];
+    filtrarAlertantMunicipis() {
+      this.alertantMunicipis = this.filtrarMunicipis(
+        this.incidencia.alertant.municipi.comarca.id,
+        this.alertantComarques
+      );
+    },
 
-    //   if (idComarca == 0) {
-    //     comarques.forEach((comarca) => {
-    //       comarca.municipis.forEach((municipi) => {
-    //         municipis.push(municipi);
-    //       });
-    //     });
-    //   } else {
-    //     comarques.forEach((comarca) => {
-    //       if (idComarca == comarca.id) {
-    //         comarca.municipis.forEach((municipi) => {
-    //           municipis.push(municipi);
-    //         });
-    //       }
-    //     });
-    //   }
+    filtrarIncidenciaComarques() {
+      this.incidenciaComarques = this.filtrarComarques(
+        this.incidencia.municipi.comarca.provincia.id
+      );
 
-    //   return municipis;
-    // },
+      this.incidenciaMunicipis = [];
+      var found = false;
+      var i = 0;
+      var selectedProvincia = this.incidencia.municipi.comarca.provincia.id;
+
+      if (selectedProvincia == 0) {
+        this.incidenciaMunicipis = this.filtrarMunicipis(
+          0,
+          this.incidenciaComarques
+        );
+      }
+
+      while (!found && i < this.provincies.length) {
+        let provincia = this.provincies[i];
+        if (provincia.id == this.incidencia.municipi.comarca.provincia.id) {
+          found = true;
+          provincia.comarques.forEach((comarca) => {
+            comarca.municipis.forEach((municipi) => {
+              this.incidenciaMunicipis.push(municipi);
+            });
+          });
+        }
+        i++;
+      }
+    },
+
+    filtrarIncidenciaMunicipis() {
+      this.incidenciaMunicipis = this.filtrarMunicipis(
+        this.incidencia.municipi.comarca.id,
+        this.incidenciaComarques
+      );
+    },
+
+    filtrarComarques(idProvincia) {
+      let comarques = [];
+
+      if (idProvincia == 0) {
+        this.provincies.forEach((provincia) => {
+          provincia.comarques.forEach((comarca) => {
+            comarques.push(comarca);
+          });
+        });
+      } else {
+        this.provincies.forEach((provincia) => {
+          if (provincia.id == idProvincia) {
+            provincia.comarques.forEach((comarca) => {
+              comarques.push(comarca);
+            });
+          }
+        });
+      }
+
+      return comarques;
+    },
+
+    filtrarMunicipis(idComarca, comarques) {
+      let municipis = [];
+
+      if (idComarca == 0) {
+        comarques.forEach((comarca) => {
+          comarca.municipis.forEach((municipi) => {
+            municipis.push(municipi);
+          });
+        });
+      } else {
+        comarques.forEach((comarca) => {
+          if (idComarca == comarca.id) {
+            comarca.municipis.forEach((municipi) => {
+              municipis.push(municipi);
+            });
+          }
+        });
+      }
+
+      return municipis;
+    },
 
     actualitzarDateTime() {
       var date = new Date();
@@ -658,6 +705,7 @@ export default {
             }
             me.incidencia.id = assignarId;
             this.loading = false;
+            this.loadingStatus = null;
             this.addAfectat();
           })
           .catch((error) => {
@@ -670,6 +718,7 @@ export default {
           .then((response) => {
             me.incidencia = response.data;
             this.loading = false;
+            this.loadingStatus = null;
           })
           .catch((error) => {
             console.log(error);
@@ -700,10 +749,6 @@ export default {
           tabContent.classList.remove("animate__fadeIn");
         }
       });
-
-      if (id == 2) {
-        this.getAfectats();
-      }
     },
 
     fabClick() {
@@ -716,7 +761,7 @@ export default {
 
     addAfectat() {
       let afectat = {
-        id: 0,
+        id: Math.random(),
         telefon: "",
         cip: "",
         nom: "",
@@ -726,34 +771,72 @@ export default {
         sexes_id: 0,
         saveAfectat: false,
       };
-      afectat.id = Math.random();
-      this.afectats.push(afectat);
-    //   this.incidencia.incidencia_has_recurs.push(emptyIncidenciaHasRecurs);
-      this.getAfectats();
+
+      let incidencia_has_recurs = this.emptyIncidenciaHasRecurs();
+      incidencia_has_recurs.afectat = afectat;
+      this.incidencia.incidencia_has_recursos.push(incidencia_has_recurs);
     },
 
     removeAfectat(id) {
       let i = 0;
       let found = false;
-      while (!found && i < this.afectats.length) {
-        if (this.afectats[i].id == id) {
+      let incidencia_has_recursos = this.incidencia.incidencia_has_recursos;
+
+        // debugger;
+      while (!found && i < incidencia_has_recursos.length) {
+        let afectat = incidencia_has_recursos[i].afectat;
+
+        if (afectat.id == id) {
           found = true;
-          this.afectats.splice(i, 1);
+          incidencia_has_recursos.splice(i, 1);
         }
         i++;
       }
-      this.getAfectats();
+
+      this.incidencia.incidencia_has_recursos = incidencia_has_recursos;
     },
 
-    getAfectats() {
-      if (!this.insert) {
-        let incidencia = this.incidencia;
-        incidencia.incidencia_has_recursos.forEach((incidencia_has_recurs) => {
-          let afectat = incidencia_has_recurs.afectat;
-          if (!this.afectats.includes(afectat)) this.afectats.push(afectat);
+
+    emptyIncidenciaHasRecurs() {
+      return {
+        afectat: 0,
+        incidencies_id: 0,
+        recursos_id: 0,
+        hora_activacio: 0,
+        hora_mobilitzacio: 0,
+        hora_assistencia: 0,
+        hora_transport: 0,
+        hora_arribada_hospital: 0,
+        hora_transferencia: 0,
+        hora_finalitzacio: 0,
+        prioritat: 0,
+        desti: "",
+      };
+    },
+
+    cercaAlertantbyTlf() {
+      let me = this;
+
+      axios
+        .get("/alertant/" + me.cercaAlertant)
+        .then((response) => {
+          let alertant = response.data[0];
+          me.incidencia.alertant.id = alertant.id;
+          me.incidencia.alertant.telefon = alertant.telefon;
+          me.incidencia.telefon_alertant = alertant.telefon;
+          me.incidencia.alertant.nom = alertant.nom;
+          me.incidencia.alertant.cognoms = alertant.cognoms;
+          me.incidencia.alertant.adreca = alertant.adreca;
+          me.incidencia.alertant.municipis_id = alertant.municipis_id;
+          me.incidencia.alertant.tipus_alertants_id =
+            alertant.tipus_alertants_id;
+          me.incidencia.alertant.municipi = alertant.municipi;
+          me.incidencia.alertant.tipus_alertant = alertant.tipus_alertant;
+          this.loadingStatus = null;
+        })
+        .catch((error) => {
+          me.loadingStatus = error;
         });
-      }
-      return this.afectats.length;
     },
   },
 };

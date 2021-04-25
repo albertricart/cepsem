@@ -7,6 +7,7 @@ use App\Models\Afectat;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\AfectatResource;
+use App\Models\Alertant;
 use Illuminate\Database\QueryException;
 
 class AfectatController extends Controller
@@ -37,10 +38,9 @@ class AfectatController extends Controller
                 $nouAfectat->save();
 
                 $response = (new AfectatResource($nouAfectat))
-                ->response()
-                ->setStatusCode(201);
+                    ->response()
+                    ->setStatusCode(201);
             }
-
         } catch (QueryException $e) {
             $response = \response(['errorMessage' => Utilitat::handleErrorMessage($e)], 400);
         }
@@ -51,12 +51,12 @@ class AfectatController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Afectat  $afectat
+     * @param  \App\Models\Afectat  $cip
      * @return \Illuminate\Http\Response
      */
-    public function show(Afectat $afectat)
+    public function show(String $cip)
     {
-        //
+        return new AfectatResource(Afectat::with(['sexe'])->where('cip', '=', $cip)->get());
     }
 
     /**
@@ -106,5 +106,4 @@ class AfectatController extends Controller
 
         return $response;
     }
-
 }

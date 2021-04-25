@@ -13,6 +13,7 @@ const mix = require('laravel-mix');
 
 mix.js('resources/js/app.js', 'public/js')
     .js('resources/js/login.js', 'public/js')
+    .js('resources/js/maps.js', 'public/js')
     .vue()
     .sass('resources/scss/app.scss', 'public/css').options({
         processCssUrls: false,
