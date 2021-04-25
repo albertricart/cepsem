@@ -1,4 +1,5 @@
 <template>
+
   <div class="recurs-item">
     <h3 class="mb-4">Recurs mòbil</h3>
 
