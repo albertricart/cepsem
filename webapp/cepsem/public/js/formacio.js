@@ -20,7 +20,7 @@ vid.ontimeupdate = function () {
 
 var contador = 0;
 
-function play() {
+function endavant() {
   vid.play();
   presentacio.style.display = "none";
 }

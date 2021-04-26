@@ -33,7 +33,7 @@
             <div style="text-align: right">
                 <button type="button" id="boton1" class="button button-icon button--rounded button--blue"
                     style="background-image: url('/cepsem/webapp/cepsem/public/assets/icons/next.svg')"
-                   >Endavant</button>
+                    onclick="endavant()">Endavant</button>
             </div>
 
             <div id="pregunta" style="display: none">
