@@ -19,7 +19,7 @@
         <div class="formacio-video">
             <h2>RCP: Reanimació Cardiopulmonar</h2>
             <div style="background-color: rgb(24, 24, 24); padding: 24px">
-                <video id="myVideo" src="http://daw.abp-politecnics.com/daw2b02/cepsem/public/assets/media/CLIP1.mp4" >
+                <video id="myVideo" src="http://daw.abp-politecnics.com/daw2b02/cepsem/public/assets/media/CLIP1.mp4"  >
                     Your browser does not support HTML5 video.
                 </video>
             </div>
@@ -31,9 +31,9 @@
                 hauras d'anar responent, osigui que, estigues atent!</h5>
 
             <div style="text-align: right">
-                <button type="button" class="button button-icon button--rounded button--blue"
+                <button type="button" id="boton1" class="button button-icon button--rounded button--blue"
                     style="background-image: url('/cepsem/webapp/cepsem/public/assets/icons/next.svg')"
-                    onclick="play()">Endavant</button>
+                   >Endavant</button>
             </div>
 
             <div id="pregunta" style="display: none">
