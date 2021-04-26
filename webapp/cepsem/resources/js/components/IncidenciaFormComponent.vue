@@ -407,6 +407,8 @@
               :key="incidencia_has_recurs.id"
               :editrecurs="incidencia_has_recurs"
               :tipusrecursos="tipusrecursos"
+              :editafectat="incidencia_has_recurs.afectat"
+              :sexes="sexes"
             >
             </recursitem-component>
           </section>
