@@ -12,6 +12,11 @@
                 alt=""
                 class="mr-3"
                 />
+                <span v-if="afectat.nom">{{ afectat.nom + " - "}}</span>
+                <span v-if="afectat.sexes_id == 1">Home, </span>
+                <span v-else>Dona, </span>
+                <span v-if="afectat.edat">{{" " + afectat.edat + " anys"}}</span>
+
             </h3>
         </div>
       <div class="col-lg-6">
@@ -122,16 +127,30 @@ export default {
       type: Array,
       required: false,
     },
+    editafectat: {
+      type: Object,
+      required: false,
+    },
+    sexes: {
+      type: Array,
+      required: false,
+    },
   },
   data() {
     return {
       trasllat: false,
       prioritats: [1, 2, 3, 4, 5],
       hora: this.getTime(),
+      afectat: {},
     };
   },
   created() {
     this.recurs = this.editrecurs;
+    if (this.editafectat === undefined) {
+      this.afectat = this.emptyAfectat();
+    } else {
+      this.afectat = this.editafectat;
+    }
   },
   mounted() {},
   methods: {
@@ -148,6 +167,23 @@ export default {
 
         setTimeout(this.getTime, 5000);
         this.hora = time;
+    },
+    emptyAfectat() {
+      return {
+        id: 0,
+        telefon: "",
+        cip: "",
+        nom: "",
+        cognoms: "",
+        edat: 0,
+        te_cip: false,
+        sexes_id: 0,
+        sexe: {
+          id: 0,
+          sexe: "",
+        },
+        saveAfectat: false,
+      };
     },
   },
   computed: {},
