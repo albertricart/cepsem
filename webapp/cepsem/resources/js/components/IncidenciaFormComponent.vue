@@ -6,6 +6,7 @@
       </h1>
 
       <h3 class="mt-5 mr-3" style="text-align: right">
+        <div id="anchor"></div>
         <b>ID {{ incidencia.id }}</b>
       </h3>
 
@@ -171,7 +172,7 @@
                     name="cognoms"
                     id="cognoms"
                     v-model="incidencia.alertant.cognoms"
-                    placeholder="Introdueix els cognoms de l'usuari..."
+                    placeholder="Introdueix els cognoms de l'alertant..."
                   />
                 </div>
               </div>
@@ -402,15 +403,17 @@
             style="display: none"
           >
             <recursitem-component
-                v-for="incidencia_has_recurs in incidencia.incidencia_has_recursos"
-                :key="incidencia_has_recurs.id"
-                :editrecurs="incidencia_has_recurs"
-                :tipusrecursos="tipusrecursos">
+              v-for="incidencia_has_recurs in incidencia.incidencia_has_recursos"
+              :key="incidencia_has_recurs.id"
+              :editrecurs="incidencia_has_recurs"
+              :tipusrecursos="tipusrecursos"
+            >
             </recursitem-component>
           </section>
 
           <div class="incidencia-form-footer">
-            <button
+            <a
+              href="#anchor"
               class="button button-icon button--pink button--rounded"
               style="
                 background-image: url('/cepsem/webapp/cepsem/public/assets/icons/next.svg');
@@ -419,7 +422,7 @@
             >
               <span v-if="currentTab == 3">Finalitzar</span>
               <span v-else>Següent</span>
-            </button>
+            </a>
           </div>
         </div>
       </div>
@@ -456,8 +459,12 @@ export default {
       required: false,
     },
     tipusrecursos: {
-        type: Array,
+      type: Array,
       required: false,
+    },
+    usuari:{
+        type: Number,
+        required: false,
     }
   },
   data() {
@@ -483,7 +490,7 @@ export default {
         tipus_incidencies_id: 0,
         alertants_id: 0,
         municipis_id: 0,
-        usuaris_id: 0,
+        usuaris_id: this.usuari,
         saveAlertant: false,
         alertant: {
           id: 0,
@@ -696,7 +703,6 @@ export default {
 
       this.incidencia.data = today;
       this.incidencia.hora = displayTime;
-
     },
 
     initComponent() {
@@ -804,7 +810,6 @@ export default {
 
       this.incidencia.incidencia_has_recursos = incidencia_has_recursos;
     },
-
 
     emptyIncidenciaHasRecurs() {
       return {

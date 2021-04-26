@@ -1,7 +1,7 @@
 <template>
   <div class="col-lg-6 col-xl-4 mb-5">
     <div class="afectat-item">
-      <h3 class="mb-3">Afectat</h3>
+      <h3 class="mb-4">AFECTAT</h3>
 
       <input
         type="checkbox"
@@ -9,7 +9,7 @@
         id="notecip"
         v-model="afectat.te_cip"
       />
-      <label for="tecip" class="mb-3">Té CIP</label>
+      <label class="mb-3">Té CIP</label>
 
       <div class="mb-3" v-show="afectat.te_cip">
         <div class="input input--col mb-2">

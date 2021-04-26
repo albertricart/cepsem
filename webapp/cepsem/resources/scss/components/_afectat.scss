@@ -7,7 +7,6 @@
 }
 
 
-
 .afectat-item {
     padding: 32px;
     background-color: whitesmoke;
@@ -22,5 +21,11 @@
         &:hover {
             background-image: url('/cepsem/webapp/cepsem/public/assets/icons/deleteUser_white.svg');
         }
+    }
+
+
+    h3 {
+        font-weight: 700;
+        font-size: 26px;
     }
 }

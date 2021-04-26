@@ -15,7 +15,7 @@ Incidència
 
 @section('content')
     @if ($idincidencia == -1)
-        <incidenciaform-component :insert="true" :tipusalertants="{{ $tipusAlertants }}" :provincies="{{ $provincies }}" :tipusincidents="{{ $tipusIncidents }}" :sexes="{{ $sexes }}" :tipusrecursos="{{ $tipusRecursos }}"></incidenciaform-component>
+        <incidenciaform-component :insert="true" :usuari="{{ Auth::user()->id }}" :tipusalertants="{{ $tipusAlertants }}" :provincies="{{ $provincies }}" :tipusincidents="{{ $tipusIncidents }}" :sexes="{{ $sexes }}" :tipusrecursos="{{ $tipusRecursos }}"></incidenciaform-component>
     @else
         <incidenciaform-component :idincidencia="{{ $idincidencia }}"  :insert="false" :tipusalertants="{{ $tipusAlertants }}" :provincies="{{ $provincies }}" :tipusincidents="{{ $tipusIncidents }}" :sexes="{{ $sexes }}" :tipusrecursos="{{ $tipusRecursos }}"></incidenciaform-component>
     @endif
