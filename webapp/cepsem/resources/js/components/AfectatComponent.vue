@@ -49,7 +49,7 @@
         large
         hover
       >
-        <template #cell(selected)="{ rowSelected }">
+        <template #cell(Seleccionat)="{ rowSelected }">
           <template v-if="rowSelected">
             <span aria-hidden="true">&check;</span>
             <span class="sr-only">Selected</span>
@@ -78,10 +78,10 @@
 
         <template #cell(te_cip)="data">
           <div v-if="data.item.te_cip">
-            <input type="checkbox" checked>
+            <input type="checkbox" checked disabled>
             </div>
             <div v-else>
-              <input type="checkbox">
+              <input type="checkbox" disabled>
             </div>
         </template>
       </b-table>
@@ -297,7 +297,7 @@ export default {
       sortDesc: false,
       perPage: 10,
       currentPage: 1,
-      alertants: [],
+      afectats: [],
       editClick: false,
       insert: false,
       afectat: {
@@ -329,7 +329,7 @@ export default {
               }
             }
         },
-        { key: "sexes.sexe", label: "Sexe", sortable: true },
+        { key: "sexe.sexe", label: "Sexe", sortable: true },
         "Editar",
       ],
       loading: true,
@@ -430,8 +430,8 @@ export default {
     checkNotNull() {
       this.errors = [];
 
-      if (this.afectat.telefon) {
-        if (this.afectat.telefon.length != 9) {
+      if (this.afectat.telefon.toString) {
+        if (this.afectat.telefon.toString().length != 9) {
           this.checkIfExistsError("El camp telèfon ha d'incloure 9 números");
         }
       } else {

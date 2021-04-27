@@ -8,7 +8,7 @@
         <nav class="header-nav">
           <a href="/cepsem/webapp/cepsem/public/">Inici</a>
           <a href="/cepsem/webapp/cepsem/public/cecos/">CECOS</a>
-          <a href="">Recursos Mòbils</a>
+          <a href="/cepsem/webapp/cepsem/public/cecos/recursMobil">Recursos Mòbils</a>
           <a href="/cepsem/webapp/cepsem/public/formacio">Formació</a>
         </nav>
       </div>

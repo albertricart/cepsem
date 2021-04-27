@@ -1,4 +1,9 @@
 .home {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+
 
     &-header {
         display: flex;
@@ -20,25 +25,26 @@
     }
 
     &-body {
+        flex: 1;
         height: 100%;
-        display: grid;
-        grid-template: 1fr / 1fr 1fr;
+        // display: grid;
+        // grid-template: 1fr / 1fr 1fr;
 
-        @include media-breakpoint-down(sm){
-            grid-template: 1fr / 1fr;
-        }
+        // @include media-breakpoint-down(sm){
+        //     grid-template: 1fr / 1fr;
+        // }
     }
 
     &-option {
-        height: 750px;
+        height: 100%;
         width: 100%;
         padding: 48px;
         position: relative;
 
         h2 {
-            font-size: 48px;
+            font-size: 38px;
             line-height: 1.2;
-            max-width: 450px;
+            max-width: 400px;
             width: 100%;
 
             @include media-breakpoint-down(sm){
@@ -64,6 +70,10 @@
 
         &__rm {
             background-color: $c_light_pink;
+        }
+        &__formacio{
+
+            background-color: $c_yellow;
         }
 
         @include media-breakpoint-down(sm){

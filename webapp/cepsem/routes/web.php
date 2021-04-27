@@ -22,9 +22,6 @@ Route::get('/login', function () {
     return view('pages.login');
 });
 
-Route::get('/cecos', function () {
-    return view('pages.cecos.index');
-});
 
 Route::get('/cecos/incidencia/{id}', function ($id) {
     return redirect()->action([App\Http\Controllers\IncidenciaController::class, 'show'], ['incidency' => $id]);
@@ -51,21 +48,29 @@ Route::middleware(['auth' ,'admin'])->group(function () {
     Route::resource('/cecos/tipus-incidencia', TipusIncidenciaController::class);
     Route::resource('/cecos/tipus-alertant', TipusAlertantController::class);
     Route::resource('/cecos/recursMobil', IncidenciaHasRecursController::class);
-
+    Route::get('/cecos', function () {
+        return view('pages.cecos.index');
+    });
 
 });
 
 Route::middleware(['auth' ,'cecos'])->group(function () {
 
     Route::resource('/cecos/incidencies', IncidenciaController::class);
+    Route::get('/cecos', function () {
+        return view('pages.cecos.index');
+    });
 
 });
 
-Route::middleware(['recurs.mobil'])->group(function () {
+Route::middleware(['auth' ,'recurs.mobil'])->group(function () {
 
-
+    Route::resource('/cecos/recursMobil', IncidenciaHasRecursController::class);
+    Route::resource('/cecos/incidencies', IncidenciaController::class);
+    Route::get('/cecos', function () {
+        return view('pages.cecos.index');
+    });
 });
-
 
 
 Route::get('/clearcache', function() {

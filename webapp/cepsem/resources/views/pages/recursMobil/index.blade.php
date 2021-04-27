@@ -6,7 +6,7 @@ Recurs Mobil
 
 @section('header')
 @if (Auth::check())
-    <header-component username="{{ Auth::user()->nom }}" :formacio="true" :helpbox="false"></header-component>
+    <header-component username="{{ Auth::user()->nom }}" :formacio="false" :helpbox="false"></header-component>
 @else
     <header-component :formacio="true" :helpbox="true"></header-component>
 @endif
