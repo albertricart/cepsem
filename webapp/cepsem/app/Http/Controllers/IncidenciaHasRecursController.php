@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\IncidenciaHasRecurs;
+use App\Models\Sexe;
+use App\Models\Provincia;
+use App\Models\TipusRecurs;
 use Illuminate\Http\Request;
+use App\Models\TipusAlertant;
+use App\Models\TipusIncidencia;
+use App\Models\IncidenciaHasRecurs;
 
 class IncidenciaHasRecursController extends Controller
 {
@@ -14,7 +19,13 @@ class IncidenciaHasRecursController extends Controller
      */
     public function index()
     {
-        return view('pages.recursMobil.index');
+        $provincies = Provincia::with(['comarques', 'comarques.municipis'])->get();
+        $tipusAlertants = TipusAlertant::all();
+        $tipusIncidents = TipusIncidencia::all();
+        $sexes = Sexe::all();
+        $tipusRecursos = TipusRecurs::all();
+
+        return view('pages.recursMobil.index', compact('provincies', 'tipusAlertants', 'tipusIncidents', 'sexes', 'tipusRecursos'));
     }
 
     /**
@@ -46,7 +57,12 @@ class IncidenciaHasRecursController extends Controller
      */
     public function show(IncidenciaHasRecurs $incidenciaHasRecurs)
     {
-        return view('pages.cecos.incidencies.incidencia', compact('incidenciaHasRecurs'));
+        $provincies = Provincia::with(['comarques', 'comarques.municipis'])->get();
+        $tipusAlertants = TipusAlertant::all();
+        $tipusIncidents = TipusIncidencia::all();
+        $sexes = Sexe::all();
+        $tipusRecursos = TipusRecurs::all();
+        return view('pages.cecos.incidencies.incidencia', compact('incidenciaHasRecurs', 'provincies', 'tipusAlertants', 'tipusIncidents', 'sexes', 'tipusRecursos'));
     }
 
     /**
