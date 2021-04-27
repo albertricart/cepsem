@@ -18,12 +18,11 @@
         @yield('content')
     </div>
 
-    <script src="{{ asset('js/maps.js') }}"></script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAbznB2qSiIQAIUmm4SwaIeFSYXaBe2dqg&libraries=&v=weekly" async></script>
     <script src="{{ asset('js/app.js') }}"></script>
-    {{-- <script src="{{ asset('js/login.js') }}"></script>
-    <script src="{{ asset('js/formacio.js') }}"></script> --}}
+    <script src="{{ asset('js/login.js') }}"></script>
+    <script src="{{ asset('js/formacio.js') }}"></script>
 </body>
-
-
 
 </html>

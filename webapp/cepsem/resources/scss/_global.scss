@@ -43,9 +43,12 @@ a {
     width: 100%;
     min-height: 350px;
     height: 100%;
+    border: 3px solid $c_light_blue;
+    border-radius: 12px;
+    outline: none;
 }
 
-#anchor{
+#anchor {
     position: relative;
     top: -98px;
 }

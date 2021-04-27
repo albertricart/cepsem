@@ -48,13 +48,9 @@ class AlertantController extends Controller
      */
     public function store(Request $request)
     {
-        if (empty($request->input('telefon'))) {
-            $response = \response(['errorMessage' => "El camp telèfon és obligatori"]);
-        } else if (empty($request->input('tipus_alertants_id'))) {
-            $response = \response(['errorMessage' => "El camp tipus és obligatori"]);
-        } else {
+        if(Utilitat::checkAlertant($request) == ""){
             try {
-                $nouAlertant = $this->getAlertant($request);
+                $nouAlertant = Utilitat::getAlertant($request);
                 $nouAlertant->save();
 
                 $response = (new AlertantResource($nouAlertant))

@@ -1,6 +1,6 @@
 <template>
   <div class="container-fluid">
-    <div class="incidencia-form mx-5 my-5">
+    <div class="incidencia-form mb-4 m-md-3 m-lg-4 m-xl-5">
       <h1 class="page-title">
         <span v-if="insert">NOVA</span><span v-else>EDITAR</span> INCIDÈNCIA
       </h1>
@@ -93,7 +93,7 @@
                 </div>
               </div>
 
-              <div class="col-lg-5 mb-5 mb-lg-0">
+              <div class="col-lg-5 my-5 my-lg-0">
                 <div class="incidencia-hora">
                   <div class="input input--row mb-4">
                     <label for="data">Data</label>
@@ -339,11 +339,12 @@
                       style="
                         background-image: url('/cepsem/webapp/cepsem/public/assets/icons/map.svg');
                       "
-                      id="submitAddress"
+                      id="submit"
                       type="button"
                       value="Geocode"
+                      @click="geocodeAddress"
                     >
-                      Geocode
+                      Localitzar
                     </button>
                   </div>
 
@@ -462,13 +463,16 @@ export default {
       type: Array,
       required: false,
     },
-    usuari:{
-        type: Number,
-        required: false,
-    }
+    usuari: {
+      type: Number,
+      required: false,
+    },
   },
   data() {
     return {
+      map: 0,
+      mapMounted: false,
+      geocoder: 0,
       alertantComarques: [],
       alertantMunicipis: [],
       incidenciaComarques: [],
@@ -479,13 +483,13 @@ export default {
       loadingStatus: "Carregant les dades...",
       incidencia: {
         id: 0,
-        num_incident: 0,
+        num_incident: 100,
         data: "yyyy-MM-dd",
         hora: "HH:mm",
         telefon_alertant: "",
         adreca: "",
         adreca_complement: "",
-        descripcio: "",
+        descripcio: "desc",
         nom_metge: "",
         tipus_incidencies_id: 0,
         alertants_id: 0,
@@ -539,6 +543,7 @@ export default {
   },
   created() {
     this.initComponent();
+
     this.alertantComarques = this.filtrarComarques(
       this.incidencia.alertant.municipi.comarca.provincia.id
     );
@@ -560,7 +565,28 @@ export default {
     this.actualitzarDateTime();
   },
 
+  computed: {
+    syncAlertantId() {
+      this.incidencia.alertant.id = this.incidencia.alertants_id;
+    },
+  },
+
   methods: {
+    //   INSERT - POST   //
+    insertIncidencia() {
+      let me = this;
+
+      axios
+        .post("/incidencies", me.incidencia)
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.log(error.response);
+          console.log(error.response.data.errorMessage);
+        });
+    },
+
     filtrarAlertantComarques() {
       this.alertantComarques = this.filtrarComarques(
         this.incidencia.alertant.municipi.comarca.provincia.id
@@ -765,11 +791,18 @@ export default {
           tabContent.classList.remove("animate__fadeIn");
         }
       });
+
+      if (id == 1 && !this.mapMounted) {
+        this.initMap();
+        this.geocodeAddress();
+      }
     },
 
     fabClick() {
       //finalitzar
       if (this.currentTab == 3) {
+        this.incidencia.alertants_id = this.incidencia.alertant.id;
+        this.insertIncidencia();
       } else {
         this.tabSelected(this.currentTab + 1);
       }
@@ -814,15 +847,15 @@ export default {
     emptyIncidenciaHasRecurs() {
       return {
         afectat: 0,
-        incidencies_id: 0,
-        recursos_id: 0,
-        hora_activacio: 0,
-        hora_mobilitzacio: 0,
-        hora_assistencia: 0,
-        hora_transport: 0,
-        hora_arribada_hospital: 0,
-        hora_transferencia: 0,
-        hora_finalitzacio: 0,
+        incidencies_id: this.incidencia.id,
+        recursos_id: 11,
+        hora_activacio: "00:00",
+        hora_mobilitzacio: "00:00",
+        hora_assistencia: "00:00",
+        hora_transport: "00:00",
+        hora_arribada_hospital: "00:00",
+        hora_transferencia: "00:00",
+        hora_finalitzacio: "00:00",
         prioritat: 0,
         desti: "",
       };
@@ -851,6 +884,38 @@ export default {
         .catch((error) => {
           me.loadingStatus = error;
         });
+    },
+
+    initMap() {
+      this.map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 15,
+        center: { lat: 41.3879, lng: 2.16992 },
+      });
+
+      this.geocoder = new google.maps.Geocoder();
+
+      document.getElementById("submit").addEventListener("click", () => {
+        this.geocodeAddress();
+      });
+
+      this.mapMounted = true;
+    },
+
+    geocodeAddress() {
+      const address = document.getElementById("address").value;
+      this.geocoder.geocode({ address: address }, (results, status) => {
+        if (status === "OK") {
+          this.map.setCenter(results[0].geometry.location);
+          new google.maps.Marker({
+            map: this.map,
+            position: results[0].geometry.location,
+          });
+        } else {
+          alert(
+            "Geocode was not successful for the following reason: " + status
+          );
+        }
+      });
     },
   },
 };
