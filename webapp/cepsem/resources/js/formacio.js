@@ -10,6 +10,7 @@ var opcio3 = document.getElementById("opcio3");
 var presentacio = document.getElementById("presentacio");
 vid.ontimeupdate= function() {preguntas()};
 var contador = 0;
+var temps = 0;
 
 function endavant()
 {
@@ -80,14 +81,16 @@ function validarPregunta()
     {
         if(opcio1.checked)
         {
+            pregunta.style.backgroundColor = "lightgreen";
             validar=true;
         }else
         {
-            pregunta.style.display="none";
+            pregunta.style.backgroundColor = "lightcoral";
             validar = false;
             contador--;
-            vid.currentTime = 10;
-            vid.play();
+            temps = 10;
+
+
         }
     }
     else if(Math.trunc(vid.currentTime)==48)
@@ -100,8 +103,8 @@ function validarPregunta()
             contador--;
             pregunta.style.display="none";
             validar = false;
-            vid.currentTime = 33;
-            vid.play();
+            temps = 33;
+
         }
     }else if(Math.trunc(vid.currentTime)==60)
     {
@@ -111,9 +114,8 @@ function validarPregunta()
         }else
         {
             contador--;
-            pregunta.style.display="none";
             validar = false;
-            vid.currentTime = 49;
+            temps = 49;
             vid.play();
         }
     }
@@ -126,7 +128,7 @@ function validarPregunta()
         {
             contador--;
             validar = false;
-            vid.currentTime = 61;
+            temps = 61;
             vid.play();
             pregunta.style.display="none";
         }
@@ -153,18 +155,33 @@ function reanudar()
 
     if(validarPregunta())
     {
-        vid.play();
-        pregunta.style.display="none";
+        ErrorPregunta();
         opcio1.checked = false;
         opcio2.checked = false;
         opcio3.checked = false;
     }
     else
     {
-        alert("error");
+        ErrorPregunta();
         opcio1.checked = false;
         opcio2.checked = false;
         opcio3.checked = false;
     }
+
+    function ErrorPregunta() {
+        setTimeout(function(){
+            if(!(validar)){
+            pregunta.style.display="none";
+            pregunta.style.backgroundColor = "white";
+            vid.currentTime = temps;
+            vid.play();
+            }
+            else
+            {
+                vid.play();
+                pregunta.style.display="none";
+            }
+        }, 3000);
+      }
 }
 

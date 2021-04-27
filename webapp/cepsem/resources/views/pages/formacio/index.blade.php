@@ -19,14 +19,14 @@
         <div class="formacio-video">
             <h2>RCP: Reanimació Cardiopulmonar</h2>
             <div style="background-color: rgb(24, 24, 24); padding: 24px">
-                <video id="myVideo" src="http://daw.abp-politecnics.com/daw2b02/cepsem/public/assets/media/CLIP1.mp4"  >
+                <video id="myVideo" src="http://daw.abp-politecnics.com/daw2b02/cepsem/public/assets/media/CLIP1.mp4" controls >
                     Your browser does not support HTML5 video.
                 </video>
             </div>
         </div>
 
         <div id="presentacio" class="formacio-body">
-            <h5>A continuació veuras un video de com fer una reanimació cardiopulmonar.
+            <h5 >A continuació veuras un video de com fer una reanimació cardiopulmonar.
                 A mesura que avancis en el video, aniran sortin una serie de preguntas que
                 hauras d'anar responent, osigui que, estigues atent!</h5>
 
@@ -35,8 +35,8 @@
                     style="background-image: url('/cepsem/webapp/cepsem/public/assets/icons/next.svg')"
                     onclick="endavant()">Endavant</button>
             </div>
-
-            <div id="pregunta" style="display: none">
+        </div>
+            <div id="pregunta" style="display: none" class="formacio-body">
                 <div class="form-group row">
                     <label for="evolucion" class="col-sm-10 col-form-label"> <b id="enunciat">Pregunta 1: Que es el
                             primer que s'ha de fer quan veiem a una persona tenint parada cardiorespiratoria?
@@ -58,10 +58,10 @@
                     </div>
                 </div>
                 <div style="text-align: right">
-                    <button type="button" class="button button--blue" onclick="reanudar()">GO</button>
+                    <button id="btnValidar" type="button" class="button button--blue" onclick="reanudar()">Validar</button>
                 </div>
             </div>
 
-        </div>
     </div>
+
 @endsection
