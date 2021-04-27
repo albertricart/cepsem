@@ -1,8 +1,16 @@
 <template>
   <div>
-    <h1 class="page-title">Recurs Mobil</h1>
+    <h1 class="page-title">RECURS MOBIL</h1>
 
-
+    <div class="d-flex justify-content-end mb-4">
+      <a
+        href="/cepsem/webapp/cepsem/public/cecos/incidencia/-1"
+        class="button button-icon button--pink"
+        id="show-btn"
+      >
+        VULL LA MEVA INCIDENCIA
+      </a>
+    </div>
 
     <div v-if="loading" class="table-loading">
       <p>{{ loadingStatus }}</p>
@@ -12,32 +20,34 @@
     <div v-else class="animate__animated animate__fadeIn">
 
       <b-table
-        id="recursMobil-table"
+        id="incidencies-table"
         :fields="fields"
-        :items="recursMobil"
+        :items="incidencies"
         :per-page="perPage"
         :current-page="currentPage"
         :sort-by.sync="sortBy"
         :sort-desc.sync="sortDesc"
-        ref="selectableTable"
         sort-icon-left
+        ref="selectableTable"
         selectable
         large
         hover
-        @row-selected="onRowSelected"
       >
-      <template #cell(selected)="{ rowSelected }">
-        <template v-if="rowSelected">
-          <span aria-hidden="true">&check;</span>
-          <span class="sr-only">Selected</span>
+        <template #cell(Seleccionat)="{ rowSelected }">
+          <template v-if="rowSelected">
+            <span aria-hidden="true">&check;</span>
+            <span class="sr-only">Selected</span>
+          </template>
+          <template v-else>
+            <span aria-hidden="true">&nbsp;</span>
+            <span class="sr-only">Not selected</span>
+          </template>
         </template>
-        <template v-else>
-          <span aria-hidden="true">&nbsp;</span>
-          <span class="sr-only">Not selected</span>
-        </template>
-      </template>
-      <template #cell(Editar)>
-            <svg @click="editRecursMobil" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#11AEBF"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M14.06 9.02l.92.92L5.92 19H5v-.92l9.06-9.06M17.66 3c-.25 0-.51.1-.7.29l-1.83 1.83 3.75 3.75 1.83-1.83c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.2-.2-.45-.29-.71-.29zm-3.6 3.19L3 17.25V21h3.75L17.81 9.94l-3.75-3.75z"/></svg>
+
+        <template #cell(Veure)="data">
+          <a :href="'/cepsem/webapp/cepsem/public/cecos/incidencia/' + data.item.id ">
+            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#11AEBF"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 6.5c3.79 0 7.17 2.13 8.82 5.5-1.65 3.37-5.02 5.5-8.82 5.5S4.83 15.37 3.18 12C4.83 8.63 8.21 6.5 12 6.5m0-2C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zm0 5c1.38 0 2.5 1.12 2.5 2.5s-1.12 2.5-2.5 2.5-2.5-1.12-2.5-2.5 1.12-2.5 2.5-2.5m0-2c-2.48 0-4.5 2.02-4.5 4.5s2.02 4.5 4.5 4.5 4.5-2.02 4.5-4.5-2.02-4.5-4.5-4.5z"/></svg>
+          </a>
         </template>
       </b-table>
 
@@ -46,96 +56,38 @@
         v-model="currentPage"
         :total-rows="rows"
         :per-page="perPage"
-        aria-controls="recursMobil-table"
+        aria-controls="incidencies-table"
       ></b-pagination>
-
     </div>
 
-
-
-    <b-modal hide-footer hide-header centered size="lg" ref="delete-modal">
-      <div class="cepsem-modal">
-        <div class="modal-header">
-          <h2>ESBORRAR</h2>
-        </div>
-
-        <div class="modal-body">
-          <p>Estàs segur que vols esborrar els següents recurs mobil?</p>
-          <ul>
-            <li v-for="(recursMobil, index) in selected" :key="index">
-              {{ recursMobil.id + " " }}
-              <span v-if="recursMobil.nom">{{ recursMobil.nom }}</span>
-              <span v-if="recursMobil.cognoms">{{ recursMobil.cognoms }}</span>
-            </li>
-          </ul>
-        </div>
-
-        <div class="cepsem-modal-footer">
-          <button
-            class="button button-icon button--rounded button--blue"
-            type="button"
-            style="background-image: url('../assets/icons/check.svg')"
-            @click="deleteRecursMobil"
-          >
-            Eliminar
-          </button>
-          <button
-            class="button button-icon button--rounded button-inverted button-inverted--red ml-2 mt-3"
-            block
-            @click="hideModal('delete-modal')"
-            type="button"
-          >
-            Cancel·lar
-          </button>
-        </div>
-      </div>
-    </b-modal>
   </div>
 </template>
 
 <script>
 export default {
-  props: {
-    incidencia: {
-      type: Array,
-      required: false,
-    },
-
-    recurs: {
-      type: Array,
-      required: false,
-    },
-
-    afectat: {
-      type: Array,
-      required: false,
-    },
-  },
+  props: {},
   data() {
     return {
       sortBy: "id",
       sortDesc: false,
       perPage: 10,
       currentPage: 1,
-      recursosMobil: [],
+      incidencies: [],
       editClick: false,
-      insert: false,
-      recursMobil: {
-        id: "",
-        nom: "",
-        cognoms: "",
-        edat: "",
-        tipusAcident: "",
-        direccio: "",
 
-      },
       fields: [
-        { key: "incidencia.id", label: "ID", sortable: true },
-        { key: "afectat.nom", label: "Nom", sortable: true },
-        { key: "afectat.cognom", label: "Cognom", sortable: true },
-        { key: "afectat.edat", label: "Edat", sortable: true },
-        { key: "incidencies.tipus_incidencies_id", label: "Tipus Incidencia", sortable: true },
-        { key: "incidencies.adreca", label: "Adreça", sortable: true },
+        { key: "data", label: "Data", sortable: true },
+        { key: "hora", label: "Hora", sortable: true },
+        { key: "telefon_alertant", label: "Tlf. Alertant", sortable: true },
+        { key: "adreca", label: "Adreça", sortable: true },
+        { key: "adreca_complement", label: "Adreça Comp.", sortable: true },
+        { key: "descripcio", label: "Descripció", sortable: true },
+        { key: "tipus_incidencia.tipus", label: "Tipus", sortable: true },
+        { key: "municipi.comarca.provincia.nom", label: "Provincia", sortable: true },
+        { key: "municipi.comarca.nom", label: "Comarca", sortable: true },
+        { key: "municipi.nom", label: "Municipi", sortable: true },
+        { key: "recursos.codi", label: "Codi", sortable: true },
+        "Veure",
       ],
       loading: true,
       loadingStatus: "Carregant les dades...",
@@ -144,21 +96,20 @@ export default {
     };
   },
   created() {
-    this.selectRecursMobil();
-
+    this.selectIncidencies();
   },
   mounted() {
-    console.log("Recurs mobil component mounted.");
+    console.log("Incidencies component mounted.");
   },
   methods: {
     //   SELECT - GET   //
-    selectRecursMobil() {
+    selectIncidencies() {
       let me = this;
 
       axios
-        .get("/recursMobil")
+        .get("/incidencies")
         .then((response) => {
-          me.recursosMobil = response.data;
+          me.incidencies = response.data;
           this.loading = false;
         })
         .catch((error) => {
@@ -167,57 +118,17 @@ export default {
         });
     },
 
-    //   INSERT - POST   //
-    insertRecursMobil() {
-      let me = this;
 
-      axios
-        .post("/recursMobil", me.recursMobil)
-        .then((response) => {
-          console.log(response);
-
-          if (response.status == 201) {
-            me.selectRecursMobil();
-            me.emptyRecursMobil();
-            me.errors = [];
-            me.hideModal("recursMobil-modal");
-          }
-        })
-        .catch((error) => {
-          console.log(error.response);
-          console.log(error.response.data.errorMessage);
-        });
-    },
-    updateRecursMobil(){
-        let me = this;
-
-      axios
-        .put("/recursMobil/" + me.recursMobil.id, me.recursMobil)
-        .then((response) => {
-          console.log(response);
-
-          if (response.status == 204) {
-            me.selectRecursMobil();
-            me.emptyRecursMobil();
-            me.errors = [];
-            me.hideModal("recursMobil-modal");
-          }
-        })
-        .catch((error) => {
-          console.log(error.response);
-          console.log(error.response.data.errorMessage);
-        });
-    },
     //   DELETE   //
-    deleteRecursMobil() {
+    deleteIncidencies() {
       let me = this;
 
-      me.selected.forEach((recursMobil) => {
+      me.selected.forEach((incidencia) => {
         axios
-          .delete("/recursMobil/" + recursMobil.id)
+          .delete("/incidencies/" + incidencia.id)
           .then((response) => {
             console.log(response);
-            me.selectRecursMobil();
+            me.selectIncidencies();
             me.hideModal("delete-modal");
           })
           .catch((error) => {
@@ -226,127 +137,10 @@ export default {
           });
       });
     },
-    afegirRecursMobil() {
-      this.insert = true;
-      this.emptyRecursMobil();
-      this.selectRecursMobil();
-      this.showModal("recursMobil-modal");
-    },
-    editRecursMobil(){
-        this.editClick = true;
-
-      if (this.insert) {
-        this.insert = false;
-      }
-    },
-    onRowSelected(items) {
-      if (this.editClick) {
-        this.getLastSelected(this.selected, items);
-        this.showModal("recursMobil-modal");
-        this.editClick = false;
-      }
-
-      this.selected = items;
-    },
-    editButtonClick(){
-        this.editClick = true;
-    },
-    getLastSelected(oldarray, newarray) {
-      let found = false;
-      let inarray = false;
-      let i = 0,
-        j = 0;
-      //   debugger;
-
-      while (!found && i < newarray.length) {
-        j = 0;
-        inarray = false;
-
-        while (!inarray && j < oldarray.length) {
-          if (oldarray[j].id == newarray[i].id) {
-            inarray = true;
-          }
-          j++;
-        }
-
-        if (!inarray) {
-          this.recursMobil = newarray[i];
-          found = true;
-        }
-
-        i++;
-      }
-    },
-    selectAllRows() {
-      this.$refs.selectableTable.selectAllRows();
-    },
-    clearSelected() {
-      this.$refs.selectableTable.clearSelected();
-    },
-    //   UTILS   //
-
-    /**
-     * Funció que fa control d'errors i redirecciona a la funcio insertUsuari() en cas d'OK
-     */
-    /* checkNotNull() {
-      this.errors = [];
-
-      if (!this.usuari.username) {
-        this.checkIfExistsError("El camp usuari és obligatori.");
-      }
-
-      if (!this.usuari.contrasenya) {
-        this.checkIfExistsError("El camp contrasenya és obligatori.");
-      }
-
-      if (!this.usuari.email) {
-        this.checkIfExistsError("El camp email és obligatori.");
-      }
-
-      if (!this.usuari.nom) {
-        this.checkIfExistsError("El camp nom és obligatori.");
-      }
-
-      if (!this.usuari.cognoms) {
-        this.checkIfExistsError("El camp cognoms és obligatori.");
-      }
-
-      if (!this.usuari.rols_id) {
-        this.checkIfExistsError("El camp rol és obligatori.");
-      }
-
-      //
-      if (this.errors.length == 0) {
-        if (this.insert) {
-          this.insertUsuari();
-        } else {
-          this.updateUsuari();
-        }
-      }
-    }, */
-
-    /**
-     * Funció que rep un missatge d'error per paràmetre, si no existeix a la llista d'errors l'afegirà
-     *
-     * @param {String} errorMessage
-     */
-    checkIfExistsError(errorMessage) {
-      if (!this.errors.includes(errorMessage)) {
-        this.errors.push(errorMessage);
-      }
-    },
-
-    //   MODALS   //
-    showModal(modal) {
-      this.$refs[modal].show();
-    },
-    hideModal(modal) {
-      this.$refs[modal].hide();
-    },
   },
   computed: {
     rows() {
-      return this.recursMobil.length;
+      return this.incidencies.length;
     },
   },
 };

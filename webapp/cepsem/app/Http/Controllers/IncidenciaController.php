@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Incidencia;
-use App\Models\IncidenciaHasRecurs;
-use App\Models\Provincia;
 use App\Models\Sexe;
-use App\Models\TipusAlertant;
-use App\Models\TipusIncidencia;
+use App\Models\Provincia;
+use App\Models\Incidencia;
 use App\Models\TipusRecurs;
 use Illuminate\Http\Request;
+use App\Models\TipusAlertant;
+use App\Models\TipusIncidencia;
+use App\Models\IncidenciaHasRecurs;
+use Illuminate\Support\Facades\Auth;
 
 class IncidenciaController extends Controller
 {
@@ -57,7 +58,8 @@ class IncidenciaController extends Controller
         $tipusIncidents = TipusIncidencia::all();
         $sexes = Sexe::all();
         $tipusRecursos = TipusRecurs::all();
-        return view('pages.cecos.incidencies.incidencia', compact('idincidencia', 'provincies', 'tipusAlertants', 'tipusIncidents', 'sexes', 'tipusRecursos'));
+        $rol = Auth::user()->rols_id;
+        return view('pages.cecos.incidencies.incidencia', compact('idincidencia', 'provincies', 'tipusAlertants', 'tipusIncidents', 'sexes', 'tipusRecursos', 'rol'));
     }
 
     /**

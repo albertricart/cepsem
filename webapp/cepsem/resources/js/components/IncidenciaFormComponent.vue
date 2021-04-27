@@ -407,6 +407,11 @@
               :key="incidencia_has_recurs.id"
               :editrecurs="incidencia_has_recurs"
               :tipusrecursos="tipusrecursos"
+              :editafectat="incidencia_has_recurs.afectat"
+              :sexes="sexes"
+              :usuarilogin="usuari"
+              :usuarirecurs="incidencia.usuari"
+
             >
             </recursitem-component>
           </section>
@@ -463,7 +468,7 @@ export default {
       required: false,
     },
     usuari:{
-        type: Number,
+        type: Object,
         required: false,
     }
   },
@@ -490,7 +495,7 @@ export default {
         tipus_incidencies_id: 0,
         alertants_id: 0,
         municipis_id: 0,
-        usuaris_id: this.usuari,
+        usuaris_id: this.usuari.id,
         saveAlertant: false,
         alertant: {
           id: 0,

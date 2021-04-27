@@ -65,13 +65,10 @@ Route::middleware(['auth' ,'cecos'])->group(function () {
 
 });
 
-Route::middleware(['recurs.mobil'])->group(function () {
+Route::middleware(['auth' ,'recurs.mobil'])->group(function () {
 
-    // Route::get('/cecos', function () {
-    //     return view('pages.cecos.index');
-    // });
-
-
+    Route::resource('/cecos/recursMobil', IncidenciaHasRecursController::class);
+    Route::resource('/cecos/incidencies', IncidenciaController::class);
 });
 
 
