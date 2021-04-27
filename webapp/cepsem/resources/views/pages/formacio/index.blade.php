@@ -19,19 +19,19 @@
         <div class="formacio-video">
             <h2>RCP: Reanimació Cardiopulmonar</h2>
             <div style="background-color: rgb(24, 24, 24); padding: 24px">
-                <video id="myVideo" src="http://daw.abp-politecnics.com/daw2b02/cepsem/public/assets/media/CLIP1.mp4" controls >
+                <video id="myVideo" src="http://daw.abp-politecnics.com/daw2b02/cepsem/public/assets/media/CLIP1.mp4" >
                     Your browser does not support HTML5 video.
                 </video>
             </div>
         </div>
 
         <div id="presentacio" class="formacio-body">
-            <h5 >A continuació veuras un video de com fer una reanimació cardiopulmonar.
+            <h5 >A continuació veuras un video de com fer una RCP.
                 A mesura que avancis en el video, aniran sortin una serie de preguntas que
-                hauras d'anar responent, osigui que, estigues atent!</h5>
+                hauras d'anar responent, para-hi molta atenció!</h5>
 
             <div style="text-align: right">
-                <button type="button" id="boton1" class="button button-icon button--rounded button--blue"
+                <button type="button" id="boton1" class="button button-icon button--rounded button--pink"
                     style="background-image: url('/cepsem/webapp/cepsem/public/assets/icons/next.svg')"
                     onclick="endavant()">Endavant</button>
             </div>
@@ -58,10 +58,19 @@
                     </div>
                 </div>
                 <div style="text-align: right">
-                    <button id="btnValidar" type="button" class="button button--blue" onclick="reanudar()">Validar</button>
+                    <button id="btnValidar" type="button" class="button button--blue" onclick="reanudar()" >Validar</button>
                 </div>
             </div>
 
+            <div id="final" class="formacio-body" style="display: none">
+                <h5 >Felicitats! Has completat la formació sobre la reanimació cardeopulmonar.</h5>
+                <div style="text-align: right">
+                    <button id="btnValidar" type="button"  class="button button-icon button--rounded button--pink" style="background-image: url('/cepsem/webapp/cepsem/public/assets/icons/next.svg')"> <a href="/cepsem/webapp/cepsem/public/">Torna a l'inici</a></button>
+                </div>
+            </div>
     </div>
+
+
+
 
 @endsection
