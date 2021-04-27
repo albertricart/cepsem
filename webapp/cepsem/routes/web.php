@@ -52,7 +52,6 @@ Route::middleware(['auth' ,'admin'])->group(function () {
         return view('pages.cecos.index');
     });
 
-
 });
 
 Route::middleware(['auth' ,'cecos'])->group(function () {
@@ -62,15 +61,16 @@ Route::middleware(['auth' ,'cecos'])->group(function () {
         return view('pages.cecos.index');
     });
 
-
 });
 
 Route::middleware(['auth' ,'recurs.mobil'])->group(function () {
 
     Route::resource('/cecos/recursMobil', IncidenciaHasRecursController::class);
     Route::resource('/cecos/incidencies', IncidenciaController::class);
+    Route::get('/cecos', function () {
+        return view('pages.cecos.index');
+    });
 });
-
 
 
 Route::get('/clearcache', function() {

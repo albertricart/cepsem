@@ -12,8 +12,8 @@
                 alt=""
                 class="mr-3"
                 />
-                <span v-if="afectat.nom">{{ afectat.nom + " - "}}</span>
-                <span v-if="afectat.sexes_id == 1">Home, </span>
+                <span v-if="afectat.nom">{{ afectat.nom + " -"}}&nbsp;</span>
+                <span v-if="afectat.sexes_id == 1">Home,&nbsp;</span>
                 <span v-else>Dona, </span>
                 <span v-if="afectat.edat">{{" " + afectat.edat + " anys"}}</span>
             </h3>
