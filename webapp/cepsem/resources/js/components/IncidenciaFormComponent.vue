@@ -412,6 +412,7 @@
               :sexes="sexes"
               :usuarilogin="usuari"
               :usuarirecurs="incidencia.usuari"
+              :insert="insert"
 
             >
             </recursitem-component>
@@ -915,10 +916,6 @@ export default {
             map: this.map,
             position: results[0].geometry.location,
           });
-        } else {
-          alert(
-            "Geocode was not successful for the following reason: " + status
-          );
         }
       });
     },

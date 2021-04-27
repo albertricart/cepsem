@@ -45,7 +45,7 @@
       <div class="col-lg-6">
         <div class="input input--col mb-2">
           <label for="horaActi" >Hora d'activació</label>
-          <input type="time" name="horaActi" id="horaActi" v-model="hora" />
+          <input type="time" name="horaActi" id="horaActi" v-model="recurs.hora_activacio" />
         </div>
         <input
           type="checkbox"
@@ -155,12 +155,16 @@ export default {
       type: Object,
       required: false,
     },
+    insert: {
+      type: Boolean,
+      required: true,
+    },
   },
   data() {
     return {
       trasllat: false,
       prioritats: [1, 2, 3, 4, 5],
-      hora: this.getTime(),
+      hora: this.checkUpdate(),
       afectat: {},
 
     };
@@ -177,6 +181,11 @@ export default {
   },
   mounted() {},
   methods: {
+      checkUpdate(){
+          if (this.insert) {
+              this.getTime();
+          }
+      },
     getTime() {
         var today = new Date();
 
