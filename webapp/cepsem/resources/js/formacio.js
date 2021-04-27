@@ -11,22 +11,22 @@ var presentacio = document.getElementById("presentacio");
 vid.ontimeupdate= function() {preguntas()};
 var contador = 0;
 
-function play()
+function endavant()
 {
     vid.play();
     presentacio.style.display="none";
 
 }
 
-function preguntas() { 
-   
+function preguntas() {
+
   if(Math.floor(vid.currentTime)==33 &&  vid.currentTime<33.3 && contador==0)
   {
-    
+
     vid.pause();
     pregunta.style.display = "block";
     contador++;
-    
+
 
   }
   else if(Math.floor(vid.currentTime)==48 &&  vid.currentTime<48.3 && contador==1)
@@ -38,7 +38,7 @@ function preguntas() {
     label2.innerHTML = "100 a ritme de 60/minut";
     label3.innerHTML = "30 a ritme de 100/minut";
     contador++;
-    
+
   }
   else if(Math.floor(vid.currentTime)==60 &&  vid.currentTime<60.3 && contador==2)
   {
@@ -70,7 +70,7 @@ function preguntas() {
     label3.innerHTML = "30 compressions i 2 ventilacions 3 vegades abans d'aplicar un altre decarrega";
     contador++;
   }
-} 
+}
 
 function validarPregunta()
 {
@@ -150,7 +150,7 @@ function validarPregunta()
 
 function reanudar()
 {
- 
+
     if(validarPregunta())
     {
         vid.play();
