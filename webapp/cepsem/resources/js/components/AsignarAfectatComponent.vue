@@ -143,10 +143,14 @@
           </div>
         </div>
 
-        <div class="col-lg-4">
+        <div class="col-lg-4" v-if="incidencia_has_recurs.recurs.id > 0">
           <div class="row"></div>
           <div class="recurs-info">
-            <h4>{{ incidencia_has_recurs.recurs.tipus_recurs.tipus }}</h4>
+              <div class="recurs-info__head">
+                  <img v-if="incidencia_has_recurs.recurs.tipus_recursos_id == 4" src="/cepsem/webapp/cepsem/public/assets/icons/helicopter.svg" alt="">
+                  <img v-else src="/cepsem/webapp/cepsem/public/assets/icons/ambulance.svg" alt="">
+                <h4 class="ml-2">{{ incidencia_has_recurs.recurs.tipus_recurs.tipus }}</h4>
+              </div>
             <p>ID: {{ incidencia_has_recurs.recurs.id }}</p>
             <p>Codi: {{ incidencia_has_recurs.recurs.codi }}</p>
           </div>
