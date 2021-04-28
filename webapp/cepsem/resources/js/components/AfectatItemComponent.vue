@@ -79,7 +79,7 @@
       </div>
 
       <div class="row">
-        <div class="col-lg-4">
+        <div class="col-lg-5">
           <div class="input input--col mb-3">
             <label for="edat">Edat</label>
             <input
@@ -91,7 +91,7 @@
             />
           </div>
         </div>
-        <div class="col-lg-8">
+        <div class="col-lg-7">
           <div class="input input--col mb-3">
             <label for="sexe">Sexe</label>
             <b-form-select
@@ -122,7 +122,7 @@
 <script>
 export default {
   props: {
-    editafectat: {
+    incidencia_has_recurs_afectat: {
       type: Object,
       required: false,
     },
@@ -139,17 +139,17 @@ export default {
     };
   },
   created() {
-    if (this.editafectat === undefined) {
+    if (this.incidencia_has_recurs_afectat === undefined) {
       this.afectat = this.emptyAfectat();
     } else {
-      this.afectat = this.editafectat;
+      this.afectat = this.incidencia_has_recurs_afectat;
     }
   },
   mounted() {
-    console.log("Afectat " + this.afectat.cip + " component mounted.");
+    console.log("Afectat amb CIP " + this.afectat.cip + " component mounted.");
   },
   destroyed() {
-    console.log("Afectat " + this.afectat.cip + " component destroyed.");
+    console.log("Afectat amb CIP" + this.afectat.cip + " component destroyed.");
   },
   methods: {
     emptyAfectat() {

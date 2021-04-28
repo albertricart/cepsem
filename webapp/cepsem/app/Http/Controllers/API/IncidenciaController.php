@@ -115,7 +115,7 @@ class IncidenciaController extends Controller
      */
     public function show(Incidencia $incidency)
     {
-        return new IncidenciaResource(Incidencia::with(['tipus_incidencia', 'usuari', 'municipi.comarca.provincia', 'alertant.municipi.comarca.provincia', 'incidencia_has_recursos.recurs', 'incidencia_has_recursos.afectat'])->find($incidency->id));
+        return new IncidenciaResource(Incidencia::with(['tipus_incidencia', 'usuari', 'municipi.comarca.provincia', 'alertant.municipi.comarca.provincia', 'incidencia_has_recursos.recurs', 'incidencia_has_recursos.afectat', 'incidencia_has_recursos.recurs.tipus_recurs'])->find($incidency->id));
     }
 
     /**
@@ -127,7 +127,7 @@ class IncidenciaController extends Controller
      */
     public function update(Request $request, Incidencia $incidency)
     {
-        //
+        $incidency->save();
     }
 
     /**
