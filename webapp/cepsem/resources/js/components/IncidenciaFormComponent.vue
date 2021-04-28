@@ -55,39 +55,31 @@
                     </div>
                   </div>
 
-                  <div class="col-lg-12">
-                    <div class="input input--col mb-2">
-                      <label for="cercaTlf">Cerca un alertant existent</label>
-                      <div class="input-button">
-                        <input
-                          type="text"
-                          name="cercaTlf"
-                          id="cercaTlf"
-                          v-model="cercaAlertant"
-                          placeholder="Introdueix el telèfon de l'alertant..."
-                          autofocus
-                        />
-                        <button
-                          class="button button--blue"
-                          style="width: 100%"
-                          @click="cercaAlertantbyTlf"
-                        >
-                          CARREGAR DADES
-                        </button>
-                      </div>
-                    </div>
-                    <div
-                      v-show="loadingStatus"
-                      class="input-error input-error--show"
-                    >
-                      <img
-                        src="/cepsem/webapp/cepsem/public/assets/icons/alert.svg"
-                        alt=""
-                        width="18px"
-                        height="18px"
-                        style="margin-bottom: auto"
+                  <div class="col-lg-4">
+                    <div class="input input--col mb-4">
+                      <label for="numincidencia">Número Incidencia</label>
+                      <input
+                        type="number"
+                        name="numincidencia"
+                        id="numincidencia"
+                        min="0"
+                        v-model="incidencia.num_incident"
+                        placeholder="Introdueix el número d'incidència..."
                       />
-                      <span>No s'ha trobat cap resultat</span>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-12">
+                    <div class="input input--col mb-4">
+                      <label for="descripcio">Descripció</label>
+                      <textarea
+                        name="descripcio"
+                        id="descripcio"
+                        cols="30"
+                        rows="4"
+                        v-model="incidencia.descripcio"
+                        placeholder="Dóna una descripció de l'incident..."
+                      ></textarea>
                     </div>
                   </div>
                 </div>
@@ -137,6 +129,44 @@
                   />DADES DE L'ALERTANT
                 </h3>
               </div>
+
+              <div class="col-lg-6 mb-4">
+                <div class="input input--col mb-2">
+                  <label for="cercaTlf">Cerca un alertant existent</label>
+                  <div class="input-button">
+                    <input
+                      type="text"
+                      name="cercaTlf"
+                      id="cercaTlf"
+                      v-model="cercaAlertant"
+                      placeholder="Introdueix el telèfon de l'alertant..."
+                      autofocus
+                    />
+                    <button
+                      class="button button--blue"
+                      style="width: 100%"
+                      @click="cercaAlertantbyTlf"
+                    >
+                      CARREGAR DADES
+                    </button>
+                  </div>
+                </div>
+                <div
+                  v-show="loadingStatus"
+                  class="input-error input-error--show"
+                >
+                  <img
+                    src="/cepsem/webapp/cepsem/public/assets/icons/alert.svg"
+                    alt=""
+                    width="18px"
+                    height="18px"
+                    style="margin-bottom: auto"
+                  />
+                  <span>No s'ha trobat cap resultat</span>
+                </div>
+              </div>
+
+              <div class="col-lg-6"></div>
 
               <div class="col-lg-6 order-1">
                 <div class="input input--col mb-4">
@@ -486,13 +516,13 @@ export default {
       loadingStatus: "Carregant les dades...",
       incidencia: {
         id: 0,
-        num_incident: 100,
+        num_incident: 0,
         data: "yyyy-MM-dd",
         hora: "HH:mm",
         telefon_alertant: "",
         adreca: "",
         adreca_complement: "",
-        descripcio: "desc",
+        descripcio: "",
         nom_metge: "",
         tipus_incidencies_id: 0,
         alertants_id: 0,
@@ -587,6 +617,7 @@ export default {
         .catch((error) => {
           console.log(error.response);
           console.log(error.response.data.errorMessage);
+          alert(error.response.data.errorMessage);
         });
     },
 
@@ -595,13 +626,14 @@ export default {
       let me = this;
 
       axios
-        .put("/incidencies", me.incidencia)
+        .put("/incidencies/" + me.incidencia.id, me.incidencia)
         .then((response) => {
           console.log(response);
         })
         .catch((error) => {
           console.log(error.response);
           console.log(error.response.data.errorMessage);
+          alert(error.response.data.errorMessage);
         });
     },
 

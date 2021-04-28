@@ -23,3 +23,24 @@
     }
 }
 
+.recurs-info{
+    padding: 16px;
+    border: 1px solid $c_light_blue;
+    border-radius: 6px;
+
+    &__head{
+        display: flex;
+        align-items: flex-start;
+    }
+
+    h4{
+        color: $c_blue;
+        margin-bottom: 10px;
+    }
+
+    img{
+        width: 30px;
+    }
+
+
+}
