@@ -12,10 +12,14 @@
         }
     }
     .section-title{
-        font-size: 18px;
+        font-size: 22px;
         display: flex;
         align-items: center;
         padding-bottom: 6px;
+
+        img{
+            width: 35px;
+        }
     }
 }
 

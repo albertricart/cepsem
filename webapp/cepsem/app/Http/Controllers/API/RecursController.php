@@ -19,8 +19,7 @@ class RecursController extends Controller
      */
     public function index()
     {
-       return RecursResource::collection(Recurs::with(['incidencies', 'tipus_recurs','usuaris'])->get());
-
+        return RecursResource::collection(Recurs::with(['incidencies', 'tipus_recurs', 'usuaris'])->get());
     }
 
     /**
@@ -59,7 +58,6 @@ class RecursController extends Controller
         }
 
         return $response;
-
     }
 
     /**
@@ -108,7 +106,6 @@ class RecursController extends Controller
         }
 
         return $response;
-
     }
 
     /**
@@ -127,6 +124,46 @@ class RecursController extends Controller
         }
         return $response;
     }
+
+
+
+
+    /**
+     * Display the specified resource.
+     *
+     * @param
+     * @return \Illuminate\Http\Response
+     */
+    public function getAvailableRecurs($tipus_recurs_id)
+    {
+        return new RecursResource(
+            Recurs::with(['usuaris', 'tipus_recurs'])
+                ->where('actiu', '=', 0)
+                ->where('tipus_recursos_id', '=', $tipus_recurs_id)
+                ->get()
+        );
+    }
+
+
+      /**
+     * Display the specified resource.
+     *
+     * @param
+     * @return \Illuminate\Http\Response
+     */
+    public function setRecursAvailability($id, $available)
+    {
+        if($available == 0 || $available == 1){
+            $recurs = Recurs::find($id);
+
+            $recurs->actiu = $available;
+
+            $recurs->save();
+        }
+    }
+
+
+
 
     public function getRecurs($request)
     {

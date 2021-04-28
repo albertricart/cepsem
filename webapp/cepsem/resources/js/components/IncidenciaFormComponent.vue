@@ -381,7 +381,7 @@
               <afectatitem-component
                 v-for="incidencia_has_recurs in incidencia.incidencia_has_recursos"
                 :key="incidencia_has_recurs.afectat.id"
-                :editafectat="incidencia_has_recurs.afectat"
+                :incidencia_has_recurs_afectat="incidencia_has_recurs.afectat"
                 :sexes="sexes"
                 @remove-afectat="removeAfectat"
               ></afectatitem-component>
@@ -406,13 +406,11 @@
             <recursitem-component
               v-for="incidencia_has_recurs in incidencia.incidencia_has_recursos"
               :key="incidencia_has_recurs.id"
-              :editrecurs="incidencia_has_recurs"
+              :incidencia_has_recurs="incidencia_has_recurs"
               :tipusrecursos="tipusrecursos"
-              :editafectat="incidencia_has_recurs.afectat"
               :sexes="sexes"
               :usuarilogin="usuari"
               :usuarirecurs="incidencia.usuari"
-
             >
             </recursitem-component>
           </section>
@@ -468,10 +466,10 @@ export default {
       type: Array,
       required: false,
     },
-    usuari:{
-        type: Object,
-        required: false,
-    }
+    usuari: {
+      type: Object,
+      required: false,
+    },
   },
   data() {
     return {
@@ -583,6 +581,21 @@ export default {
 
       axios
         .post("/incidencies", me.incidencia)
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.log(error.response);
+          console.log(error.response.data.errorMessage);
+        });
+    },
+
+    //   UPDATE - PUT   //
+    updateIncidencia() {
+      let me = this;
+
+      axios
+        .put("/incidencies", me.incidencia)
         .then((response) => {
           console.log(response);
         })
@@ -799,15 +812,19 @@ export default {
 
       if (id == 1 && !this.mapMounted) {
         this.initMap();
-        this.geocodeAddress();
+        if (this.incidencia.adreca != "") this.geocodeAddress();
       }
     },
 
     fabClick() {
       //finalitzar
       if (this.currentTab == 3) {
-        this.incidencia.alertants_id = this.incidencia.alertant.id;
-        this.insertIncidencia();
+        if (this.insert) {
+          this.incidencia.alertants_id = this.incidencia.alertant.id;
+          this.insertIncidencia();
+        } else {
+          this.updateIncidencia();
+        }
       } else {
         this.tabSelected(this.currentTab + 1);
       }
@@ -851,9 +868,9 @@ export default {
 
     emptyIncidenciaHasRecurs() {
       return {
-        afectat: 0,
+        afectat: {},
         incidencies_id: this.incidencia.id,
-        recursos_id: 11,
+        recursos_id: 0,
         hora_activacio: "00:00",
         hora_mobilitzacio: "00:00",
         hora_assistencia: "00:00",
@@ -863,6 +880,14 @@ export default {
         hora_finalitzacio: "00:00",
         prioritat: 0,
         desti: "",
+        recurs: {
+          actiu: 0,
+          codi: "",
+          id: 0,
+          tipus_recursos_id: 0,
+          tipus_recurs: {},
+          usuaris: [],
+        },
       };
     },
 
@@ -916,9 +941,7 @@ export default {
             position: results[0].geometry.location,
           });
         } else {
-          alert(
-            "Geocode was not successful for the following reason: " + status
-          );
+          alert("No s'ha pogut localitzar l'adreça indicada (" + status + ")");
         }
       });
     },
