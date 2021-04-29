@@ -441,6 +441,7 @@
               :sexes="sexes"
               :usuarilogin="usuari"
               :usuarirecurs="incidencia.usuari"
+              :insert="insert"
             >
             </recursitem-component>
           </section>

@@ -63,12 +63,23 @@
             <div class="col-lg-6">
               <div class="input input--col mb-2">
                 <label for="horaActi">Hora d'activació</label>
-                <input
+                <div v-if="insert">
+                  <input
                   type="time"
                   name="horaActi"
                   id="horaActi"
                   v-model="hora"
                 />
+                </div>
+                <div v-else>
+                  <input
+                  type="time"
+                  name="horaActi"
+                  id="horaActi"
+                  v-model="incidencia_has_recurs.hora_activacio"
+                />
+                </div>
+
               </div>
               <input
                 type="checkbox"
