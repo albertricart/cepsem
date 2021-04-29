@@ -13,6 +13,10 @@
 
     &--pink {
         background-color: $c_pink;
+
+        &:hover {
+            color: white;
+        }
     }
 
     &-icon {

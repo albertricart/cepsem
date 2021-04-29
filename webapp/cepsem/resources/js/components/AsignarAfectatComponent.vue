@@ -25,7 +25,7 @@
           <div class="row">
             <div class="col-lg-6">
               <div class="input input--col mb-4">
-                <label for="tipusrecurs">Tipus recurs Mòbil</label>
+                <label :for="'tipusrecurs' + incidencia_has_recurs.id">Tipus recurs Mòbil</label>
                 <b-form-select
                   name="tipusrecurs"
                   id="tipusrecurs"
@@ -38,7 +38,7 @@
               </div>
             </div>
 
-            <div class="col-lg-6  m-auto">
+            <div class="col-lg-6 m-auto">
               <button
                 class="button button-rounded button--blue"
                 @click="getAvailableRecurs"
@@ -49,7 +49,7 @@
 
             <div class="col-lg-4">
               <div class="input input--col mb-4">
-                <label for="prioritat">Prioritat</label>
+                <label>Prioritat</label>
                 <b-form-select
                   name="prioritat"
                   id="prioritat"
@@ -62,39 +62,40 @@
 
             <div class="col-lg-6">
               <div class="input input--col mb-2">
-                <label for="horaActi">Hora d'activació</label>
+                <label>Hora d'activació</label>
                 <div v-if="insert">
                   <input
-                  type="time"
-                  name="horaActi"
-                  id="horaActi"
-                  v-model="hora"
-                />
+                    type="time"
+                    name="horaActi"
+                    id="horaActi"
+                    v-model="hora"
+                  />
                 </div>
                 <div v-else>
                   <input
-                  type="time"
-                  name="horaActi"
-                  id="horaActi"
-                  v-model="incidencia_has_recurs.hora_activacio"
-                />
+                    type="time"
+                    name="horaActi"
+                    id="horaActi"
+                    v-model="incidencia_has_recurs.hora_activacio"
+                  />
                 </div>
-
               </div>
+            </div>
+
+            <div class="col-lg-12 mb-3">
               <input
                 type="checkbox"
                 name="trasllat"
                 id="trasllat"
                 v-model="trasllat"
-                style="margin-top: 65px"
               />
-              <label for="trasllat">Trasllat Hospitalari</label>
+              <label>Trasllat Hospitalari</label>
             </div>
 
             <div class="row" v-if="trasllat">
-              <div class="col-lg-4">
+              <div class="col-lg-12">
                 <div class="input input--col mb-4">
-                  <label for="desti">Destí Hospitalari</label>
+                  <label>Destí Hospitalari</label>
                   <input
                     type="text"
                     name="desti"
@@ -107,7 +108,7 @@
 
               <div class="col-lg-6">
                 <div class="input input--col mb-2">
-                  <label for="horatransport">Hora de Transport</label>
+                  <label>Hora de Transport</label>
                   <input
                     type="time"
                     name="horatransport"
@@ -116,8 +117,11 @@
                     v-model="incidencia_has_recurs.hora_transport"
                   />
                 </div>
+              </div>
+
+              <div class="col-lg-6">
                 <div class="input input--col mb-2">
-                  <label for="horatransferencia">Hora de Transferència</label>
+                  <label>Hora de Transferència</label>
                   <input
                     type="time"
                     name="horatransferencia"
@@ -130,23 +134,26 @@
 
               <div class="col-lg-6">
                 <div class="input input--col mb-2">
-                  <label for="horahospital">Hora d'arribada a l'hospital</label>
-                  <input
-                    type="time"
-                    name="horahospital"
-                    id="horahospital"
-                    placeholder="Introdueix l'hora d'arribada a l'hospital..."
-                    v-model="incidencia_has_recurs.hora_arribada_hospital"
-                  />
-                </div>
-                <div class="input input--col mb-2">
-                  <label for="horafinal">Hora de Finalització</label>
+                  <label>Hora de Finalització</label>
                   <input
                     type="time"
                     name="horafinal"
                     id="horafinal"
                     placeholder="Introdueix l'hora de finalització..."
                     v-model="incidencia_has_recurs.hora_finalitzacio"
+                  />
+                </div>
+              </div>
+
+              <div class="col-lg-6">
+                <div class="input input--col mb-2">
+                  <label>Hora d'arribada a l'hospital</label>
+                  <input
+                    type="time"
+                    name="horahospital"
+                    id="horahospital"
+                    placeholder="Introdueix l'hora d'arribada a l'hospital..."
+                    v-model="incidencia_has_recurs.hora_arribada_hospital"
                   />
                 </div>
               </div>
@@ -157,11 +164,21 @@
         <div class="col-lg-4" v-if="incidencia_has_recurs.recurs.id > 0">
           <div class="row"></div>
           <div class="recurs-info">
-              <div class="recurs-info__head">
-                  <img v-if="incidencia_has_recurs.recurs.tipus_recursos_id == 4" src="/cepsem/webapp/cepsem/public/assets/icons/helicopter.svg" alt="">
-                  <img v-else src="/cepsem/webapp/cepsem/public/assets/icons/ambulance.svg" alt="">
-                <h4 class="ml-2">{{ incidencia_has_recurs.recurs.tipus_recurs.tipus }}</h4>
-              </div>
+            <div class="recurs-info__head">
+              <img
+                v-if="incidencia_has_recurs.recurs.tipus_recursos_id == 4"
+                src="/cepsem/webapp/cepsem/public/assets/icons/helicopter.svg"
+                alt=""
+              />
+              <img
+                v-else
+                src="/cepsem/webapp/cepsem/public/assets/icons/ambulance.svg"
+                alt=""
+              />
+              <h4 class="ml-2">
+                {{ incidencia_has_recurs.recurs.tipus_recurs.tipus }}
+              </h4>
+            </div>
             <p>ID: {{ incidencia_has_recurs.recurs.id }}</p>
             <p>Codi: {{ incidencia_has_recurs.recurs.codi }}</p>
           </div>
@@ -215,11 +232,11 @@ export default {
   },
   mounted() {},
   methods: {
-      checkUpdate(){
-          if (this.insert) {
-              this.getTime();
-          }
-      },
+    checkUpdate() {
+      if (this.insert) {
+        this.getTime();
+      }
+    },
     getTime() {
       var today = new Date();
 
@@ -254,12 +271,19 @@ export default {
     },
 
     getAvailableRecurs() {
-        if (this.incidencia_has_recurs.recurs.tipus_recursos_id >= 1 && this.incidencia_has_recurs.recurs.tipus_recursos_id <= 4) {
-            let me = this;
+      if (
+        this.incidencia_has_recurs.recurs.tipus_recursos_id >= 1 &&
+        this.incidencia_has_recurs.recurs.tipus_recursos_id <= 4
+      ) {
+        let me = this;
 
         if (this.incidencia_has_recurs.recurs.id > 0) {
           this.setRecursActiu(this.incidencia_has_recurs.recurs.id, 0);
-          console.log("Recurs amb id " + this.incidencia_has_recurs.recurs.id + " en espera.");
+          console.log(
+            "Recurs amb id " +
+              this.incidencia_has_recurs.recurs.id +
+              " en espera."
+          );
         }
 
         axios

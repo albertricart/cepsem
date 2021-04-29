@@ -83,7 +83,6 @@ class IncidenciaController extends Controller
                         $incidencia_has_afectat->incidencies_id = $incidencia->id;
                         $incidencia_has_afectat->afectats_id = $afectat->id;
                         $incidencia_has_afectat->save();
-
                     } else {
                         $rollback = true;
                     }
@@ -127,7 +126,7 @@ class IncidenciaController extends Controller
      */
     public function update(Request $request, Incidencia $incidency)
     {
-        $incidency->save();
+        $incidencia = $this->updateIncidencia($request->request->parameters);
     }
 
     /**
@@ -163,5 +162,10 @@ class IncidenciaController extends Controller
         $afectat->sexes_id = $incidencia_has_recurs_afectat['sexes_id'];
 
         return $afectat;
+    }
+
+    public function updateIncidencia($request)
+    {
+
     }
 }

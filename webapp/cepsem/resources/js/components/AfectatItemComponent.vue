@@ -13,7 +13,7 @@
 
       <div class="mb-3" v-show="afectat.te_cip">
         <div class="input input--col mb-2">
-          <label for="cip">CIP</label>
+          <label>CIP</label>
           <input
             type="text"
             name="cip"
@@ -46,7 +46,7 @@
       </div>
 
       <div class="input input--col mb-3">
-        <label for="telefon">Telèfon</label>
+        <label>Telèfon</label>
         <input
           type="text"
           name="telefon"
@@ -57,7 +57,7 @@
       </div>
 
       <div class="input input--col mb-3">
-        <label for="nom">Nom</label>
+        <label>Nom</label>
         <input
           type="text"
           name="nom"
@@ -68,7 +68,7 @@
       </div>
 
       <div class="input input--col mb-3">
-        <label for="cognoms">Cognoms</label>
+        <label>Cognoms</label>
         <input
           type="text"
           name="cognoms"
@@ -81,7 +81,7 @@
       <div class="row">
         <div class="col-lg-5">
           <div class="input input--col mb-3">
-            <label for="edat">Edat</label>
+            <label>Edat</label>
             <input
               type="number"
               name="edat"
@@ -93,7 +93,7 @@
         </div>
         <div class="col-lg-7">
           <div class="input input--col mb-3">
-            <label for="sexe">Sexe</label>
+            <label>Sexe</label>
             <b-form-select
               name="sexe"
               id="sexe"

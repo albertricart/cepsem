@@ -88,21 +88,21 @@
               <div class="col-lg-5 my-5 my-lg-0">
                 <div class="incidencia-hora">
                   <div class="input input--row mb-4">
-                    <label for="data">Data</label>
+                    <label for="dataincidencia">Data</label>
                     <input
                       type="date"
-                      name="data"
-                      id="data"
+                      name="dataincidencia"
+                      id="dataincidencia"
                       v-model="incidencia.data"
                     />
                   </div>
 
                   <div class="input input--row mb-4">
-                    <label for="hora">Hora</label>
+                    <label for="horaincidencia">Hora</label>
                     <input
                       type="time"
-                      name="hora"
-                      id="hora"
+                      name="horaincidencia"
+                      id="horaincidencia"
                       v-model="incidencia.hora"
                     />
                   </div>
@@ -170,11 +170,11 @@
 
               <div class="col-lg-6 order-1">
                 <div class="input input--col mb-4">
-                  <label for="nom">Nom</label>
+                  <label for="nomalertant">Nom</label>
                   <input
                     type="text"
-                    name="nom"
-                    id="nom"
+                    name="nomalertant"
+                    id="nomalertant"
                     placeholder="Introdueix el nom de l'alertant..."
                     v-model="incidencia.alertant.nom"
                   />
@@ -196,11 +196,11 @@
 
               <div class="col-lg-6 order-2 order-lg-3">
                 <div class="input input--col mb-4">
-                  <label for="cognoms">Cognoms</label>
+                  <label for="cognomsalertant">Cognoms</label>
                   <input
                     type="text"
-                    name="cognoms"
-                    id="cognoms"
+                    name="cognomsalertant"
+                    id="cognomsalertant"
                     v-model="incidencia.alertant.cognoms"
                     placeholder="Introdueix els cognoms de l'alertant..."
                   />
@@ -209,10 +209,10 @@
 
               <div class="col-lg-6 order-6 order-lg-4">
                 <div class="input input--col mb-4">
-                  <label for="provincia">Provincia</label>
+                  <label for="provinciaalertant">Provincia</label>
                   <b-form-select
-                    name="provincia"
-                    id="provincia"
+                    name="provinciaalertant"
+                    id="provinciaalertant"
                     v-model="incidencia.alertant.municipi.comarca.provincia.id"
                     class="select"
                     value-field="id"
@@ -225,13 +225,13 @@
 
               <div class="col-lg-6 order-3 order-lg-5">
                 <div class="input input--col mb-4">
-                  <label for="telefon">Telèfon</label>
+                  <label for="telefonalertant">Telèfon</label>
                   <input
                     type="number"
                     min="600000000"
                     max="999999999"
-                    name="telefon"
-                    id="telefon"
+                    name="telefonalertant"
+                    id="telefonalertant"
                     v-model="incidencia.alertant.telefon"
                     placeholder="Introdueix el telèfon de l'alertant..."
                   />
@@ -240,10 +240,10 @@
 
               <div class="col-lg-6 order-7 order-lg-6">
                 <div class="input input--col mb-4">
-                  <label for="comarca">Comarca</label>
+                  <label for="comarcaalertant">Comarca</label>
                   <b-form-select
-                    name="comarca"
-                    id="comarca"
+                    name="comarcaalertant"
+                    id="comarcaalertant"
                     class="select"
                     value-field="id"
                     text-field="nom"
@@ -256,10 +256,10 @@
 
               <div class="col-lg-6 order-4 order-lg-7">
                 <div class="input input--col mb-4">
-                  <label for="tipus">Tipus</label>
+                  <label for="tipusalertant">Tipus</label>
                   <b-form-select
-                    name="tipus"
-                    id="tipus"
+                    name="tipusalertant"
+                    id="tipusalertant"
                     v-model="incidencia.alertant.tipus_alertants_id"
                     class="select"
                     value-field="id"
@@ -271,10 +271,10 @@
 
               <div class="col-lg-6 order-8">
                 <div class="input input--col mb-4">
-                  <label for="municipi">Municipi</label>
+                  <label for="municipialertant">Municipi</label>
                   <b-form-select
-                    name="municipi"
-                    id="municipi"
+                    name="municipialertant"
+                    id="municipialertant"
                     v-model="incidencia.alertant.municipis_id"
                     class="select"
                     value-field="id"
@@ -283,7 +283,7 @@
                   ></b-form-select>
                 </div>
               </div>
-
+<!--
               <div class="col-lg-4 order-9" v-show="insert">
                 <input
                   type="checkbox"
@@ -292,7 +292,7 @@
                   v-model="incidencia.saveAlertant"
                 />
                 <label for="saveAlertant">Emmagatzemar Alertant</label>
-              </div>
+              </div> -->
             </div>
           </section>
 
@@ -307,10 +307,10 @@
                 <div class="row">
                   <div class="col-xl-4">
                     <div class="input input--col mb-4">
-                      <label for="provincia">Provincia</label>
+                      <label for="provinciaincidencia">Provincia</label>
                       <b-form-select
-                        name="provincia"
-                        id="provincia"
+                        name="provinciaincidencia"
+                        id="provinciaincidencia"
                         v-model="incidencia.municipi.comarca.provincia.id"
                         class="select"
                         value-field="id"
@@ -322,10 +322,10 @@
                   </div>
                   <div class="col-xl-4">
                     <div class="input input--col mb-4">
-                      <label for="comarca">Comarca</label>
+                      <label for="comarcaincidencia">Comarca</label>
                       <b-form-select
-                        name="comarca"
-                        id="comarca"
+                        name="comarcaincidencia"
+                        id="comarcaincidencia"
                         class="select"
                         value-field="id"
                         text-field="nom"
@@ -337,10 +337,10 @@
                   </div>
                   <div class="col-xl-4">
                     <div class="input input--col mb-4">
-                      <label for="municipi">Municipi</label>
+                      <label for="municipiincidencia">Municipi</label>
                       <b-form-select
-                        name="municipi"
-                        id="municipi"
+                        name="municipiincidencia"
+                        id="municipiincidencia"
                         v-model="incidencia.municipis_id"
                         class="select"
                         value-field="id"
@@ -352,13 +352,13 @@
 
                   <div class="col-lg-7">
                     <div class="input input--col mb-4">
-                      <label for="adreca">Adreça</label>
+                      <label for="address">Adreça</label>
                       <input
                         type="text"
-                        name="adreca"
+                        name="address"
                         id="address"
                         v-model="incidencia.adreca"
-                        placeholder="Introdueix l'adreça de l'alertant..."
+                        placeholder="Introdueix l'adreça de l'incident..."
                       />
                     </div>
                   </div>
@@ -529,7 +529,7 @@ export default {
         alertants_id: 0,
         municipis_id: 0,
         usuaris_id: this.usuari.id,
-        saveAlertant: false,
+        // saveAlertant: false,
         alertant: {
           id: 0,
           telefon: "",
